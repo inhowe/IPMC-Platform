@@ -1,0 +1,10 @@
+Change Component Designator: OldDesignator=C48 NewDesignator=C47
+Change Component Designator: OldDesignator=C50 NewDesignator=C48
+Change Component Designator: OldDesignator=C51 NewDesignator=C49
+Change Component Designator: OldDesignator=C52 NewDesignator=C50
+Change Component Designator: OldDesignator=C53 NewDesignator=C51
+Change Component Designator: OldDesignator=C54 NewDesignator=C52
+Change Component Designator: OldDesignator=C55 NewDesignator=C53
+Change Component Designator: OldDesignator=C56 NewDesignator=C54
+Change Component Designator: OldDesignator=C57 NewDesignator=C55
+Change Net Name : Old Net Name=NetC55_1 New Net Name=NetC53_1

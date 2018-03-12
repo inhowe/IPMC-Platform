@@ -1,0 +1,4 @@
+Removed Pin From Net: NetName=DA_SYNC# Pin=U5-30
+Removed Pin From Net: NetName=DA_LDAC# Pin=U5-33
+Added Pin To Net: NetName=DA_LDAC# Pin=U5-30
+Added Pin To Net: NetName=DA_SYNC# Pin=U5-33
