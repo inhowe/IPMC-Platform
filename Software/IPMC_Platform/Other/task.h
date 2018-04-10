@@ -7,8 +7,11 @@
 #include "ADS1115.h"
 #include "AD5722.h"
 
-void TaskDAC(bool *TimeBit);
-void TaskDebug(bool *TimeBit);
+extern bool T_DAC;
+extern bool T_DEBUG;
+
+void TaskDAC(bool *TaskBit);
+void TaskDebug(bool *TaskBit);
 void TaskInitVariable(void);
 
 #endif

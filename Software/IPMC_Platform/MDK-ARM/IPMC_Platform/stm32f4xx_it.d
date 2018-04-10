@@ -38,3 +38,7 @@ ipmc_platform\stm32f4xx_it.o: ..\Other\protocol.h
 ipmc_platform\stm32f4xx_it.o: ..\Other\wave.h
 ipmc_platform\stm32f4xx_it.o: ../Inc/tim.h
 ipmc_platform\stm32f4xx_it.o: ../Inc/usart.h
+ipmc_platform\stm32f4xx_it.o: ..\Other\task.h
+ipmc_platform\stm32f4xx_it.o: ..\Peripheral\ADS1115.h
+ipmc_platform\stm32f4xx_it.o: ..\Peripheral\myiic.h
+ipmc_platform\stm32f4xx_it.o: ..\Peripheral\sys.h

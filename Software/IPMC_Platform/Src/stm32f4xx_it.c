@@ -38,12 +38,8 @@
 /* USER CODE BEGIN 0 */
 #include "AD5722.h"
 #include "protocol.h"
+#include "task.h"
 uint32_t T6tick=0;
-bool T6_F5 =false; //flag of 5 times of base time6 
-bool T6_F10=false;//flag of 10 times of base time6 
-bool T6_F50=false;//flag of 50 times of base time6 
-bool T6_F100=false;//flag of 100 times of base time6
-bool T6_F1000=false;//flag of 1000 times of base time6 
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
@@ -207,12 +203,17 @@ void SysTick_Handler(void)
 void USART1_IRQHandler(void)
 {
   /* USER CODE BEGIN USART1_IRQn 0 */
-
+	uint8_t temp=0;
   /* USER CODE END USART1_IRQn 0 */
-  HAL_UART_IRQHandler(&huart1);
+//  HAL_UART_IRQHandler(&huart1);
   /* USER CODE BEGIN USART1_IRQn 1 */
-	DealUART1Buff(&UART1_Rev);
-	HAL_UART_Receive_IT(&huart1,&UART1_Rev,1);
+	if(USART1->SR & (1<<5))
+	{
+		temp=USART1->DR;
+		DealUART1Buff(&temp);
+	}
+//	HAL_UART_Receive_IT(&huart1,&UART1_Rev,1);
+
   /* USER CODE END USART1_IRQn 1 */
 }
 
@@ -237,16 +238,13 @@ void TIM6_DAC_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM6_DAC_IRQn 0 */
 	T6tick++;
-	if(T6tick%5==0)T6_F5=true;
-	if(T6tick%10==0)T6_F10=true;
-	if(T6tick%50==0)
-	{
-		T6_F50=true;
-	}
-	if(T6tick%100==0)T6_F100=true;
+	if(T6tick%5==0)T_DAC=true;
+//	if(T6tick%10==0)T_DAC=true;
+//	if(T6tick%50==0);
+//	if(T6tick%100==0);
 	if(T6tick%1000==0)
 	{
-		T6_F1000=true;
+		T_DEBUG=true;
 		HAL_GPIO_TogglePin(LEDG_GPIO_Port,LEDG_Pin);
 		HAL_GPIO_TogglePin(LED0_GPIO_Port,LED0_Pin);
 	}

@@ -54,29 +54,25 @@
 
 //ignore
 
-enum DA_RANGE_e{
+typedef enum DA_RANGE_e{
 	UNIPOLAR5V = 0,
 	UNIPOLAR10V,
 	UNIPOLAR10_8V,
 	BIPOLAR5V,
 	BIPOLAR10V,
 	BIPOLAR10_8V
-};
+}DA_RANGE_t;
 
-enum DA_CHANNEL_e{
+typedef enum DA_CHANNEL_e{
 	CH0=DAC_A,
 	CH1=DAC_B,
 	CH01=DAC_AB
-};
+}DA_CHANNEL_t;
 
-enum DA_CODETYPE_e{
+typedef enum DA_CODETYPE_e{
 	BIN,//binary 
 	TWOsCOMP //two s complement
-};
-
-typedef enum DA_RANGE_e 		DA_RANGE_t;
-typedef enum DA_CHANNEL_e 	DA_CHANNEL_t;
-typedef enum DA_CODETYPE_e 	DA_CODETYPE_t;
+}DA_CODETYPE_t;
 
 /*Output Control Block*/
 struct AD5722_OCB_s{

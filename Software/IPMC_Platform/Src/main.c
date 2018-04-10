@@ -71,12 +71,6 @@ static void MX_NVIC_Init(void);
 /* USER CODE END PFP */
 
 /* USER CODE BEGIN 0 */
-extern uint32_t T6tick;
-extern bool T6_F5; 
-extern bool T6_F10;
-extern bool T6_F50;
-extern bool T6_F100;
-extern bool T6_F1000;
 
 /* USER CODE END 0 */
 
@@ -126,8 +120,8 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-		TaskDebug(&T6_F1000);
-		TaskDAC(&T6_F5);
+		TaskDAC(&T_DAC);
+//		TaskDebug(&T_DEBUG);
   /* USER CODE END WHILE */
 
   /* USER CODE BEGIN 3 */
