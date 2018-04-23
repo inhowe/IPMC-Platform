@@ -62,7 +62,7 @@
 
 /*------------------ ICC Compiler ----------------------*/
 #elif defined ( __ICCARM__ )
-  #include <cmsis_iar.h>
+  #include <cmsis_iccarm.h>
 
 /*------------------ TI CCS Compiler -------------------*/
 #elif defined ( __TMS470__ )

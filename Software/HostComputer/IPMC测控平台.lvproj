@@ -1,6 +1,7 @@
 ﻿<?xml version='1.0' encoding='UTF-8'?>
 <Project Type="Project" LVVersion="17008000">
 	<Item Name="我的电脑" Type="My Computer">
+		<Property Name="NI.SortType" Type="Int">3</Property>
 		<Property Name="server.app.propertiesEnabled" Type="Bool">true</Property>
 		<Property Name="server.control.propertiesEnabled" Type="Bool">true</Property>
 		<Property Name="server.tcp.enabled" Type="Bool">false</Property>
@@ -14,6 +15,8 @@
 		<Item Name="main.vi" Type="VI" URL="../main.vi"/>
 		<Item Name="浮点转字节数组.vi" Type="VI" URL="../浮点转字节数组.vi"/>
 		<Item Name="运行时菜单.rtm" Type="Document" URL="../运行时菜单.rtm"/>
+		<Item Name="NUAA圆角.ico" Type="Document" URL="../NUAA圆角.ico"/>
+		<Item Name="protocol.xlsx" Type="Document" URL="../protocol.xlsx"/>
 		<Item Name="依赖关系" Type="Dependencies">
 			<Item Name="vi.lib" Type="Folder">
 				<Item Name="BuildHelpPath.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/BuildHelpPath.vi"/>
@@ -50,6 +53,10 @@
 				<Item Name="VISA Configure Serial Port (Instr).vi" Type="VI" URL="/&lt;vilib&gt;/Instr/_visa.llb/VISA Configure Serial Port (Instr).vi"/>
 				<Item Name="VISA Configure Serial Port (Serial Instr).vi" Type="VI" URL="/&lt;vilib&gt;/Instr/_visa.llb/VISA Configure Serial Port (Serial Instr).vi"/>
 				<Item Name="whitespace.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/whitespace.ctl"/>
+				<Item Name="System Exec.vi" Type="VI" URL="/&lt;vilib&gt;/Platform/system.llb/System Exec.vi"/>
+				<Item Name="Error Cluster From Error Code.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Error Cluster From Error Code.vi"/>
+				<Item Name="NI_FileType.lvlib" Type="Library" URL="/&lt;vilib&gt;/Utility/lvfile.llb/NI_FileType.lvlib"/>
+				<Item Name="Application Directory.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/file.llb/Application Directory.vi"/>
 			</Item>
 		</Item>
 		<Item Name="程序生成规范" Type="Build">
@@ -72,7 +79,7 @@
 				<Property Name="Bld_supportedLanguage[0]" Type="Str">ChineseS</Property>
 				<Property Name="Bld_supportedLanguage[1]" Type="Str">English</Property>
 				<Property Name="Bld_supportedLanguageCount" Type="Int">2</Property>
-				<Property Name="Bld_version.build" Type="Int">4</Property>
+				<Property Name="Bld_version.build" Type="Int">12</Property>
 				<Property Name="Bld_version.major" Type="Int">1</Property>
 				<Property Name="Destination[0].destName" Type="Str">IPMC测控平台.exe</Property>
 				<Property Name="Destination[0].path" Type="Path">../builds/NI_AB_PROJECTNAME/IPMC测控平台/IPMC测控平台.exe</Property>
@@ -81,13 +88,16 @@
 				<Property Name="Destination[1].destName" Type="Str">支持目录</Property>
 				<Property Name="Destination[1].path" Type="Path">../builds/NI_AB_PROJECTNAME/IPMC测控平台/data</Property>
 				<Property Name="DestinationCount" Type="Int">2</Property>
-				<Property Name="Source[0].itemID" Type="Str">{E4D4A885-8738-4205-9926-CBE7108E7D19}</Property>
+				<Property Name="Exe_iconItemID" Type="Ref">/我的电脑/NUAA圆角.ico</Property>
+				<Property Name="Source[0].itemID" Type="Str">{00B297DD-D5EF-4820-AD67-6198FD51FE42}</Property>
 				<Property Name="Source[0].type" Type="Str">Container</Property>
 				<Property Name="Source[1].destinationIndex" Type="Int">0</Property>
 				<Property Name="Source[1].itemID" Type="Ref">/我的电脑/main.vi</Property>
 				<Property Name="Source[1].sourceInclusion" Type="Str">TopLevel</Property>
 				<Property Name="Source[1].type" Type="Str">VI</Property>
-				<Property Name="SourceCount" Type="Int">2</Property>
+				<Property Name="Source[2].itemID" Type="Ref">/我的电脑/NUAA圆角.ico</Property>
+				<Property Name="Source[2].newName" Type="Str">NUAA.ico</Property>
+				<Property Name="SourceCount" Type="Int">3</Property>
 				<Property Name="TgtF_companyName" Type="Str">NUAA</Property>
 				<Property Name="TgtF_fileDescription" Type="Str">IPMC测控平台</Property>
 				<Property Name="TgtF_internalName" Type="Str">IPMC测控平台</Property>
@@ -159,7 +169,7 @@
 				<Property Name="INST_defaultDir" Type="Str">{BAAA530A-532E-4D52-86A1-7A340E9FD0F2}</Property>
 				<Property Name="INST_language" Type="Int">2052</Property>
 				<Property Name="INST_productName" Type="Str">IPMC测控平台</Property>
-				<Property Name="INST_productVersion" Type="Str">1.0.1</Property>
+				<Property Name="INST_productVersion" Type="Str">1.0.2</Property>
 				<Property Name="InstSpecBitness" Type="Str">32-bit</Property>
 				<Property Name="InstSpecVersion" Type="Str">17008011</Property>
 				<Property Name="MSI_arpCompany" Type="Str">NUAA</Property>
@@ -178,7 +188,7 @@
 				<Property Name="Source[0].File[0].name" Type="Str">IPMC测控平台.exe</Property>
 				<Property Name="Source[0].File[0].Shortcut[0].destIndex" Type="Int">1</Property>
 				<Property Name="Source[0].File[0].Shortcut[0].name" Type="Str">IPMC测控平台</Property>
-				<Property Name="Source[0].File[0].Shortcut[0].subDir" Type="Str">IPMC测控平台</Property>
+				<Property Name="Source[0].File[0].Shortcut[0].subDir" Type="Str"></Property>
 				<Property Name="Source[0].File[0].ShortcutCount" Type="Int">1</Property>
 				<Property Name="Source[0].File[0].tag" Type="Str">{73F965B0-56CD-4AB9-A0FB-D2E9DD2086B4}</Property>
 				<Property Name="Source[0].FileCount" Type="Int">1</Property>
@@ -190,7 +200,15 @@
 				<Property Name="Source[1].runEXE" Type="Bool">true</Property>
 				<Property Name="Source[1].tag" Type="Ref">/我的电脑/CH341SER.EXE</Property>
 				<Property Name="Source[1].type" Type="Str">File</Property>
-				<Property Name="SourceCount" Type="Int">2</Property>
+				<Property Name="Source[2].dest" Type="Str">{BAAA530A-532E-4D52-86A1-7A340E9FD0F2}</Property>
+				<Property Name="Source[2].name" Type="Str">NUAA圆角.ico</Property>
+				<Property Name="Source[2].tag" Type="Ref">/我的电脑/NUAA圆角.ico</Property>
+				<Property Name="Source[2].type" Type="Str">File</Property>
+				<Property Name="Source[3].dest" Type="Str">{BAAA530A-532E-4D52-86A1-7A340E9FD0F2}</Property>
+				<Property Name="Source[3].name" Type="Str">protocol.xlsx</Property>
+				<Property Name="Source[3].tag" Type="Ref">/我的电脑/protocol.xlsx</Property>
+				<Property Name="Source[3].type" Type="Str">File</Property>
+				<Property Name="SourceCount" Type="Int">4</Property>
 			</Item>
 		</Item>
 	</Item>

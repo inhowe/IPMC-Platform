@@ -1,6 +1,7 @@
 #include "ADS1115.h"
 
 ADS1x15_t ADS;
+int32_t   ADS_Buff[4];
 
 void ADS1x15_Delay_ms(uint32_t cnt)
 {
@@ -52,7 +53,7 @@ uint16_t ADS1x15_ReadData(uint8_t reg)
 //ch-Channel:
 //@para:ADS_CH0-ADS_CH3 or ADS_Diff_CH01 or ADS_Diff_CH23
 //Channel is not equal to 0-3!
-void ADS1x15_Config(uint16_t channel)
+void ADS1x15_Config(adsChannel_t channel)
 {
 	uint16_t cfgValue=0;
 	cfgValue=	 ADS1x15_REG_CONFIG_OS_SINGLE
@@ -69,8 +70,17 @@ void ADS1x15_Config(uint16_t channel)
 	
 }
 
+void ADS1x15_SelectChannel(adsChannel_t channel)
+{
+  ADS1x15_Config(channel);
+}
 
-int16_t ADS1x15_GetValue(uint16_t channel)
+int16_t ADS1x15_ReadLastValue(void)
+{
+	return ADS1x15_ReadData(ADS1x15_REG_POINTER_CONVERT);
+}
+
+int16_t ADS1x15_GetValue(adsChannel_t channel)
 {
 	ADS1x15_Config(channel);
 	ADS1x15_Delay_ms(5);

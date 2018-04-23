@@ -105,13 +105,21 @@
 /*=========================================================================*/
 
 //Abbreviate definition
-#define ADS_CH0 ADS1x15_REG_CONFIG_MUX_SINGLE_0
-#define ADS_CH1 ADS1x15_REG_CONFIG_MUX_SINGLE_1
-#define ADS_CH2 ADS1x15_REG_CONFIG_MUX_SINGLE_2
-#define ADS_CH3 ADS1x15_REG_CONFIG_MUX_SINGLE_3
-
-#define ADS_Diff_CH01 ADS1x15_REG_CONFIG_MUX_DIFF_0_1
-#define ADS_Diff_CH23 ADS1x15_REG_CONFIG_MUX_DIFF_2_3
+//#define ADS_CH0         ADS1x15_REG_CONFIG_MUX_SINGLE_0
+//#define ADS_CH1         ADS1x15_REG_CONFIG_MUX_SINGLE_1
+//#define ADS_CH2         ADS1x15_REG_CONFIG_MUX_SINGLE_2
+//#define ADS_CH3         ADS1x15_REG_CONFIG_MUX_SINGLE_3
+//#define ADS_Diff_CH01  ADS1x15_REG_CONFIG_MUX_DIFF_0_1
+//#define ADS_Diff_CH23   ADS1x15_REG_CONFIG_MUX_DIFF_2_3
+typedef enum
+{
+  ADS_CH0  = ADS1x15_REG_CONFIG_MUX_SINGLE_0,
+  ADS_CH1  = ADS1x15_REG_CONFIG_MUX_SINGLE_1,
+  ADS_CH2  = ADS1x15_REG_CONFIG_MUX_SINGLE_2,
+  ADS_CH3  = ADS1x15_REG_CONFIG_MUX_SINGLE_3,
+  ADS_Diff_CH01   = ADS1x15_REG_CONFIG_MUX_DIFF_0_1,
+  ADS_Diff_CH23   = ADS1x15_REG_CONFIG_MUX_DIFF_2_3
+} adsChannel_t;
 
 //Full Scale '-'='.'
 typedef enum
@@ -131,10 +139,13 @@ typedef struct ADS1x15_t{
 	int16_t CH3;
 }ADS1x15_t;
 
-extern ADS1x15_t ADS;
+extern ADS1x15_t  ADS;
+extern int32_t   ADS_Buff[4];
 
 void ADS1x15_Init(void);
-void ADS1x15_Config(uint16_t channel);
-int16_t ADS1x15_GetValue(uint16_t channel);
+void ADS1x15_Config(adsChannel_t channel);
+void ADS1x15_SelectChannel(adsChannel_t channel);
+int16_t ADS1x15_ReadLastValue(void);
+int16_t ADS1x15_GetValue(adsChannel_t channel);
 
 #endif

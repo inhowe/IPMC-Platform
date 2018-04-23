@@ -120,8 +120,11 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+    //		TaskIdle(&T_DAC);
 		TaskDAC(&T_DAC);
-//		TaskDebug(&T_DEBUG);
+    TaskADC(&T_ADC);
+//    TaskToPC(&T_ToPC);
+		TaskDebug(&T_DEBUG);
   /* USER CODE END WHILE */
 
   /* USER CODE BEGIN 3 */

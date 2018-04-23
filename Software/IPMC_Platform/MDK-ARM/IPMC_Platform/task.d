@@ -39,3 +39,5 @@ ipmc_platform\task.o: ..\Peripheral\AD5722.h
 ipmc_platform\task.o: ..\Peripheral\ADS1115.h
 ipmc_platform\task.o: ..\Peripheral\myiic.h
 ipmc_platform\task.o: ..\Peripheral\sys.h
+ipmc_platform\task.o: ..\Other\protocol.h
+ipmc_platform\task.o: ../Inc/usart.h

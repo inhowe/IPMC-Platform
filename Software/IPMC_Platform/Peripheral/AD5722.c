@@ -14,7 +14,7 @@
 
 struct AD5722_OCB_s DA_OCB={0,CH01,UNIPOLAR5V};
 
-#define DELAYCONST 60
+#define DELAYCONST 35 //1us
 
 void AD5722_Delay_ns(uint32_t t)
 {
@@ -26,6 +26,16 @@ void AD5722_Delay_ns(uint32_t t)
 void AD5722_AlwaysLoadDAC(void)
 {
 	AD5722_LDAC_L;
+	AD5722_Delay_ns(DELAYCONST);
+}
+
+void AD5722_LoadDAC(void)
+{
+	AD5722_LDAC_H;
+	AD5722_Delay_ns(DELAYCONST);
+	AD5722_LDAC_L;
+	AD5722_Delay_ns(DELAYCONST);
+	AD5722_LDAC_H;
 	AD5722_Delay_ns(DELAYCONST);
 }
 
@@ -43,17 +53,13 @@ void AD5722_ClearOutValue(void)
 void AD5722_SendData(uint32_t data)
 {
 	uint8_t i;
-	
-//	printf("SendData:0x%x \r\n",data);
 	AD5722_START_SYNC;
-	AD5722_SCK_H;
-	
 	AD5722_Delay_ns(DELAYCONST);
+	
 	for(i=0;i<24;i++)
 	{
 		AD5722_SCK_H;
 		AD5722_Delay_ns(DELAYCONST);
-		
 		if(data&0x00800000)
 		{ 
 			AD5722_DI_H; 
@@ -63,13 +69,14 @@ void AD5722_SendData(uint32_t data)
 			AD5722_DI_L; 
 		}
 		AD5722_Delay_ns(DELAYCONST);
-		
 		AD5722_SCK_L;
 		AD5722_Delay_ns(DELAYCONST);
 		
 		data=data<<1;
 	}
+	AD5722_Delay_ns(DELAYCONST);
 	AD5722_RESET_SYNC;
+	AD5722_Delay_ns(DELAYCONST);
 }
 
 uint32_t AD5722_ReadData(void)
@@ -77,14 +84,13 @@ uint32_t AD5722_ReadData(void)
 	uint8_t i;
 	uint32_t data=0;
 	AD5722_RESET_SYNC;
-	AD5722_Delay_ns(0xff);
-	
-	AD5722_START_SYNC;
-	AD5722_SCK_H;
 	AD5722_Delay_ns(DELAYCONST);
+	AD5722_START_SYNC;
 	
 	for(i=0;i<24;i++)
 	{
+		AD5722_SCK_H;
+		AD5722_Delay_ns(DELAYCONST);
 		AD5722_SCK_L;
 		AD5722_Delay_ns(DELAYCONST);
 		
@@ -97,10 +103,11 @@ uint32_t AD5722_ReadData(void)
 		AD5722_SCK_H;
 		AD5722_Delay_ns(DELAYCONST);
 		
-		if(i<23) data=data<<1;
+		if(i<24-1) data=data<<1;
 	}
 	AD5722_RESET_SYNC;
-	return data;
+	AD5722_Delay_ns(DELAYCONST);
+	return data; //high 8 bits is useless
 }
 
 /* 
@@ -146,7 +153,8 @@ uint16_t AD5722_DataFormatTransfer(double value)
    @para: range = UNIPOLAR5V~BIPOLAR10_8V */
 void AD5722_SetRange(void)
 {
-	AD5722_SendData(DA_WRITE|RANGE_REG|DAC_AB|DA_OCB.Range);
+	AD5722_SendData(DA_WRITE|RANGE_REG|DAC_A|DA_OCB.Range);
+	AD5722_SendData(DA_WRITE|RANGE_REG|DAC_B|DA_OCB.Range);
 }
 
 /* 
@@ -160,6 +168,7 @@ void AD5722_Output(double value,DA_CHANNEL_t channel)
 	
 	data=AD5722_DataFormatTransfer(value);
 	AD5722_SendData(DA_WRITE|DAC_REG|channel|data);
+//	AD5722_LoadDAC();
 }
 
 /* Config the default operation mode */
@@ -167,23 +176,42 @@ void AD5722_Output(double value,DA_CHANNEL_t channel)
 void AD5722_Init(void)
 {
 	//GPIO Initilization has been finished firstly.
+	GPIO_InitTypeDef GPIO_InitStruct;
+  /* GPIO Ports Clock Enable */
+  __HAL_RCC_GPIOB_CLK_ENABLE();
+
+  /*Configure GPIO pins : PBPin PBPin PBPin PBPin 
+                           PBPin */
+  GPIO_InitStruct.Pin = DA_CLR_Pin|DA_LDAC_Pin|DA_SYNC_Pin|DA_SCK_Pin 
+                          |DA_DI_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PtPin */
+  GPIO_InitStruct.Pin = DA_DO_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(DA_DO_GPIO_Port, &GPIO_InitStruct);
+
+	HAL_GPIO_WritePin(GPIOB, DA_SCK_Pin|DA_DI_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GPIOB, DA_CLR_Pin|DA_LDAC_Pin|DA_SYNC_Pin, GPIO_PIN_SET);
+	HAL_Delay(1);
 	
-	
-	AD5722_RESET_SYNC;
 	AD5722_AlwaysLoadDAC();
-	AD5722_ClearOutValue();
-	
+	HAL_Delay(1);
 	//Select output range.
-	DA_OCB.Range = BIPOLAR5V  ;
+	DA_OCB.Range = BIPOLAR10V  ; //tigao liangcheng quebao shuchu 5v shihou, you zugou de 5V(fouze hui yichu)
 	AD5722_SetRange();
-	
+
 	//Power on the A,B Channel.
 	AD5722_SendData(DA_WRITE|PWR_REG|PWRON_CHA|PWRON_CHB);
   HAL_Delay(1);
 	
 	//Output a init value (may be covered by WAVE_ADB_Init)
-	DA_OCB.Value=1;
-	DA_OCB.CH=CH01;
+	DA_OCB.Value=1.665;
+	DA_OCB.CH=CH1;
 	AD5722_Output(DA_OCB.Value,DA_OCB.CH);
 }
 
@@ -192,15 +220,17 @@ void AD5722_Init(void)
 uint32_t AD5722_ReadBack(uint32_t addr)
 {
 	addr = addr | DA_READ;
-	AD5722_SendData(addr);
-	HAL_Delay(1);
+	AD5722_SendData(addr);//specifies the register
 	return AD5722_ReadData();
 }
 
 void AD5722_Test(void)
 {
-//	AD5722_SendData(0x0AAA0); //ch0=1.665
-//	while(1);
+	AD5722_SendData(0x0AAA0); //ch0=1.665
+	printf("Pwr:%d ",(AD5722_ReadBack(PWR_REG)));
+	printf("Out0:%d ",(AD5722_ReadBack(DAC_REG|DAC_A))>>4);
+	printf("Out1:%d ",(AD5722_ReadBack(DAC_REG|DAC_B))>>4);
+	while(1);
 //	AD5722_SendData(0x2AAA0); //ch1=1.665
 //	while(1);
 //	AD5722_SendData(0x4AAA0); //both=1.665

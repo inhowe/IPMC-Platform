@@ -6,7 +6,13 @@
 #include "AD5722.h"
 #include "usart.h"
 
-void DealUART1Buff(uint8_t*data);
+#define BYTE0(dwTemp)       (*(char *)(&dwTemp))
+#define BYTE1(dwTemp)       (*((char *)(&dwTemp) + 1))
+#define BYTE2(dwTemp)       (*((char *)(&dwTemp) + 2))
+#define BYTE3(dwTemp)       (*((char *)(&dwTemp) + 3))
 
+void DealUART1Buff(uint8_t*data);
+void ToPC_ADCData(int32_t adcbuf[],int32_t timestamp0,int32_t timestamp1);
+void ToPC_WaveData(void);
 
 #endif

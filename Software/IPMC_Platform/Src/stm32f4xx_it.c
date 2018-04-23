@@ -207,12 +207,13 @@ void USART1_IRQHandler(void)
   /* USER CODE END USART1_IRQn 0 */
 //  HAL_UART_IRQHandler(&huart1);
   /* USER CODE BEGIN USART1_IRQn 1 */
+  // YOU MUST COMMENT THE STATEMENT "HAL_UART_IRQHandler(&huart1);"
 	if(USART1->SR & (1<<5))
 	{
 		temp=USART1->DR;
 		DealUART1Buff(&temp);
 	}
-//	HAL_UART_Receive_IT(&huart1,&UART1_Rev,1);
+	HAL_UART_Receive_IT(&huart1,&UART1_Rev,1);
 
   /* USER CODE END USART1_IRQn 1 */
 }
@@ -238,10 +239,16 @@ void TIM6_DAC_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM6_DAC_IRQn 0 */
 	T6tick++;
-	if(T6tick%5==0)T_DAC=true;
-//	if(T6tick%10==0)T_DAC=true;
-//	if(T6tick%50==0);
-//	if(T6tick%100==0);
+	if(T6tick%5==0)
+  {
+    T_DAC=true;
+    T_ADC=true;
+  }
+  if(T6tick%50==0)
+  {
+    T_ToPC=true;
+  }
+
 	if(T6tick%1000==0)
 	{
 		T_DEBUG=true;
