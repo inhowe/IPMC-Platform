@@ -34,7 +34,7 @@
     <usedDebug>true</usedDebug>
     	<debugprobe></debugprobe>
     <optimization></optimization>
-    <icfloc>1</icfloc>
+    <icfloc>0</icfloc>
     <Adefines>
         <define></define>
     </Adefines>   
@@ -74,6 +74,9 @@
 	    <name>Drivers</name> 
 		   <group>
 		 		<name>STM32F4xx_HAL_Driver</name>
+						<file>
+							<name>../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_can.c</name>
+						</file>
 						<file>
 							<name>../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c</name>
 						</file>
@@ -137,6 +140,10 @@
 
                                 <file>
                                  <name>..\Src\gpio.c</name>
+                                </file>
+
+                                <file>
+                                 <name>..\Src\can.c</name>
                                 </file>
 
                                 <file>

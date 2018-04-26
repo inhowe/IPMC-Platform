@@ -39,6 +39,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stm32f4xx_hal.h"
+#include "can.h"
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
@@ -82,7 +83,7 @@ static void MX_NVIC_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-	
+
   /* USER CODE END 1 */
 
   /* MCU Configuration----------------------------------------------------------*/
@@ -106,26 +107,30 @@ int main(void)
   MX_USART1_UART_Init();
   MX_TIM6_Init();
   MX_USART2_UART_Init();
+  MX_CAN1_Init();
 
   /* Initialize interrupts */
   MX_NVIC_Init();
   /* USER CODE BEGIN 2 */
-	HAL_TIM_Base_Start_IT(&htim6);
-	HAL_UART_Receive_IT(&huart1,&UART1_Rev,1);
-	AD5722_Init();
-	TaskInitVariable();
+  //CAN boardrate 42M/((6+8+1)*6)=500Kbps
+  __HAL_CAN_ENABLE_IT(&hcan1,CAN_IT_RX_FIFO0_MSG_PENDING);
+  HAL_CAN_Start(&hcan1);
+  HAL_TIM_Base_Start_IT(&htim6);
+  HAL_UART_Receive_IT(&huart1,&UART1_Rev,1);
+  AD5722_Init();
+  TaskInitVariable();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    //		TaskIdle(&T_DAC);
-		TaskDAC(&T_DAC);
+//    TaskIdle(&T_DAC);
+    TaskDAC(&T_DAC);
     TaskADC(&T_ADC);
-//    TaskToPC(&T_ToPC);
-		TaskDebug(&T_DEBUG);
-  /* USER CODE END WHILE */
+    //    TaskToPC(&T_ToPC);
+    TaskDebug(&T_DEBUG);
+    /* USER CODE END WHILE */
 
   /* USER CODE BEGIN 3 */
 		
@@ -206,6 +211,12 @@ static void MX_NVIC_Init(void)
   /* USART2_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(USART2_IRQn, 2, 0);
   HAL_NVIC_EnableIRQ(USART2_IRQn);
+  /* CAN1_RX0_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(CAN1_RX0_IRQn, 3, 0);
+  HAL_NVIC_EnableIRQ(CAN1_RX0_IRQn);
+  /* CAN1_RX1_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(CAN1_RX1_IRQn, 4, 0);
+  HAL_NVIC_EnableIRQ(CAN1_RX1_IRQn);
 }
 
 /* USER CODE BEGIN 4 */

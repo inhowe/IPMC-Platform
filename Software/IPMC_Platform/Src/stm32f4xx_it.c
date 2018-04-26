@@ -43,6 +43,7 @@ uint32_t T6tick=0;
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
+extern CAN_HandleTypeDef hcan1;
 extern TIM_HandleTypeDef htim6;
 extern UART_HandleTypeDef huart1;
 extern UART_HandleTypeDef huart2;
@@ -198,23 +199,52 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
+* @brief This function handles CAN1 RX0 interrupts.
+*/
+void CAN1_RX0_IRQHandler(void)
+{
+  /* USER CODE BEGIN CAN1_RX0_IRQn 0 */
+
+  /* USER CODE END CAN1_RX0_IRQn 0 */
+  HAL_CAN_IRQHandler(&hcan1);
+  __HAL_CAN_ENABLE_IT(&hcan1,CAN_IT_RX_FIFO0_MSG_PENDING);
+  /* USER CODE BEGIN CAN1_RX0_IRQn 1 */
+
+  /* USER CODE END CAN1_RX0_IRQn 1 */
+}
+
+/**
+* @brief This function handles CAN1 RX1 interrupt.
+*/
+void CAN1_RX1_IRQHandler(void)
+{
+  /* USER CODE BEGIN CAN1_RX1_IRQn 0 */
+
+  /* USER CODE END CAN1_RX1_IRQn 0 */
+  HAL_CAN_IRQHandler(&hcan1);
+  /* USER CODE BEGIN CAN1_RX1_IRQn 1 */
+
+  /* USER CODE END CAN1_RX1_IRQn 1 */
+}
+
+/**
 * @brief This function handles USART1 global interrupt.
 */
 void USART1_IRQHandler(void)
 {
   /* USER CODE BEGIN USART1_IRQn 0 */
-	uint8_t temp=0;
+  uint8_t temp=0;
   /* USER CODE END USART1_IRQn 0 */
-//  HAL_UART_IRQHandler(&huart1);
+  //  HAL_UART_IRQHandler(&huart1);
   /* USER CODE BEGIN USART1_IRQn 1 */
   // YOU MUST COMMENT THE STATEMENT "HAL_UART_IRQHandler(&huart1);"
-	if(USART1->SR & (1<<5))
-	{
-		temp=USART1->DR;
-		DealUART1Buff(&temp);
-	}
-	HAL_UART_Receive_IT(&huart1,&UART1_Rev,1);
-
+  if(USART1->SR & (1<<5))
+  {
+    temp=USART1->DR;
+    DealUART1Buff(&temp);
+  }
+  HAL_UART_Receive_IT(&huart1,&UART1_Rev,1);
+  
   /* USER CODE END USART1_IRQn 1 */
 }
 
@@ -238,8 +268,8 @@ void USART2_IRQHandler(void)
 void TIM6_DAC_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM6_DAC_IRQn 0 */
-	T6tick++;
-	if(T6tick%5==0)
+  T6tick++;
+  if(T6tick%5==0)
   {
     T_DAC=true;
     T_ADC=true;
@@ -248,13 +278,13 @@ void TIM6_DAC_IRQHandler(void)
   {
     T_ToPC=true;
   }
-
-	if(T6tick%1000==0)
-	{
-		T_DEBUG=true;
-		HAL_GPIO_TogglePin(LEDG_GPIO_Port,LEDG_Pin);
-		HAL_GPIO_TogglePin(LED0_GPIO_Port,LED0_Pin);
-	}
+  
+  if(T6tick%500==0)
+  {
+    T_DEBUG=true;
+    HAL_GPIO_TogglePin(LEDG_GPIO_Port,LEDG_Pin);
+    HAL_GPIO_TogglePin(LED0_GPIO_Port,LED0_Pin);
+  }
   /* USER CODE END TIM6_DAC_IRQn 0 */
   HAL_TIM_IRQHandler(&htim6);
   /* USER CODE BEGIN TIM6_DAC_IRQn 1 */

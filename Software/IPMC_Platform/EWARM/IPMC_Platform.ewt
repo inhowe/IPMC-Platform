@@ -9,9 +9,9 @@
         <debug>1</debug>
         <settings>
             <name>C-STAT</name>
-            <archiveVersion>261</archiveVersion>
+            <archiveVersion>260</archiveVersion>
             <data>
-                <version>261</version>
+                <version>260</version>
                 <cstatargs>
                     <useExtraArgs>0</useExtraArgs>
                     <extraArgs></extraArgs>
@@ -24,7 +24,7 @@
                     <messagesLimit>100</messagesLimit>
                 </cstatargs>
                 <cstat_settings>
-                    <cstat_version>1.5.2</cstat_version>
+                    <cstat_version>1.4.4</cstat_version>
                     <checks_tree>
                         <package name="STDCHECKS" enabled="true">
                             <group enabled="true" name="ARR">
@@ -400,11 +400,9 @@
                                 <check name="MISRAC2004-5.4" enabled="true" />
                                 <check name="MISRAC2004-5.5" enabled="false" />
                                 <check name="MISRAC2004-5.6" enabled="false" />
-                                <check name="MISRAC2004-5.7" enabled="false" />
                             </group>
                             <group enabled="true" name="MISRAC2004-6">
                                 <check name="MISRAC2004-6.1" enabled="true" />
-                                <check name="MISRAC2004-6.2" enabled="true" />
                                 <check name="MISRAC2004-6.3" enabled="false" />
                                 <check name="MISRAC2004-6.4" enabled="true" />
                                 <check name="MISRAC2004-6.5" enabled="true" />
@@ -415,24 +413,15 @@
                             <group enabled="true" name="MISRAC2004-8">
                                 <check name="MISRAC2004-8.1" enabled="true" />
                                 <check name="MISRAC2004-8.2" enabled="true" />
-                                <check name="MISRAC2004-8.3" enabled="true" />
                                 <check name="MISRAC2004-8.5_a" enabled="true" />
                                 <check name="MISRAC2004-8.5_b" enabled="true" />
-                                <check name="MISRAC2004-8.6" enabled="true" />
-                                <check name="MISRAC2004-8.7" enabled="true" />
-                                <check name="MISRAC2004-8.8_a" enabled="true" />
-                                <check name="MISRAC2004-8.8_b" enabled="true" />
                                 <check name="MISRAC2004-8.12" enabled="true" />
-                            </group>
-                            <group enabled="true" name="MISRAC2004-8 10">
-                                <check name="MISRAC2004-8.10" enabled="true" />
                             </group>
                             <group enabled="true" name="MISRAC2004-9">
                                 <check name="MISRAC2004-9.1_a" enabled="true" />
                                 <check name="MISRAC2004-9.1_b" enabled="true" />
                                 <check name="MISRAC2004-9.1_c" enabled="true" />
                                 <check name="MISRAC2004-9.2" enabled="true" />
-                                <check name="MISRAC2004-9.3" enabled="true" />
                             </group>
                             <group enabled="true" name="MISRAC2004-10">
                                 <check name="MISRAC2004-10.1_a" enabled="true" />
@@ -461,7 +450,6 @@
                                 <check name="MISRAC2004-12.2_c" enabled="true" />
                                 <check name="MISRAC2004-12.3" enabled="true" />
                                 <check name="MISRAC2004-12.4" enabled="true" />
-                                <check name="MISRAC2004-12.5" enabled="true" />
                                 <check name="MISRAC2004-12.6_a" enabled="false" />
                                 <check name="MISRAC2004-12.6_b" enabled="false" />
                                 <check name="MISRAC2004-12.7" enabled="true" />
@@ -515,7 +503,6 @@
                                 <check name="MISRAC2004-16.2_a" enabled="true" />
                                 <check name="MISRAC2004-16.2_b" enabled="true" />
                                 <check name="MISRAC2004-16.3" enabled="true" />
-                                <check name="MISRAC2004-16.4" enabled="true" />
                                 <check name="MISRAC2004-16.5" enabled="true" />
                                 <check name="MISRAC2004-16.7" enabled="true" />
                                 <check name="MISRAC2004-16.8" enabled="true" />
@@ -526,8 +513,6 @@
                                 <check name="MISRAC2004-17.1_a" enabled="true" />
                                 <check name="MISRAC2004-17.1_b" enabled="true" />
                                 <check name="MISRAC2004-17.1_c" enabled="true" />
-                                <check name="MISRAC2004-17.2" enabled="true" />
-                                <check name="MISRAC2004-17.3" enabled="true" />
                                 <check name="MISRAC2004-17.4_a" enabled="true" />
                                 <check name="MISRAC2004-17.4_b" enabled="true" />
                                 <check name="MISRAC2004-17.5" enabled="true" />
@@ -542,29 +527,15 @@
                                 <check name="MISRAC2004-18.4" enabled="true" />
                             </group>
                             <group enabled="true" name="MISRAC2004-19">
-                                <check name="MISRAC2004-19.1" enabled="false" />
                                 <check name="MISRAC2004-19.2" enabled="false" />
-                                <check name="MISRAC2004-19.4" enabled="true" />
-                                <check name="MISRAC2004-19.5" enabled="true" />
                                 <check name="MISRAC2004-19.6" enabled="true" />
                                 <check name="MISRAC2004-19.7" enabled="false" />
-                                <check name="MISRAC2004-19.10" enabled="true" />
                                 <check name="MISRAC2004-19.12" enabled="true" />
                                 <check name="MISRAC2004-19.13" enabled="false" />
                                 <check name="MISRAC2004-19.15" enabled="true" />
                             </group>
                             <group enabled="true" name="MISRAC2004-20">
                                 <check name="MISRAC2004-20.1" enabled="true" />
-                                <check name="MISRAC2004-20.2" enabled="true" />
-                                <check name="MISRAC2004-20.3_a" enabled="true" />
-                                <check name="MISRAC2004-20.3_b" enabled="true" />
-                                <check name="MISRAC2004-20.3_c" enabled="true" />
-                                <check name="MISRAC2004-20.3_d" enabled="true" />
-                                <check name="MISRAC2004-20.3_e" enabled="true" />
-                                <check name="MISRAC2004-20.3_f" enabled="true" />
-                                <check name="MISRAC2004-20.3_g" enabled="true" />
-                                <check name="MISRAC2004-20.3_h" enabled="true" />
-                                <check name="MISRAC2004-20.3_i" enabled="true" />
                                 <check name="MISRAC2004-20.4" enabled="true" />
                                 <check name="MISRAC2004-20.5" enabled="true" />
                                 <check name="MISRAC2004-20.6" enabled="true" />
@@ -679,8 +650,9 @@
                                 <check name="MISRAC2012-Rule-8.2_b" enabled="true" />
                                 <check name="MISRAC2012-Rule-8.3_b" enabled="true" />
                                 <check name="MISRAC2012-Rule-8.4" enabled="true" />
-                                <check name="MISRAC2012-Rule-8.5_a" enabled="true" />
+                                <check name="MISRAC2012-Rule-8.5_a" enabled="false" />
                                 <check name="MISRAC2012-Rule-8.5_b" enabled="true" />
+                                <check name="MISRAC2012-Rule-8.6" enabled="true" />
                                 <check name="MISRAC2012-Rule-8.7" enabled="false" />
                                 <check name="MISRAC2012-Rule-8.9_a" enabled="false" />
                                 <check name="MISRAC2012-Rule-8.9_b" enabled="false" />
@@ -1244,6 +1216,9 @@
         <group>
             <name>User</name>
             <file>
+                <name>$PROJ_DIR$\..\Src\can.c</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\Src\gpio.c</name>
             </file>
             <file>
@@ -1262,9 +1237,6 @@
                 <name>$PROJ_DIR$\..\Src\usart.c</name>
             </file>
         </group>
-        <file>
-            <name>$PROJ_DIR$\..\README.md</name>
-        </file>
     </group>
     <group>
         <name>Drivers</name>
@@ -1278,6 +1250,9 @@
             <name>STM32F4xx_HAL_Driver</name>
             <file>
                 <name>$PROJ_DIR$\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_can.c</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_cortex.c</name>

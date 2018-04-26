@@ -75,14 +75,14 @@ typedef enum DA_CODETYPE_e{
 }DA_CODETYPE_t;
 
 /*Output Control Block*/
-struct AD5722_OCB_s{
+typedef struct AD5722_OCB_s{
 	double      	Value;
 	DA_CHANNEL_t  CH;
 	DA_RANGE_t 	  Range;
 //	enum DA_CODETYPE CodeType;
-};
+}AD5722_OCB_t;
 
-extern struct AD5722_OCB_s DA_OCB;
+extern AD5722_OCB_t DA_OCB;
 
 void AD5722_Init(void);
 void AD5722_Output(double value,DA_CHANNEL_t channel);

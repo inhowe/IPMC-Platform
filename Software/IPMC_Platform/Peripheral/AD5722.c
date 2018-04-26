@@ -12,7 +12,7 @@
 
 #include "AD5722.h"
 
-struct AD5722_OCB_s DA_OCB={0,CH01,UNIPOLAR5V};
+AD5722_OCB_t DA_OCB={0,CH01,UNIPOLAR5V};
 
 #define DELAYCONST 35 //1us
 

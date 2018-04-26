@@ -23,6 +23,7 @@ ipmc_platform\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.
 ipmc_platform\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h
 ipmc_platform\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h
 ipmc_platform\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h
+ipmc_platform\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h
 ipmc_platform\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h
 ipmc_platform\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h
 ipmc_platform\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h
@@ -33,6 +34,7 @@ ipmc_platform\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 ipmc_platform\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 ipmc_platform\main.o: C:\Keil_V5\ARM\ARMCC\Bin\..\include\stdbool.h
 ipmc_platform\main.o: C:\Keil_V5\ARM\ARMCC\Bin\..\include\math.h
+ipmc_platform\main.o: ../Inc/can.h
 ipmc_platform\main.o: ../Inc/tim.h
 ipmc_platform\main.o: ../Inc/usart.h
 ipmc_platform\main.o: ../Inc/gpio.h
