@@ -1,18 +1,21 @@
-/Hardware/IPMC_MACP
+
 !/Hardware/IPMC_MACP/IPMC_MACP.SchDoc
 !/Hardware/IPMC_MACP/IPMC_MACP.PcbDoc
 !/Hardware/IPMC_MACP/IPMC_MACP.PrjPcb
+/Hardware/IPMC_MACP
 
-/Hardware/IPMC_MACP_V2
+
 !/Hardware/IPMC_MACP_V2/IPMC_MACP.SchDoc
 !/Hardware/IPMC_MACP_V2/IPMC_MACP.PcbDoc
 !/Hardware/IPMC_MACP_V2/IPMC_MACP.PrjPcb
 !/Hardware/IPMC_MACP_V2/1.txt
+/Hardware/IPMC_MACP_V2
 
-/Hardware/PN-Power
+
 !/Hardware/PN-Power/PN-Power.SchDoc
 !/Hardware/PN-Power/PN-Power.Pc.bDoc
 !/Hardware/PN-Power/PN-Power.PrjPcb
+/Hardware/PN-Power
 
 /Software/builds/
 /Software/IPMC_Platform/MDK-ARM/IPMC_Platform
