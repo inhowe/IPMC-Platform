@@ -13,9 +13,9 @@
 !/Hardware/PN-Power/PN-Power.Pc.bDoc
 !/Hardware/PN-Power/PN-Power.PrjPcb
 
-/Software/builds/
-/Software/IPMC_Platform/MDK-ARM/IPMC_Platform
-/Software/IPMC_Platform/EWARM/IPMC_Platform/
+/Software/builds/*
+/Software/IPMC_Platform/MDK-ARM/IPMC_Platform/*
+/Software/IPMC_Platform/EWARM/IPMC_Platform/*
 
 /IPMC Driver/*
 !/IPMC Driver/DriverPro.rar
