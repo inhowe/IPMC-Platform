@@ -1,6 +1,0 @@
-Added Pin To Net: NetName=3.3V Pin=U5-1
-Added Pin To Net: NetName=3.3V Pin=U5-19
-Added Pin To Net: NetName=3.3V Pin=U5-32
-Added Pin To Net: NetName=3.3V Pin=U5-48
-Added Pin To Net: NetName=3.3V Pin=U5-64
-Added Member To Class: ClassName=IPMC_MACP Member=Component *7 LM336

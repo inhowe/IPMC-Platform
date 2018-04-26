@@ -1,19 +1,22 @@
-
+/Hardware/IPMC_MACP/
 !/Hardware/IPMC_MACP/IPMC_MACP.SchDoc
 !/Hardware/IPMC_MACP/IPMC_MACP.PcbDoc
 !/Hardware/IPMC_MACP/IPMC_MACP.PrjPcb
+
+/Hardware/IPMC_MACP_V2/
 !/Hardware/IPMC_MACP_V2/IPMC_MACP.SchDoc
 !/Hardware/IPMC_MACP_V2/IPMC_MACP.PcbDoc
 !/Hardware/IPMC_MACP_V2/IPMC_MACP.PrjPcb
+
+/Hardware/PN-Power/
 !/Hardware/PN-Power/PN-Power.SchDoc
 !/Hardware/PN-Power/PN-Power.Pc.bDoc
 !/Hardware/PN-Power/PN-Power.PrjPcb
-Software/builds/
-!/Software/IPMC_Platform/MDK-ARM/IPMC_Platform.uvprojx
-!/Software/IPMC_Platform/MDK-ARM/startup_stm32f405xx.s
-!/Software/IPMC_Platform/EWARM/Project.eww
-!/Software/IPMC_Platform/EWARM/startup_stm32f405xx.s
+
+/Software/builds/
+/Software/IPMC_Platform/MDK-ARM/IPMC_Platform
+/Software/IPMC_Platform/EWARM/IPMC_Platform/
+
+/IPMC Driver/
 !/IPMC Driver/DriverPro.rar
 !/IPMC Driver/IPMC Driver.pdf
-/Software/IPMC_Platform/EWARM/settings/
-!/Software/IPMC_Platform/EWARM/settings/test.txt
