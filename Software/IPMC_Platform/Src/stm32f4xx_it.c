@@ -39,6 +39,8 @@
 #include "AD5722.h"
 #include "protocol.h"
 #include "task.h"
+#include "key.h"
+#include "queue.h"
 uint32_t T6tick=0;
 /* USER CODE END 0 */
 
@@ -204,12 +206,10 @@ void SysTick_Handler(void)
 void CAN1_RX0_IRQHandler(void)
 {
   /* USER CODE BEGIN CAN1_RX0_IRQn 0 */
-
   /* USER CODE END CAN1_RX0_IRQn 0 */
   HAL_CAN_IRQHandler(&hcan1);
-  __HAL_CAN_ENABLE_IT(&hcan1,CAN_IT_RX_FIFO0_MSG_PENDING);
   /* USER CODE BEGIN CAN1_RX0_IRQn 1 */
-
+  __HAL_CAN_ENABLE_IT(&hcan1,CAN_IT_RX_FIFO0_MSG_PENDING);
   /* USER CODE END CAN1_RX0_IRQn 1 */
 }
 
@@ -241,10 +241,8 @@ void USART1_IRQHandler(void)
   if(USART1->SR & (1<<5))
   {
     temp=USART1->DR;
-    DealUART1Buff(&temp);
+    Queue_Enqueue(&UART_RXqueue,temp);
   }
-  HAL_UART_Receive_IT(&huart1,&UART1_Rev,1);
-  
   /* USER CODE END USART1_IRQn 1 */
 }
 
@@ -279,12 +277,22 @@ void TIM6_DAC_IRQHandler(void)
     T_ToPC=true;
   }
   
-  if(T6tick%500==0)
+  if(T6tick%1000==0)
   {
     T_DEBUG=true;
     HAL_GPIO_TogglePin(LEDG_GPIO_Port,LEDG_Pin);
-    HAL_GPIO_TogglePin(LED0_GPIO_Port,LED0_Pin);
+    if(BoardID==0x00)
+    {
+      HAL_GPIO_TogglePin(LED0_GPIO_Port,LED0_Pin);
+      HAL_GPIO_WritePin(LED1_GPIO_Port,LED1_Pin,GPIO_PIN_SET);
+    }
+    else if(BoardID==0x01)
+    {
+      HAL_GPIO_TogglePin(LED1_GPIO_Port,LED1_Pin);
+      HAL_GPIO_WritePin(LED0_GPIO_Port,LED0_Pin,GPIO_PIN_SET);
+    }
   }
+  TimerCheckKey();
   /* USER CODE END TIM6_DAC_IRQn 0 */
   HAL_TIM_IRQHandler(&htim6);
   /* USER CODE BEGIN TIM6_DAC_IRQn 1 */

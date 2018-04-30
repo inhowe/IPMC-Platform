@@ -137,6 +137,15 @@ void HAL_CAN_MspDeInit(CAN_HandleTypeDef* canHandle)
 
 /* USER CODE BEGIN 1 */
 
+void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
+{
+  uint8_t canbuf[8];
+  CAN_RxHeaderTypeDef CAN1RxHeaderType;
+  uint8_t i=0;
+  HAL_CAN_GetRxMessage(&hcan1,CAN_RX_FIFO0,&CAN1RxHeaderType,canbuf);
+  while(i<CAN1RxHeaderType.DLC)
+    Queue_Enqueue(&CAN_RXqueue,canbuf[i++]);
+}
 /* USER CODE END 1 */
 
 /**

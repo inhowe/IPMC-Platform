@@ -94,7 +94,9 @@
 /* #define USE_FULL_ASSERT    1U */
 
 /* USER CODE BEGIN Private defines */
+#define MAXBoardID 0x01
 extern uint8_t UART1_Rev;
+extern uint8_t BoardID;
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

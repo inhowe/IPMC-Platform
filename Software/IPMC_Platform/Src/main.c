@@ -51,7 +51,7 @@
 #include "task.h"
 #include "usart.h"
 #include "wave.h"
-
+#include "queue.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
@@ -59,6 +59,7 @@
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
 uint8_t UART1_Rev;
+uint8_t BoardID=0x00;
 
 /* USER CODE END PV */
 
@@ -83,7 +84,8 @@ static void MX_NVIC_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-
+  Queue_Init(&UART_RXqueue);
+  Queue_Init(&CAN_RXqueue);
   /* USER CODE END 1 */
 
   /* MCU Configuration----------------------------------------------------------*/
@@ -113,10 +115,10 @@ int main(void)
   MX_NVIC_Init();
   /* USER CODE BEGIN 2 */
   //CAN boardrate 42M/((6+8+1)*6)=500Kbps
-  __HAL_CAN_ENABLE_IT(&hcan1,CAN_IT_RX_FIFO0_MSG_PENDING);
   HAL_CAN_Start(&hcan1);
   HAL_TIM_Base_Start_IT(&htim6);
-  HAL_UART_Receive_IT(&huart1,&UART1_Rev,1);
+  __HAL_CAN_ENABLE_IT(&hcan1,CAN_IT_RX_FIFO0_MSG_PENDING);
+  __HAL_UART_ENABLE_IT(&huart1,UART_IT_RXNE);
   AD5722_Init();
   TaskInitVariable();
   /* USER CODE END 2 */
@@ -126,6 +128,8 @@ int main(void)
   while (1)
   {
 //    TaskIdle(&T_DAC);
+    DealQueueBuff(&UART_RXqueue);
+    DealQueueBuff(&CAN_RXqueue);
     TaskDAC(&T_DAC);
     TaskADC(&T_ADC);
     //    TaskToPC(&T_ToPC);

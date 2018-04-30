@@ -1,181 +1,235 @@
 #include "protocol.h"
 
 uint8_t Rx1Buff[20];
+  uint8_t ibuff=0,ican=0;
+  uint8_t canbuf[8],NbrOfTx=0;
+void ToBoard_Transpond(uint8_t* TargetID,uint8_t *channel,uint8_t* type,uint8_t* buff,uint8_t* bufflen)
+{
+  CAN_TxHeaderTypeDef CAN1TxHeaderType;
+
+  CAN1TxHeaderType.StdId=*TargetID;        
+  CAN1TxHeaderType.IDE=CAN_ID_STD;    
+  CAN1TxHeaderType.RTR=CAN_RTR_DATA;  
+  CAN1TxHeaderType.DLC=8; 
+  
+  NbrOfTx=(*bufflen+5)/8;
+  if((*bufflen+5)%8!=0)
+    NbrOfTx++;
+  
+  canbuf[0]=0xAA;
+  canbuf[1]=0xAA;
+  canbuf[2]=*TargetID;
+  canbuf[3]=*channel;
+  canbuf[4]=*type;
+  ibuff=0;
+  for(;ibuff+5<8;ibuff++)
+  {
+    canbuf[ibuff+5]=buff[ibuff];
+  }
+  NbrOfTx--;
+  HAL_CAN_AddTxMessage(&hcan1,&CAN1TxHeaderType,canbuf,(uint32_t*)CAN_TX_MAILBOX0);
+  
+  while(NbrOfTx)
+  {
+    for(ican=0;ican<8;ican++)
+    {
+      if(ibuff<*bufflen)
+        canbuf[ican]=buff[ibuff++];
+      else
+        canbuf[ican]=0;
+    }
+    NbrOfTx--;
+    HAL_CAN_AddTxMessage(&hcan1,&CAN1TxHeaderType,canbuf,(uint32_t*)CAN_TX_MAILBOX0);
+  }
+}
 
 uint8_t LengthCal(uint8_t* data)
 {
-	uint8_t len;
-	switch(*data)
-	{
-		case SLOPE :	len=12;break;
-		case SINE  :	len=16;break;
-		case PWM   :	len=16;break;
-		case DC    :	len=8;break;
-		default    : len=0 ;break;
-	}
-	return len;
+  uint8_t len;
+  switch(*data)
+  {
+  case SLOPE :	len=12;break;
+  case SINE  :	len=16;break;
+  case PWM   :	len=16;break;
+  case DC    :	len=8;break;
+  default    : len=0 ;break;
+  }
+  return len;
 }
 
 void ChannelSelect(uint8_t* data)
 {
-	switch(*data)
-	{
-		case 0:DA_OCB.CH=CH0; break;
-		case 1:DA_OCB.CH=CH1; break;
-		case 2:DA_OCB.CH=CH01; break;
-		default:DA_OCB.CH=CH0;break;
-	}
+  switch(*data)
+  {
+  case 0:DA_OCB.CH=CH0; break;
+  case 1:DA_OCB.CH=CH1; break;
+  case 2:DA_OCB.CH=CH01; break;
+  default:DA_OCB.CH=CH0;break;
+  }
 }
 
 void Data_anysis(uint8_t* buff,uint8_t* channel)
 {
-	switch(*channel)
-		{
-    case 0:
-      switch(CGroup.DA0.type)
-      {
-      case SLOPE:
-        CGroup.DA0.SLOPE.k=(double)((buff[0]<<24)+(buff[1]<<16)+(buff[2]<<8)+buff[3])/100.0;
-				CGroup.DA0.SLOPE.b=(double)((buff[4]<<24)+(buff[5]<<16)+(buff[6]<<8)+buff[7])/100.0;
-				CGroup.DA0.SLOPE.extreme=(double)((buff[8]<<24)+(buff[9]<<16)+(buff[10]<<8)+buff[11])/100.0;
-				WaveCLK0=0;
-        break;
-      case SINE:
-        CGroup.DA0.SINE.amp=(double)((buff[0]<<24)+(buff[1]<<16)+(buff[2]<<8)+buff[3])/100.0;
-				CGroup.DA0.SINE.wfrq=(double)((buff[4]<<24)+(buff[5]<<16)+(buff[6]<<8)+buff[7])/100.0;
-				CGroup.DA0.SINE.pha=(double)((buff[8]<<24)+(buff[9]<<16)+(buff[10]<<8)+buff[11])/100.0;
-				CGroup.DA0.SINE.Yoffset=(double)((buff[12]<<24)+(buff[13]<<16)+(buff[14]<<8)+buff[15])/100.0;
-				WaveCLK0=0;
-        break;
-      case PWM:
-        CGroup.DA0.PWM.HV   =(double)((buff[0]<<24)+(buff[1]<<16)+(buff[2]<<8)+buff[3])/100.0;
-				CGroup.DA0.PWM.LV   =(double)((buff[4]<<24)+(buff[5]<<16)+(buff[6]<<8)+buff[7])/100.0;
-				CGroup.DA0.PWM.frq  =(double)((buff[8]<<24)+(buff[9]<<16)+(buff[10]<<8)+buff[11])/100.0;
-				CGroup.DA0.PWM.duty =(double)((buff[12]<<24)+(buff[13]<<16)+(buff[14]<<8)+buff[15])/100.0;
-				WaveCLK0=0;
-        break;
-      case DC:
-        CGroup.DA0.DC =(double)((buff[0]<<24)+(buff[1]<<16)+(buff[2]<<8)+buff[3])/100.0;
-				WaveCLK0=0;
-        break;
-      default:break;
-      }
-      break;
-    case 1:
-      switch(CGroup.DA1.type)
-      {
-      case SLOPE:
-        CGroup.DA1.SLOPE.k=(double)((buff[0]<<24)+(buff[1]<<16)+(buff[2]<<8)+buff[3])/100.0;
-				CGroup.DA1.SLOPE.b=(double)((buff[4]<<24)+(buff[5]<<16)+(buff[6]<<8)+buff[7])/100.0;
-				CGroup.DA1.SLOPE.extreme=(double)((buff[8]<<24)+(buff[9]<<16)+(buff[10]<<8)+buff[11])/100.0;
-				WaveCLK1=0;
-        break;
-      case SINE:
-        CGroup.DA1.SINE.amp=(double)((buff[0]<<24)+(buff[1]<<16)+(buff[2]<<8)+buff[3])/100.0;
-				CGroup.DA1.SINE.wfrq=(double)((buff[4]<<24)+(buff[5]<<16)+(buff[6]<<8)+buff[7])/100.0;
-				CGroup.DA1.SINE.pha=(double)((buff[8]<<24)+(buff[9]<<16)+(buff[10]<<8)+buff[11])/100.0;
-				CGroup.DA1.SINE.Yoffset=(double)((buff[12]<<24)+(buff[13]<<16)+(buff[14]<<8)+buff[15])/100.0;
-				WaveCLK1=0;
-        break;
-      case PWM:
-        CGroup.DA1.PWM.HV   =(double)((buff[0]<<24)+(buff[1]<<16)+(buff[2]<<8)+buff[3])/100.0;
-				CGroup.DA1.PWM.LV   =(double)((buff[4]<<24)+(buff[5]<<16)+(buff[6]<<8)+buff[7])/100.0;
-				CGroup.DA1.PWM.frq  =(double)((buff[8]<<24)+(buff[9]<<16)+(buff[10]<<8)+buff[11])/100.0;
-				CGroup.DA1.PWM.duty =(double)((buff[12]<<24)+(buff[13]<<16)+(buff[14]<<8)+buff[15])/100.0;
-				WaveCLK1=0;
-        break;
-      case DC:
-				CGroup.DA1.DC   =(double)((buff[4]<<24)+(buff[5]<<16)+(buff[6]<<8)+buff[7])/100.0;
-				WaveCLK1=0;
-        break;
-      default:break;
-      }
-      break;
-    case 2:
-      switch(CGroup.DA01.type)
-      {
-      case SLOPE:
-        CGroup.DA01.SLOPE.k=(double)((buff[0]<<24)+(buff[1]<<16)+(buff[2]<<8)+buff[3])/100.0;
-				CGroup.DA01.SLOPE.b=(double)((buff[4]<<24)+(buff[5]<<16)+(buff[6]<<8)+buff[7])/100.0;
-				CGroup.DA01.SLOPE.extreme=(double)((buff[8]<<24)+(buff[9]<<16)+(buff[10]<<8)+buff[11])/100.0;
-				WaveCLK0=WaveCLK1=0;
-        break;
-      case SINE:
-        CGroup.DA01.SINE.amp=(double)((buff[0]<<24)+(buff[1]<<16)+(buff[2]<<8)+buff[3])/100.0;
-				CGroup.DA01.SINE.wfrq=(double)((buff[4]<<24)+(buff[5]<<16)+(buff[6]<<8)+buff[7])/100.0;
-				CGroup.DA01.SINE.pha=(double)((buff[8]<<24)+(buff[9]<<16)+(buff[10]<<8)+buff[11])/100.0;
-				CGroup.DA01.SINE.Yoffset=(double)((buff[12]<<24)+(buff[13]<<16)+(buff[14]<<8)+buff[15])/100.0;
-				WaveCLK0=WaveCLK1=0;
-        break;
-      case PWM:
-        CGroup.DA01.PWM.HV   =(double)((buff[0]<<24)+(buff[1]<<16)+(buff[2]<<8)+buff[3])/100.0;
-				CGroup.DA01.PWM.LV   =(double)((buff[4]<<24)+(buff[5]<<16)+(buff[6]<<8)+buff[7])/100.0;
-				CGroup.DA01.PWM.frq  =(double)((buff[8]<<24)+(buff[9]<<16)+(buff[10]<<8)+buff[11])/100.0;
-				CGroup.DA01.PWM.duty =(double)((buff[12]<<24)+(buff[13]<<16)+(buff[14]<<8)+buff[15])/100.0;
-				WaveCLK0=WaveCLK1=0;
-        break;
-      case DC:
-				CGroup.DA0.DC =(double)((buff[0]<<24)+(buff[1]<<16)+(buff[2]<<8)+buff[3])/100.0;
-				CGroup.DA1.DC =(double)((buff[4]<<24)+(buff[5]<<16)+(buff[6]<<8)+buff[7])/100.0;
-				CGroup.DA0.type = DC;
-				CGroup.DA1.type = DC;
-				WaveCLK0=WaveCLK1=0;
-				CGroup.DA01.DC =(double)((buff[0]<<24)+(buff[1]<<16)+(buff[2]<<8)+buff[3])/100.0;
-        break;
-      default:break;
-      }
-      break;
-		}
-}
-
-void DealUART1Buff(uint8_t* data)
-{
-	static uint8_t head=0,cnt=0,len=0;
-  static uint8_t channel=0;
-	if(head==0&&(*data)==0xAA)
-	{
-		head=1;
-	}
-	else if(head==1&&(*data)==0xAA)
-	{
-		head=2;
-	}
-	else if(head==2)
-	{
-		head=3;
-	}
-	else if(head==3)
-	{
-		head=4;
-    channel=*data;
-	}
-	else if(head==4)
-	{
-		head=5;
-    switch(channel)
+  switch(*channel)
+  {
+  case 0:
+    switch(CGroup.DA0.type)
     {
-    case 0:
-      CGroup.DA0.type=(WaveType)*data;break;
-    case 1:
-      CGroup.DA1.type=(WaveType)*data;break;
-    case 2:
-      CGroup.DA01.type=(WaveType)*data;break;
+    case SLOPE:
+      CGroup.DA0.SLOPE.k=(double)((buff[0]<<24)+(buff[1]<<16)+(buff[2]<<8)+buff[3])/100.0;
+      CGroup.DA0.SLOPE.b=(double)((buff[4]<<24)+(buff[5]<<16)+(buff[6]<<8)+buff[7])/100.0;
+      CGroup.DA0.SLOPE.extreme=(double)((buff[8]<<24)+(buff[9]<<16)+(buff[10]<<8)+buff[11])/100.0;
+      WaveCLK0=0;
+      break;
+    case SINE:
+      CGroup.DA0.SINE.amp=(double)((buff[0]<<24)+(buff[1]<<16)+(buff[2]<<8)+buff[3])/100.0;
+      CGroup.DA0.SINE.wfrq=(double)((buff[4]<<24)+(buff[5]<<16)+(buff[6]<<8)+buff[7])/100.0;
+      CGroup.DA0.SINE.pha=(double)((buff[8]<<24)+(buff[9]<<16)+(buff[10]<<8)+buff[11])/100.0;
+      CGroup.DA0.SINE.Yoffset=(double)((buff[12]<<24)+(buff[13]<<16)+(buff[14]<<8)+buff[15])/100.0;
+      WaveCLK0=0;
+      break;
+    case PWM:
+      CGroup.DA0.PWM.HV   =(double)((buff[0]<<24)+(buff[1]<<16)+(buff[2]<<8)+buff[3])/100.0;
+      CGroup.DA0.PWM.LV   =(double)((buff[4]<<24)+(buff[5]<<16)+(buff[6]<<8)+buff[7])/100.0;
+      CGroup.DA0.PWM.frq  =(double)((buff[8]<<24)+(buff[9]<<16)+(buff[10]<<8)+buff[11])/100.0;
+      CGroup.DA0.PWM.duty =(double)((buff[12]<<24)+(buff[13]<<16)+(buff[14]<<8)+buff[15])/100.0;
+      WaveCLK0=0;
+      break;
+    case DC:
+      CGroup.DA0.DC =(double)((buff[0]<<24)+(buff[1]<<16)+(buff[2]<<8)+buff[3])/100.0;
+      WaveCLK0=0;
+      break;
     default:break;
     }
-    len=LengthCal(data);
-    cnt=0;
-	}
-	else if(head==5)
-	{
-		Rx1Buff[cnt++]=*data;
-		if(cnt==len) 
-		{
-			head=0;
-			Data_anysis(Rx1Buff,&channel);
-		}
-	}
-	else head=0;
+    break;
+  case 1:
+    switch(CGroup.DA1.type)
+    {
+    case SLOPE:
+      CGroup.DA1.SLOPE.k=(double)((buff[0]<<24)+(buff[1]<<16)+(buff[2]<<8)+buff[3])/100.0;
+      CGroup.DA1.SLOPE.b=(double)((buff[4]<<24)+(buff[5]<<16)+(buff[6]<<8)+buff[7])/100.0;
+      CGroup.DA1.SLOPE.extreme=(double)((buff[8]<<24)+(buff[9]<<16)+(buff[10]<<8)+buff[11])/100.0;
+      WaveCLK1=0;
+      break;
+    case SINE:
+      CGroup.DA1.SINE.amp=(double)((buff[0]<<24)+(buff[1]<<16)+(buff[2]<<8)+buff[3])/100.0;
+      CGroup.DA1.SINE.wfrq=(double)((buff[4]<<24)+(buff[5]<<16)+(buff[6]<<8)+buff[7])/100.0;
+      CGroup.DA1.SINE.pha=(double)((buff[8]<<24)+(buff[9]<<16)+(buff[10]<<8)+buff[11])/100.0;
+      CGroup.DA1.SINE.Yoffset=(double)((buff[12]<<24)+(buff[13]<<16)+(buff[14]<<8)+buff[15])/100.0;
+      WaveCLK1=0;
+      break;
+    case PWM:
+      CGroup.DA1.PWM.HV   =(double)((buff[0]<<24)+(buff[1]<<16)+(buff[2]<<8)+buff[3])/100.0;
+      CGroup.DA1.PWM.LV   =(double)((buff[4]<<24)+(buff[5]<<16)+(buff[6]<<8)+buff[7])/100.0;
+      CGroup.DA1.PWM.frq  =(double)((buff[8]<<24)+(buff[9]<<16)+(buff[10]<<8)+buff[11])/100.0;
+      CGroup.DA1.PWM.duty =(double)((buff[12]<<24)+(buff[13]<<16)+(buff[14]<<8)+buff[15])/100.0;
+      WaveCLK1=0;
+      break;
+    case DC:
+      CGroup.DA1.DC   =(double)((buff[4]<<24)+(buff[5]<<16)+(buff[6]<<8)+buff[7])/100.0;
+      WaveCLK1=0;
+      break;
+    default:break;
+    }
+    break;
+  case 2:
+    switch(CGroup.DA01.type)
+    {
+    case SLOPE:
+      CGroup.DA01.SLOPE.k=(double)((buff[0]<<24)+(buff[1]<<16)+(buff[2]<<8)+buff[3])/100.0;
+      CGroup.DA01.SLOPE.b=(double)((buff[4]<<24)+(buff[5]<<16)+(buff[6]<<8)+buff[7])/100.0;
+      CGroup.DA01.SLOPE.extreme=(double)((buff[8]<<24)+(buff[9]<<16)+(buff[10]<<8)+buff[11])/100.0;
+      WaveCLK0=WaveCLK1=0;
+      break;
+    case SINE:
+      CGroup.DA01.SINE.amp=(double)((buff[0]<<24)+(buff[1]<<16)+(buff[2]<<8)+buff[3])/100.0;
+      CGroup.DA01.SINE.wfrq=(double)((buff[4]<<24)+(buff[5]<<16)+(buff[6]<<8)+buff[7])/100.0;
+      CGroup.DA01.SINE.pha=(double)((buff[8]<<24)+(buff[9]<<16)+(buff[10]<<8)+buff[11])/100.0;
+      CGroup.DA01.SINE.Yoffset=(double)((buff[12]<<24)+(buff[13]<<16)+(buff[14]<<8)+buff[15])/100.0;
+      WaveCLK0=WaveCLK1=0;
+      break;
+    case PWM:
+      CGroup.DA01.PWM.HV   =(double)((buff[0]<<24)+(buff[1]<<16)+(buff[2]<<8)+buff[3])/100.0;
+      CGroup.DA01.PWM.LV   =(double)((buff[4]<<24)+(buff[5]<<16)+(buff[6]<<8)+buff[7])/100.0;
+      CGroup.DA01.PWM.frq  =(double)((buff[8]<<24)+(buff[9]<<16)+(buff[10]<<8)+buff[11])/100.0;
+      CGroup.DA01.PWM.duty =(double)((buff[12]<<24)+(buff[13]<<16)+(buff[14]<<8)+buff[15])/100.0;
+      WaveCLK0=WaveCLK1=0;
+      break;
+    case DC:
+      CGroup.DA0.DC =(double)((buff[0]<<24)+(buff[1]<<16)+(buff[2]<<8)+buff[3])/100.0;
+      CGroup.DA1.DC =(double)((buff[4]<<24)+(buff[5]<<16)+(buff[6]<<8)+buff[7])/100.0;
+      CGroup.DA0.type = DC;
+      CGroup.DA1.type = DC;
+      WaveCLK0=WaveCLK1=0;
+      CGroup.DA01.DC =(double)((buff[0]<<24)+(buff[1]<<16)+(buff[2]<<8)+buff[3])/100.0;
+      break;
+    default:break;
+    }
+    break;
+  }
+}
 
+void DealQueueBuff(Queue_t* queue)
+{
+  static uint8_t head=0,cnt=0;
+  static uint8_t channel=0,len=0,type=0;
+  static uint8_t TargetID;
+  while(Queue_Dequeue(queue))
+  {
+    if(head==0&&queue->DequeueData==0xAA)
+    {
+      head=1;
+    }
+    else if(head==1&&queue->DequeueData==0xAA)
+    {
+      head=2;
+    }
+    else if(head==2)
+    {
+      head=3;
+      TargetID=queue->DequeueData;
+    }
+    else if(head==3)
+    {
+      head=4;
+      channel=queue->DequeueData;
+    }
+    else if(head==4)
+    {
+      head=5;
+      if(TargetID==BoardID)
+      {
+        switch(channel)
+        {
+        case 0:
+          CGroup.DA0.type=(WaveType)queue->DequeueData;break;
+        case 1:
+          CGroup.DA1.type=(WaveType)queue->DequeueData;break;
+        case 2:
+          CGroup.DA01.type=(WaveType)queue->DequeueData;break;
+        default:break;
+        }
+      }
+      else
+        type=queue->DequeueData;
+      
+      len=LengthCal(&(queue->DequeueData));
+      cnt=0;
+    }
+    else if(head==5)
+    {
+      Rx1Buff[cnt++]=queue->DequeueData;
+      if(cnt==len) 
+      {
+        head=0;
+        if(TargetID==BoardID)
+          Data_anysis(Rx1Buff,&channel);
+        else
+          ToBoard_Transpond(&TargetID,&channel,&type,Rx1Buff,&len);
+      }
+    }
+    else head=0;
+  }
 }
 
 //adcbuf has symbol
@@ -241,7 +295,7 @@ void ToPC_WaveData(void)
   buff[cnt++]=0x00;//channel
   
   buff[cnt++]=CGroup.DA0.type;
-	buff[cnt++]=CGroup.DA1.type;
+  buff[cnt++]=CGroup.DA1.type;
   buff[cnt++]=CGroup.DA01.type;
   
   buff[cnt++]=0x00;//reserved
@@ -250,3 +304,5 @@ void ToPC_WaveData(void)
   for(i=0;i<cnt;i++)
     printf("%d",buff[i]);
 }
+
+

@@ -1168,10 +1168,22 @@
         <group>
             <name>Other</name>
             <file>
+                <name>$PROJ_DIR$\..\Other\key.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Other\key.h</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\Other\protocol.c</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\Other\protocol.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Other\queue.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Other\queue.h</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\Other\task.c</name>

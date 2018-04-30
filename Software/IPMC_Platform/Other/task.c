@@ -73,29 +73,20 @@ void TaskADC(bool *TaskBit)
 
 void TaskDebug(bool *TaskBit)
 {
-  uint8_t CANTxBuff[8]={0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa,0xaa}; 
-  CAN_TxHeaderTypeDef CAN1TxHeaderType;
-  
   if(*TaskBit)
   {
     *TaskBit=false;
     
-    CAN1TxHeaderType.StdId=0X12;        //㊣那℅?㊣那那?﹞?
-    CAN1TxHeaderType.ExtId=0x12;        //角??1㊣那那?﹞?(29??)
-    CAN1TxHeaderType.IDE=CAN_ID_STD;    //那1車?㊣那℅???
-    CAN1TxHeaderType.RTR=CAN_RTR_DATA;  //那y?Y??
-    CAN1TxHeaderType.DLC=8; 
-    HAL_CAN_AddTxMessage(&hcan1,&CAN1TxHeaderType,CANTxBuff,(uint32_t*)CAN_TX_MAILBOX0);
     // seem to impact the data register
     //	  printf("Out0:0x%x ",(AD5722_ReadBack(DAC_REG|DAC_A))>>4);
     //		printf("Out1:0x%x ",(AD5722_ReadBack(DAC_REG|DAC_B))>>4);
     
-    printf("C:%4.3fV ",ADS_Buff[0]/32768.0*6.144);
-    printf("V:%4.3fV ",ADS_Buff[1]/32768.0*6.144);
-    printf("F:%4.3fV ",ADS_Buff[2]/32768.0*6.144);
-    printf("G:%4.3fV ",ADS_Buff[3]/32768.0*6.144);
-    
-    printf("\r\n");
+//    printf("C:%4.3fV ",ADS_Buff[0]/32768.0*6.144);
+//    printf("V:%4.3fV ",ADS_Buff[1]/32768.0*6.144);
+//    printf("F:%4.3fV ",ADS_Buff[2]/32768.0*6.144);
+//    printf("G:%4.3fV ",ADS_Buff[3]/32768.0*6.144);
+//    printf("\r\n");
+
   }
 }
 

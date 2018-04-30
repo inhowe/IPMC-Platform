@@ -16,13 +16,13 @@ void ADS1x15_WriteData(uint8_t reg,uint16_t data)
 	
 	IIC_Start();
 	IIC_Send_Byte(ADS1115_ADDRESS_W);//Device addr
-	ack = IIC_Wait_Ack();if(ack==1){IIC_Stop();printf("W1 ");}
+	ack = IIC_Wait_Ack();if(ack==1){IIC_Stop();/*printf("W1 ");*/}
 	IIC_Send_Byte(reg);//Pointer Register
-	ack = IIC_Wait_Ack();if(ack==1){IIC_Stop();printf("W2 ");}
+	ack = IIC_Wait_Ack();if(ack==1){IIC_Stop();/*printf("W2 ");*/}
 	IIC_Send_Byte((data&0xff00)>>8);//High Byte
-	ack = IIC_Wait_Ack();if(ack==1){IIC_Stop();printf("W3 ");}
+	ack = IIC_Wait_Ack();if(ack==1){IIC_Stop();/*printf("W3 ");*/}
 	IIC_Send_Byte(data&0x00ff);//Low Byte
-	ack = IIC_Wait_Ack();if(ack==1){IIC_Stop();printf("W4 ");}
+	ack = IIC_Wait_Ack();if(ack==1){IIC_Stop();/*printf("W4 ");*/}
 	IIC_Stop();
 }
 
@@ -33,14 +33,14 @@ uint16_t ADS1x15_ReadData(uint8_t reg)
 	
 	IIC_Start();
 		IIC_Send_Byte(ADS1115_ADDRESS_W);//write point register
-		ack = IIC_Wait_Ack();if(ack==1){IIC_Stop();printf("R1 ");}
+		ack = IIC_Wait_Ack();if(ack==1){IIC_Stop();/*printf("R1 ");*/}
 		IIC_Send_Byte(reg);
-		ack = IIC_Wait_Ack();if(ack==1){IIC_Stop();printf("R2 ");}
+		ack = IIC_Wait_Ack();if(ack==1){IIC_Stop();/*printf("R2 ");*/}
 	IIC_Stop();
 	
 	IIC_Start();
 		IIC_Send_Byte(ADS1115_ADDRESS_R);//read data
-		ack = IIC_Wait_Ack();if(ack==1){IIC_Stop();printf("R3 ");}
+		ack = IIC_Wait_Ack();if(ack==1){IIC_Stop();/*printf("R3 ");*/}
 		tmp1=IIC_Read_Byte(ack);
 		IIC_Ack();
 		tmp2=IIC_Read_Byte(ack);
