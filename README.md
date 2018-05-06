@@ -3,8 +3,11 @@
 版本索取API：https://api.github.com/repos/drinow/IPMC-Platform/releases/latest
 
 ## 更新日志
+- 20180506更新
+	- 上位机支持自动更新
 - 20180505更新
-	- 移植UCOS-II，无系统版本暂不更新
+	- 移植UCOS-II，无操作系统的版本暂不更新
+	- 支持检测版本更新，但尚不支持进行版本更新
 - 20180501更新
 	- 新添了自动搜寻串口功能
 	- 细节优化

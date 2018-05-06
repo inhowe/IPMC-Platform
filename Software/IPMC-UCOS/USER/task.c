@@ -11,6 +11,16 @@ OS_STK START_TASK_STK[START_STK_SIZE];
 //LED0хннЯ
 void led_task(void *pdata)
 {	 	
+	uint8_t command[4];
+	command[0]='R';
+	command[1]='0';
+	command[2]=0x0D;
+//	command[3]=0x0A;
+	HAL_UART_Transmit(&UART2_Handler,command,4,10);
+	command[0]='M';
+	command[1]=1;
+	command[2]=0x0D;
+//	command[3]=0x0A;
 	while(1)
 	{
 		if(BoardID==0x00)
@@ -23,6 +33,7 @@ void led_task(void *pdata)
 		else
 		{	LED1=1;LED0=1;}
 		delay_ms(950);
+		HAL_UART_Transmit(&UART2_Handler,command,4,10);
 	};
 }
 

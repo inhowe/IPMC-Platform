@@ -4,7 +4,8 @@ import os
 import urllib
 import logging
 import sys
-
+import time
+# https://github.com/drinow/IPMC-Platform/releases/download/0.2/IPMC.zip
 
 logging.basicConfig(
     format='%(asctime)s %(levelname)s %(message)s',
@@ -12,15 +13,21 @@ logging.basicConfig(
     stream=sys.stdout)
 
 file_path = os.path.join(os.getcwd(),'IPMC.zip')
-print 'Please input your URL:'
-url = raw_input()
 
-def down(_save_path, _url):
+logging.info("---- Filling the URL...")
+url = str(sys.argv[1])
+# url = raw_input()
+print "Inputed URL is : ",url
+
+def down(_url):
     try:
-        urllib.urlretrieve(_url, _save_path)
+        logging.info("---- Downloading update file...")
+        urllib.urlretrieve(_url, file_path)
+        logging.info('---- File is downloaded!')
+        logging.info('---- SUCCESS')
     except:
-        print '\nError when retrieving the URL:', _save_path
+        logging.info('---- Error when retrieving the URL!')
+        logging.info('---- FAILED')
 
-logging.info("Downloading file.")
-down(file_path, url)
-logging.info('file is download!')
+
+down(url)
