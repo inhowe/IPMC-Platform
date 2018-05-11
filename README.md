@@ -3,6 +3,8 @@
 版本索取API：https://api.github.com/repos/drinow/IPMC-Platform/releases/latest
 
 ## 更新日志
+- 20180511更新
+	- 上位机增加自动获取管理员权限功能
 - 20180506更新
 	- 上位机支持自动更新
 - 20180505更新

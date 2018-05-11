@@ -34,6 +34,7 @@
 		<Item Name="launch.vi" Type="VI" URL="../launch.vi"/>
 		<Item Name="version.ini" Type="Document" URL="../version.ini"/>
 		<Item Name="protocol.xlsx" Type="Document" URL="../protocol.xlsx"/>
+		<Item Name="launch.manifest" Type="Document" URL="../../builds/IPMC-Platform/launch/launch.manifest"/>
 		<Item Name="依赖关系" Type="Dependencies">
 			<Item Name="vi.lib" Type="Folder">
 				<Item Name="BuildHelpPath.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/BuildHelpPath.vi"/>
@@ -100,30 +101,17 @@
 				<Item Name="IB_RW_Project_Installer_Data.ctl" Type="VI" URL="/&lt;vilib&gt;/AppBuilder/IB_RW_Project/IB_RW_Project_Installer_Data.ctl"/>
 				<Item Name="IB_RW_Project_Installer.vi" Type="VI" URL="/&lt;vilib&gt;/AppBuilder/IB_RW_Project/IB_RW_Project_Installer.vi"/>
 				<Item Name="NI_App_Builder_API.lvlib" Type="Library" URL="/&lt;vilib&gt;/AppBuilder/AB_API_Simple/NI_App_Builder_API.lvlib"/>
-				<Item Name="Python Integration Toolkit.lvlib" Type="Library" URL="/&lt;vilib&gt;/Enthought/Python Integration Toolkit/Python Integration Toolkit.lvlib"/>
-				<Item Name="NI_Data Type.lvlib" Type="Library" URL="/&lt;vilib&gt;/Utility/Data Type/NI_Data Type.lvlib"/>
-				<Item Name="Is Path and Not Empty.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/file.llb/Is Path and Not Empty.vi"/>
-				<Item Name="Registry refnum.ctl" Type="VI" URL="/&lt;vilib&gt;/registry/registry.llb/Registry refnum.ctl"/>
-				<Item Name="Registry Handle Master.vi" Type="VI" URL="/&lt;vilib&gt;/registry/registry.llb/Registry Handle Master.vi"/>
-				<Item Name="Close Registry Key.vi" Type="VI" URL="/&lt;vilib&gt;/registry/registry.llb/Close Registry Key.vi"/>
-				<Item Name="Registry Simplify Data Type.vi" Type="VI" URL="/&lt;vilib&gt;/registry/registry.llb/Registry Simplify Data Type.vi"/>
-				<Item Name="Registry WinErr-LVErr.vi" Type="VI" URL="/&lt;vilib&gt;/registry/registry.llb/Registry WinErr-LVErr.vi"/>
-				<Item Name="Read Registry Value STR.vi" Type="VI" URL="/&lt;vilib&gt;/registry/registry.llb/Read Registry Value STR.vi"/>
-				<Item Name="Read Registry Value DWORD.vi" Type="VI" URL="/&lt;vilib&gt;/registry/registry.llb/Read Registry Value DWORD.vi"/>
-				<Item Name="Read Registry Value.vi" Type="VI" URL="/&lt;vilib&gt;/registry/registry.llb/Read Registry Value.vi"/>
-				<Item Name="Read Registry Value Simple STR.vi" Type="VI" URL="/&lt;vilib&gt;/registry/registry.llb/Read Registry Value Simple STR.vi"/>
-				<Item Name="Read Registry Value Simple U32.vi" Type="VI" URL="/&lt;vilib&gt;/registry/registry.llb/Read Registry Value Simple U32.vi"/>
-				<Item Name="Read Registry Value Simple.vi" Type="VI" URL="/&lt;vilib&gt;/registry/registry.llb/Read Registry Value Simple.vi"/>
-				<Item Name="STR_ASCII-Unicode.vi" Type="VI" URL="/&lt;vilib&gt;/registry/registry.llb/STR_ASCII-Unicode.vi"/>
-				<Item Name="Registry View.ctl" Type="VI" URL="/&lt;vilib&gt;/registry/registry.llb/Registry View.ctl"/>
-				<Item Name="Registry RtKey.ctl" Type="VI" URL="/&lt;vilib&gt;/registry/registry.llb/Registry RtKey.ctl"/>
-				<Item Name="Registry SAM.ctl" Type="VI" URL="/&lt;vilib&gt;/registry/registry.llb/Registry SAM.ctl"/>
-				<Item Name="Open Registry Key.vi" Type="VI" URL="/&lt;vilib&gt;/registry/registry.llb/Open Registry Key.vi"/>
 				<Item Name="ex_CorrectErrorChain.vi" Type="VI" URL="/&lt;vilib&gt;/express/express shared/ex_CorrectErrorChain.vi"/>
 				<Item Name="subFile Dialog.vi" Type="VI" URL="/&lt;vilib&gt;/express/express input/FileDialogBlock.llb/subFile Dialog.vi"/>
 				<Item Name="NI_Unzip.lvlib" Type="Library" URL="/&lt;vilib&gt;/zip/NI_Unzip.lvlib"/>
 				<Item Name="Create Directory Recursive.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/libraryn.llb/Create Directory Recursive.vi"/>
 				<Item Name="subTimeDelay.vi" Type="VI" URL="/&lt;vilib&gt;/express/express execution control/TimeDelayBlock.llb/subTimeDelay.vi"/>
+				<Item Name="New Session.vi" Type="VI" URL="/&lt;vilib&gt;/Enthought/Python Integration Toolkit/API/New Session.vi"/>
+				<Item Name="Close Session.vi" Type="VI" URL="/&lt;vilib&gt;/Enthought/Python Integration Toolkit/API/Close Session.vi"/>
+				<Item Name="Pack.vi" Type="VI" URL="/&lt;vilib&gt;/Enthought/Python Integration Toolkit/API/Pack.vi"/>
+				<Item Name="Call.vi" Type="VI" URL="/&lt;vilib&gt;/Enthought/Python Integration Toolkit/API/Call.vi"/>
+				<Item Name="Unpack.vi" Type="VI" URL="/&lt;vilib&gt;/Enthought/Python Integration Toolkit/API/Unpack.vi"/>
+				<Item Name="Unpack String.vi" Type="VI" URL="/&lt;vilib&gt;/Enthought/Python Integration Toolkit/API/Unpack String.vi"/>
 			</Item>
 			<Item Name="provcom_StringGlobals.vi" Type="VI" URL="/&lt;resource&gt;/Framework/Providers/Common/provcom_StringGlobals.vi"/>
 			<Item Name="mxLvErrorHandler.vi" Type="VI" URL="/&lt;resource&gt;/Framework/Providers/API/mxLvErrorHandler.vi"/>
@@ -155,12 +143,6 @@
 			<Item Name="mxLvGetItem.vi" Type="VI" URL="/&lt;resource&gt;/Framework/Providers/API/mxLvGetItem.vi"/>
 			<Item Name="mxLvProvider.mxx" Type="Document" URL="/&lt;resource&gt;/Framework/Providers/mxLvProvider.mxx"/>
 			<Item Name="运行时菜单.rtm" Type="Document" URL="../运行时菜单.rtm"/>
-			<Item Name="Advapi32.dll" Type="Document" URL="Advapi32.dll">
-				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
-			</Item>
-			<Item Name="kernel32.dll" Type="Document" URL="kernel32.dll">
-				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
-			</Item>
 		</Item>
 		<Item Name="程序生成规范" Type="Build">
 			<Item Name="launch" Type="EXE">
@@ -168,6 +150,7 @@
 				<Property Name="App_INI_aliasGUID" Type="Str">{80494243-3B6B-4844-82D1-E2AEF5F21D5C}</Property>
 				<Property Name="App_INI_GUID" Type="Str">{0974CF05-CC8C-4ED2-BC95-866CCA59DD60}</Property>
 				<Property Name="App_serverConfig.httpPort" Type="Int">8002</Property>
+				<Property Name="App_winsec.manifest" Type="Ref">/我的电脑/launch.manifest</Property>
 				<Property Name="Bld_autoIncrement" Type="Bool">true</Property>
 				<Property Name="Bld_buildCacheID" Type="Str">{355D0486-CB30-42D1-B7A0-B3F93CF03403}</Property>
 				<Property Name="Bld_buildSpecName" Type="Str">launch</Property>
@@ -179,7 +162,7 @@
 				<Property Name="Bld_localDestDirType" Type="Str">relativeToCommon</Property>
 				<Property Name="Bld_modifyLibraryFile" Type="Bool">true</Property>
 				<Property Name="Bld_previewCacheID" Type="Str">{B714A26D-D1F7-43E2-8329-EBC11EF6A241}</Property>
-				<Property Name="Bld_version.build" Type="Int">35</Property>
+				<Property Name="Bld_version.build" Type="Int">36</Property>
 				<Property Name="Bld_version.major" Type="Int">1</Property>
 				<Property Name="Destination[0].destName" Type="Str">launch.exe</Property>
 				<Property Name="Destination[0].path" Type="Path">../builds/IPMC-Platform/launch/launch.exe</Property>
@@ -188,46 +171,10 @@
 				<Property Name="Destination[1].destName" Type="Str">支持目录</Property>
 				<Property Name="Destination[1].path" Type="Path">../builds/IPMC-Platform/launch/data</Property>
 				<Property Name="DestinationCount" Type="Int">2</Property>
-				<Property Name="Exe_actXinfo_enumCLSID[0]" Type="Str">{2059218F-1C5B-4F2D-B378-70588B5AD0DF}</Property>
-				<Property Name="Exe_actXinfo_enumCLSID[1]" Type="Str">{14818313-8122-44D5-972C-1B2EDA0788BA}</Property>
-				<Property Name="Exe_actXinfo_enumCLSID[10]" Type="Str">{8CCB5A13-8970-40E2-A3D4-1D6D4737F7FA}</Property>
-				<Property Name="Exe_actXinfo_enumCLSID[11]" Type="Str">{C71117F7-D194-4110-9755-50B103B67784}</Property>
-				<Property Name="Exe_actXinfo_enumCLSID[12]" Type="Str">{1EF9F97D-651A-419A-AF3A-C20FFF1B85F4}</Property>
-				<Property Name="Exe_actXinfo_enumCLSID[13]" Type="Str">{1F0B2D4C-8AA0-412A-B208-516D1E74F640}</Property>
-				<Property Name="Exe_actXinfo_enumCLSID[14]" Type="Str">{C71806C8-1376-45D0-9A17-16218C6E7D91}</Property>
-				<Property Name="Exe_actXinfo_enumCLSID[15]" Type="Str">{70299639-631C-48C6-8093-CCDC5233F482}</Property>
-				<Property Name="Exe_actXinfo_enumCLSID[16]" Type="Str">{18A52C9F-E477-4673-BCA2-A587B080ECED}</Property>
-				<Property Name="Exe_actXinfo_enumCLSID[2]" Type="Str">{0EE3D026-4914-41A0-809B-420E7B971942}</Property>
-				<Property Name="Exe_actXinfo_enumCLSID[3]" Type="Str">{708DCB44-9343-4B0E-8C0D-94BACD2D4BC8}</Property>
-				<Property Name="Exe_actXinfo_enumCLSID[4]" Type="Str">{0DCEBB8D-1DC7-43F1-8BFB-9037C550A123}</Property>
-				<Property Name="Exe_actXinfo_enumCLSID[5]" Type="Str">{90A7A27A-86D7-484C-A9DD-022AEC135849}</Property>
-				<Property Name="Exe_actXinfo_enumCLSID[6]" Type="Str">{660F3D5B-C23E-4806-847F-C5B5EEC5565A}</Property>
-				<Property Name="Exe_actXinfo_enumCLSID[7]" Type="Str">{97342C8A-4AFE-47BC-91E9-E359ACBCC3E0}</Property>
-				<Property Name="Exe_actXinfo_enumCLSID[8]" Type="Str">{EEBD8C2C-4DC6-4A8E-B3F9-E4692A9821A5}</Property>
-				<Property Name="Exe_actXinfo_enumCLSID[9]" Type="Str">{3DC97E22-C515-4F0B-B943-C5E05DBAC147}</Property>
-				<Property Name="Exe_actXinfo_enumCLSIDsCount" Type="Int">17</Property>
-				<Property Name="Exe_actXinfo_majorVersion" Type="Int">5</Property>
-				<Property Name="Exe_actXinfo_minorVersion" Type="Int">5</Property>
-				<Property Name="Exe_actXinfo_objCLSID[0]" Type="Str">{C149323E-CD18-4679-9F44-BA77766D431D}</Property>
-				<Property Name="Exe_actXinfo_objCLSID[1]" Type="Str">{0555657B-B55B-4882-9E83-76DD760D5764}</Property>
-				<Property Name="Exe_actXinfo_objCLSID[10]" Type="Str">{0E43C65B-6456-4E49-8CE0-F813EEF26974}</Property>
-				<Property Name="Exe_actXinfo_objCLSID[11]" Type="Str">{C739B149-4DA1-4426-B23C-311BD94C3DE8}</Property>
-				<Property Name="Exe_actXinfo_objCLSID[12]" Type="Str">{6D119D41-BF64-4F93-BFE5-B2522C3DE2A3}</Property>
-				<Property Name="Exe_actXinfo_objCLSID[13]" Type="Str">{9036DB48-E732-45C3-858F-B1ABEBFE9BFB}</Property>
-				<Property Name="Exe_actXinfo_objCLSID[2]" Type="Str">{85BE74CF-018F-4DE2-B6A8-A55B0B9E980B}</Property>
-				<Property Name="Exe_actXinfo_objCLSID[3]" Type="Str">{8100615F-E83F-4605-AF81-DF16DE722561}</Property>
-				<Property Name="Exe_actXinfo_objCLSID[4]" Type="Str">{8EADA9E7-66C4-43FC-88D4-9AF62595126D}</Property>
-				<Property Name="Exe_actXinfo_objCLSID[5]" Type="Str">{4A8480AE-0050-4314-ACA6-3191848798F9}</Property>
-				<Property Name="Exe_actXinfo_objCLSID[6]" Type="Str">{C38AFE95-EE46-4787-B70B-BE3AC4D25D87}</Property>
-				<Property Name="Exe_actXinfo_objCLSID[7]" Type="Str">{A9D7F1AE-0FAA-43E0-9347-8367DCEFCBEA}</Property>
-				<Property Name="Exe_actXinfo_objCLSID[8]" Type="Str">{CE6A0523-DC66-4D39-B582-07E45BF93D6E}</Property>
-				<Property Name="Exe_actXinfo_objCLSID[9]" Type="Str">{39C23340-86A8-46E7-8B5E-2140755DEEBA}</Property>
-				<Property Name="Exe_actXinfo_objCLSIDsCount" Type="Int">14</Property>
-				<Property Name="Exe_actXinfo_progIDPrefix" Type="Str">Launch</Property>
 				<Property Name="Exe_actXServerName" Type="Str">Launch</Property>
 				<Property Name="Exe_actXServerNameGUID" Type="Str">{97630F66-0F7A-42E0-BAF1-266584CEE9E0}</Property>
 				<Property Name="Exe_iconItemID" Type="Ref">/我的电脑/other/NUAA圆角.ico</Property>
-				<Property Name="Source[0].itemID" Type="Str">{2DA2DA2A-491A-490D-B74A-398E3E01E33C}</Property>
+				<Property Name="Source[0].itemID" Type="Str">{73A7ADCB-3447-4698-9088-2705C074C610}</Property>
 				<Property Name="Source[0].type" Type="Str">Container</Property>
 				<Property Name="Source[1].destinationIndex" Type="Int">0</Property>
 				<Property Name="Source[1].itemID" Type="Ref">/我的电脑/launch.vi</Property>
@@ -389,7 +336,7 @@
 				<Property Name="INST_defaultDir" Type="Str">{BAAA530A-532E-4D52-86A1-7A340E9FD0F2}</Property>
 				<Property Name="INST_language" Type="Int">2052</Property>
 				<Property Name="INST_productName" Type="Str">IPMC-Platform</Property>
-				<Property Name="INST_productVersion" Type="Str">1.0.21</Property>
+				<Property Name="INST_productVersion" Type="Str">1.0.22</Property>
 				<Property Name="InstSpecBitness" Type="Str">32-bit</Property>
 				<Property Name="InstSpecVersion" Type="Str">17008011</Property>
 				<Property Name="MSI_arpCompany" Type="Str">NUAA</Property>
@@ -451,6 +398,71 @@
 				<Property Name="Source[6].tag" Type="Ref">/我的电脑/other/download.exe</Property>
 				<Property Name="Source[6].type" Type="Str">File</Property>
 				<Property Name="SourceCount" Type="Int">7</Property>
+			</Item>
+			<Item Name="IPMC-Platform-NoPack" Type="Installer">
+				<Property Name="Destination[0].name" Type="Str">IPMC-Platform</Property>
+				<Property Name="Destination[0].parent" Type="Str">{3912416A-D2E5-411B-AFEE-B63654D690C0}</Property>
+				<Property Name="Destination[0].tag" Type="Str">{7483AB54-4414-46B8-8799-AC64B5E27B2F}</Property>
+				<Property Name="Destination[0].type" Type="Str">userFolder</Property>
+				<Property Name="DestinationCount" Type="Int">1</Property>
+				<Property Name="INST_autoIncrement" Type="Bool">true</Property>
+				<Property Name="INST_buildLocation" Type="Path">../builds/IPMC-Platform/IPMC-Platform-NoPack</Property>
+				<Property Name="INST_buildLocation.type" Type="Str">relativeToCommon</Property>
+				<Property Name="INST_buildSpecName" Type="Str">IPMC-Platform-NoPack</Property>
+				<Property Name="INST_defaultDir" Type="Str">{7483AB54-4414-46B8-8799-AC64B5E27B2F}</Property>
+				<Property Name="INST_language" Type="Int">2052</Property>
+				<Property Name="INST_productName" Type="Str">IPMC</Property>
+				<Property Name="INST_productVersion" Type="Str">1.0.3</Property>
+				<Property Name="InstSpecBitness" Type="Str">32-bit</Property>
+				<Property Name="InstSpecVersion" Type="Str">17008011</Property>
+				<Property Name="MSI_arpCompany" Type="Str">NUAA</Property>
+				<Property Name="MSI_distID" Type="Str">{CD879E4B-6C7F-4CF6-9530-9932EDE4A71F}</Property>
+				<Property Name="MSI_hideNonRuntimes" Type="Bool">true</Property>
+				<Property Name="MSI_osCheck" Type="Int">0</Property>
+				<Property Name="MSI_upgradeCode" Type="Str">{9D9AE0CC-4CB8-48DD-8222-1EFCF4A3A804}</Property>
+				<Property Name="MSI_windowMessage" Type="Str">无环境组件安装包</Property>
+				<Property Name="MSI_windowTitle" Type="Str">IPMC测控平台</Property>
+				<Property Name="RegDest[0].dirName" Type="Str">Software</Property>
+				<Property Name="RegDest[0].dirTag" Type="Str">{DDFAFC8B-E728-4AC8-96DE-B920EBB97A86}</Property>
+				<Property Name="RegDest[0].parentTag" Type="Str">2</Property>
+				<Property Name="RegDestCount" Type="Int">1</Property>
+				<Property Name="Source[0].dest" Type="Str">{7483AB54-4414-46B8-8799-AC64B5E27B2F}</Property>
+				<Property Name="Source[0].File[0].dest" Type="Str">{7483AB54-4414-46B8-8799-AC64B5E27B2F}</Property>
+				<Property Name="Source[0].File[0].name" Type="Str">launch.exe</Property>
+				<Property Name="Source[0].File[0].Shortcut[0].destIndex" Type="Int">1</Property>
+				<Property Name="Source[0].File[0].Shortcut[0].name" Type="Str">launch</Property>
+				<Property Name="Source[0].File[0].Shortcut[0].subDir" Type="Str"></Property>
+				<Property Name="Source[0].File[0].ShortcutCount" Type="Int">1</Property>
+				<Property Name="Source[0].File[0].tag" Type="Str">{2C86AE60-F264-48A1-BB6F-718E2296279C}</Property>
+				<Property Name="Source[0].FileCount" Type="Int">1</Property>
+				<Property Name="Source[0].name" Type="Str">launch</Property>
+				<Property Name="Source[0].tag" Type="Ref">/我的电脑/程序生成规范/launch</Property>
+				<Property Name="Source[0].type" Type="Str">EXE</Property>
+				<Property Name="Source[1].dest" Type="Str">{7483AB54-4414-46B8-8799-AC64B5E27B2F}</Property>
+				<Property Name="Source[1].File[0].dest" Type="Str">{7483AB54-4414-46B8-8799-AC64B5E27B2F}</Property>
+				<Property Name="Source[1].File[0].name" Type="Str">IPMC.exe</Property>
+				<Property Name="Source[1].File[0].tag" Type="Str">{73F965B0-56CD-4AB9-A0FB-D2E9DD2086B4}</Property>
+				<Property Name="Source[1].FileCount" Type="Int">1</Property>
+				<Property Name="Source[1].name" Type="Str">IPMC</Property>
+				<Property Name="Source[1].tag" Type="Ref">/我的电脑/程序生成规范/IPMC</Property>
+				<Property Name="Source[1].type" Type="Str">EXE</Property>
+				<Property Name="Source[2].dest" Type="Str">{7483AB54-4414-46B8-8799-AC64B5E27B2F}</Property>
+				<Property Name="Source[2].name" Type="Str">protocol.xlsx</Property>
+				<Property Name="Source[2].tag" Type="Ref">/我的电脑/protocol.xlsx</Property>
+				<Property Name="Source[2].type" Type="Str">File</Property>
+				<Property Name="Source[3].dest" Type="Str">{7483AB54-4414-46B8-8799-AC64B5E27B2F}</Property>
+				<Property Name="Source[3].name" Type="Str">version.ini</Property>
+				<Property Name="Source[3].tag" Type="Ref">/我的电脑/version.ini</Property>
+				<Property Name="Source[3].type" Type="Str">File</Property>
+				<Property Name="Source[4].dest" Type="Str">{7483AB54-4414-46B8-8799-AC64B5E27B2F}</Property>
+				<Property Name="Source[4].name" Type="Str">download.exe</Property>
+				<Property Name="Source[4].tag" Type="Ref">/我的电脑/other/download.exe</Property>
+				<Property Name="Source[4].type" Type="Str">File</Property>
+				<Property Name="Source[5].dest" Type="Str">{7483AB54-4414-46B8-8799-AC64B5E27B2F}</Property>
+				<Property Name="Source[5].name" Type="Str">NUAA圆角.ico</Property>
+				<Property Name="Source[5].tag" Type="Ref">/我的电脑/other/NUAA圆角.ico</Property>
+				<Property Name="Source[5].type" Type="Str">File</Property>
+				<Property Name="SourceCount" Type="Int">6</Property>
 			</Item>
 		</Item>
 	</Item>
