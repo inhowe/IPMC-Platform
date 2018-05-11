@@ -34,7 +34,7 @@
 		<Item Name="launch.vi" Type="VI" URL="../launch.vi"/>
 		<Item Name="version.ini" Type="Document" URL="../version.ini"/>
 		<Item Name="protocol.xlsx" Type="Document" URL="../protocol.xlsx"/>
-		<Item Name="launch.manifest" Type="Document" URL="../../builds/IPMC-Platform/launch/launch.manifest"/>
+		<Item Name="launch.manifest" Type="Document" URL="../launch.manifest"/>
 		<Item Name="依赖关系" Type="Dependencies">
 			<Item Name="vi.lib" Type="Folder">
 				<Item Name="BuildHelpPath.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/BuildHelpPath.vi"/>
@@ -162,7 +162,7 @@
 				<Property Name="Bld_localDestDirType" Type="Str">relativeToCommon</Property>
 				<Property Name="Bld_modifyLibraryFile" Type="Bool">true</Property>
 				<Property Name="Bld_previewCacheID" Type="Str">{B714A26D-D1F7-43E2-8329-EBC11EF6A241}</Property>
-				<Property Name="Bld_version.build" Type="Int">36</Property>
+				<Property Name="Bld_version.build" Type="Int">37</Property>
 				<Property Name="Bld_version.major" Type="Int">1</Property>
 				<Property Name="Destination[0].destName" Type="Str">launch.exe</Property>
 				<Property Name="Destination[0].path" Type="Path">../builds/IPMC-Platform/launch/launch.exe</Property>
@@ -171,10 +171,46 @@
 				<Property Name="Destination[1].destName" Type="Str">支持目录</Property>
 				<Property Name="Destination[1].path" Type="Path">../builds/IPMC-Platform/launch/data</Property>
 				<Property Name="DestinationCount" Type="Int">2</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[0]" Type="Str">{BC1B028B-332C-4FD3-999C-0D82D3ED1FCB}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[1]" Type="Str">{CE47D73D-9BDC-4FA6-94CC-2F1D6D60F419}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[10]" Type="Str">{DED259B6-448E-4801-A8D0-588A560BCED8}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[11]" Type="Str">{549956AD-8F05-4025-83C7-AB0989A9D74C}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[12]" Type="Str">{3D96A636-073C-4FFC-ADFF-3881606148FB}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[13]" Type="Str">{6006CAFA-8285-47E5-9C1E-431F5CB22A61}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[14]" Type="Str">{4CF43AA7-71C6-421D-A1C9-7985ADFA09E5}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[15]" Type="Str">{0AA7407E-6275-4C69-9204-E8D67FD7493E}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[16]" Type="Str">{00C4E394-C1A9-4276-937F-7F81D79BBD68}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[2]" Type="Str">{1493A297-A245-493D-B0E7-77C983BD3674}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[3]" Type="Str">{3600CB00-C49F-4437-B1A4-1E63072A2209}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[4]" Type="Str">{580BF91F-0C19-4D72-96CA-0B8D98688994}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[5]" Type="Str">{02565E2B-4CEE-4BE8-A578-9F1F2FFE2606}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[6]" Type="Str">{5F288D15-25D5-452A-A301-3EF405DFF940}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[7]" Type="Str">{A931C335-E7C0-4E52-A9AF-86A11C344BFC}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[8]" Type="Str">{FB69DEA6-8A32-4C25-BAA5-C66379AA5B40}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[9]" Type="Str">{4B0D86FE-B034-420D-97F1-038A81567299}</Property>
+				<Property Name="Exe_actXinfo_enumCLSIDsCount" Type="Int">17</Property>
+				<Property Name="Exe_actXinfo_majorVersion" Type="Int">5</Property>
+				<Property Name="Exe_actXinfo_minorVersion" Type="Int">5</Property>
+				<Property Name="Exe_actXinfo_objCLSID[0]" Type="Str">{4B26F738-1C55-4A8B-A2B8-681E16BA3BB9}</Property>
+				<Property Name="Exe_actXinfo_objCLSID[1]" Type="Str">{31B23458-98FF-4F51-AB3B-5AE3D636D087}</Property>
+				<Property Name="Exe_actXinfo_objCLSID[10]" Type="Str">{2C967F47-C491-4F24-9AF4-7952E6DF91A2}</Property>
+				<Property Name="Exe_actXinfo_objCLSID[11]" Type="Str">{500B67BD-5A4D-46D6-B924-EE7CB3601C11}</Property>
+				<Property Name="Exe_actXinfo_objCLSID[12]" Type="Str">{B9B07105-DDD2-44C4-AD43-3E0FC9787B54}</Property>
+				<Property Name="Exe_actXinfo_objCLSID[13]" Type="Str">{16382BF4-DEBB-4E27-9F06-90456A55BB1E}</Property>
+				<Property Name="Exe_actXinfo_objCLSID[2]" Type="Str">{F56D4907-CB55-4283-9CD9-A75CC15C16F5}</Property>
+				<Property Name="Exe_actXinfo_objCLSID[3]" Type="Str">{AC953CD7-50E3-4950-9023-E5778875FC02}</Property>
+				<Property Name="Exe_actXinfo_objCLSID[4]" Type="Str">{E8B6146A-E376-45B8-A3FA-C93F8F1D64E4}</Property>
+				<Property Name="Exe_actXinfo_objCLSID[5]" Type="Str">{CECD07EF-AB2F-4D36-98DA-C08E52119B06}</Property>
+				<Property Name="Exe_actXinfo_objCLSID[6]" Type="Str">{40FDE035-3F39-4B73-9241-563F68C6BFCD}</Property>
+				<Property Name="Exe_actXinfo_objCLSID[7]" Type="Str">{3B9487AF-A9BF-447D-B2D1-33F83E76CEDF}</Property>
+				<Property Name="Exe_actXinfo_objCLSID[8]" Type="Str">{595A9367-E9D2-4AD0-B24D-7BDF432E36FD}</Property>
+				<Property Name="Exe_actXinfo_objCLSID[9]" Type="Str">{EF68FB22-14A0-403C-A45D-F93045713259}</Property>
+				<Property Name="Exe_actXinfo_objCLSIDsCount" Type="Int">14</Property>
+				<Property Name="Exe_actXinfo_progIDPrefix" Type="Str">Launch</Property>
 				<Property Name="Exe_actXServerName" Type="Str">Launch</Property>
 				<Property Name="Exe_actXServerNameGUID" Type="Str">{97630F66-0F7A-42E0-BAF1-266584CEE9E0}</Property>
 				<Property Name="Exe_iconItemID" Type="Ref">/我的电脑/other/NUAA圆角.ico</Property>
-				<Property Name="Source[0].itemID" Type="Str">{73A7ADCB-3447-4698-9088-2705C074C610}</Property>
+				<Property Name="Source[0].itemID" Type="Str">{554D800E-C1A6-4CEA-9AFE-874E33B168A2}</Property>
 				<Property Name="Source[0].type" Type="Str">Container</Property>
 				<Property Name="Source[1].destinationIndex" Type="Int">0</Property>
 				<Property Name="Source[1].itemID" Type="Ref">/我的电脑/launch.vi</Property>
@@ -336,7 +372,7 @@
 				<Property Name="INST_defaultDir" Type="Str">{BAAA530A-532E-4D52-86A1-7A340E9FD0F2}</Property>
 				<Property Name="INST_language" Type="Int">2052</Property>
 				<Property Name="INST_productName" Type="Str">IPMC-Platform</Property>
-				<Property Name="INST_productVersion" Type="Str">1.0.22</Property>
+				<Property Name="INST_productVersion" Type="Str">1.0.23</Property>
 				<Property Name="InstSpecBitness" Type="Str">32-bit</Property>
 				<Property Name="InstSpecVersion" Type="Str">17008011</Property>
 				<Property Name="MSI_arpCompany" Type="Str">NUAA</Property>
@@ -412,7 +448,7 @@
 				<Property Name="INST_defaultDir" Type="Str">{7483AB54-4414-46B8-8799-AC64B5E27B2F}</Property>
 				<Property Name="INST_language" Type="Int">2052</Property>
 				<Property Name="INST_productName" Type="Str">IPMC</Property>
-				<Property Name="INST_productVersion" Type="Str">1.0.3</Property>
+				<Property Name="INST_productVersion" Type="Str">1.0.4</Property>
 				<Property Name="InstSpecBitness" Type="Str">32-bit</Property>
 				<Property Name="InstSpecVersion" Type="Str">17008011</Property>
 				<Property Name="MSI_arpCompany" Type="Str">NUAA</Property>
