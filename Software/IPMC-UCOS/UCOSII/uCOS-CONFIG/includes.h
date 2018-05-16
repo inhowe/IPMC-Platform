@@ -33,15 +33,23 @@
 #include "key.h"
 #include "protocol.h"
 #include "can.h"
+#include "laser.h"
+
+#define  SetBit(x,y)   x|=(1<<y) //将X的第Y位置1
+#define  ClrBit(x,y)   x&=~(1<<y) //将X的第Y位清0
+
+#define LASERErrBIT 15
 
 #define MAXBoardID 0x01
 
 extern OS_EVENT *CAN_Q;
 extern OS_EVENT *UART1_Q;
+extern OS_EVENT *COM2Msg;
+
 extern void* CAN_QTbl[64];
 extern void* UART1_QTbl[64];
-extern uint8_t BoardID;
-
+extern INT16U BoardID;
+extern INT16U ErrCode;
 #endif
 
 

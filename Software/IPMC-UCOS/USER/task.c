@@ -7,49 +7,64 @@ OS_STK ADC_TASK_STK[ADC_STK_SIZE];
 OS_STK COM_TASK_STK[COM_STK_SIZE];
 OS_STK DBG_TASK_STK[DBG_STK_SIZE];
 OS_STK START_TASK_STK[START_STK_SIZE];
+OS_STK IDLE_TASK_STK[IDLE_STK_SIZE];
+OS_STK LASER_TASK_STK[LASER_STK_SIZE];
 
 //LED0任务
 void led_task(void *pdata)
-{	 	
-	uint8_t command[4];
-	command[0]='R';
-	command[1]='0';
-	command[2]=0x0D;
-//	command[3]=0x0A;
-	HAL_UART_Transmit(&UART2_Handler,command,4,10);
-	command[0]='M';
-	command[1]=1;
-	command[2]=0x0D;
-//	command[3]=0x0A;
+{
+    INT16U time=950;
+    while(1)
+    {
+        if(BoardID==0x00)
+        {	LED0=0;LED1=1;}
+        else
+        {	LED1=0;LED0=1;}
+        delay_ms(50);
+        if(BoardID==0x00)
+        {	LED0=1;LED1=1;}
+        else
+        {	LED1=1;LED0=1;}
+        
+        if(ErrCode!=0)time=150; else time=950;
+        delay_ms(time);
+    }
+}
+
+void IDLE_Task(void* pdata)
+{
 	while(1)
 	{
-		if(BoardID==0x00)
-		{	LED0=0;LED1=1;}
-		else
-		{	LED1=0;LED0=1;}
-		delay_ms(50);
-		if(BoardID==0x00)
-		{	LED0=1;LED1=1;}
-		else
-		{	LED1=1;LED0=1;}
-		delay_ms(950);
-		HAL_UART_Transmit(&UART2_Handler,command,4,10);
-	};
+        delay_ms(1000);
+	}
+}
+
+void Laser_Task(void* pdata)
+{
+    INT8U err,*COM2Buff;
+    INT16U time=20;
+    while(1)
+    {
+        LaserCMDMessure();
+        COM2Buff = OSMboxPend(COM2Msg,time,&err);
+        if(err == OS_ERR_NONE)
+        {
+            LaserBAKMessure(COM2Buff);
+            ClrBit(ErrCode,LASERErrBIT);
+            time = 20;
+        }
+        else
+        {   //通信失败时等待传感器恢复
+            LaserOffset=-99.9999;
+            time = 5000;
+            SetBit(ErrCode,LASERErrBIT);
+        }
+        delay_ms(time);
+    }
 }
 
 void COM_Task(void* pdata)
 {
-//	INT8U *msg,err;
-//	char one=1;
-//	char two=2;    
-
-//	OSQPost(UART1_Q,(void*)&one);
-//	OSQPost(UART1_Q,(void*)&two); 
-//	while (1)
-//	{
-//		msg=(INT8U *)OSQPend(UART1_Q,0,&err);
-//		printf("%d\r\n",*msg);	
-//	}
 	while(1)
 	{
 		DealQueueBuff(&UART_RXqueue);
@@ -63,10 +78,10 @@ void DBG_Task(void* pdata)
 {
 	while(1)
 	{
-        printf("C:%4.3fV ",ADS_Buff[0]/32768.0*6.144);
-        printf("V:%4.3fV ",ADS_Buff[1]/32768.0*6.144);
-        printf("F:%4.3fV ",ADS_Buff[2]/32768.0*6.144);
-        printf("G:%4.3fV ",ADS_Buff[3]/32768.0*6.144);
+        printf("C:%.3fV ",ADS_Buff[0]/32768.0*6.144);
+        printf("V:%.3fV ",ADS_Buff[1]/32768.0*6.144);
+        printf("F:%.3fV ",ADS_Buff[2]/32768.0*6.144);
+        printf("L:%.4fmm ",LaserOffset);
         printf("\r\n");
 		delay_ms(1000);
 	}
@@ -131,7 +146,7 @@ void start_task(void *pdata)
                            (INT32U         )LED_STK_SIZE,             
                            (void*          )0,                         
                            (INT16U         )OS_TASK_OPT_STK_CHK|OS_TASK_OPT_STK_CLR);
-	
+
 	cpu_sr=OSTaskCreateExt((void(*)(void*) )DBG_Task,                 
                            (void*          )0,
                            (OS_STK*        )&DBG_TASK_STK[DBG_STK_SIZE-1],
@@ -141,7 +156,7 @@ void start_task(void *pdata)
                            (INT32U         )DBG_STK_SIZE,             
                            (void*          )0,                         
                            (INT16U         )OS_TASK_OPT_STK_CHK|OS_TASK_OPT_STK_CLR|OS_TASK_OPT_SAVE_FP);
-						   
+
 	cpu_sr=OSTaskCreateExt((void(*)(void*) )DAC_Task,                 
                            (void*          )0,
                            (OS_STK*        )&DAC_TASK_STK[DAC_STK_SIZE-1],
@@ -151,7 +166,7 @@ void start_task(void *pdata)
                            (INT32U         )DAC_STK_SIZE,             
                            (void*          )0,                         
                            (INT16U         )OS_TASK_OPT_STK_CHK|OS_TASK_OPT_STK_CLR|OS_TASK_OPT_SAVE_FP);
-	
+
 	cpu_sr=OSTaskCreateExt((void(*)(void*) )ADC_Task,                 
                            (void*          )0,
                            (OS_STK*        )&ADC_TASK_STK[ADC_STK_SIZE-1],
@@ -161,7 +176,7 @@ void start_task(void *pdata)
                            (INT32U         )ADC_STK_SIZE,             
                            (void*          )0,                         
                            (INT16U         )OS_TASK_OPT_STK_CHK|OS_TASK_OPT_STK_CLR|OS_TASK_OPT_SAVE_FP);
-						   
+
 	cpu_sr=OSTaskCreateExt((void(*)(void*) )COM_Task,                 
                            (void*          )0,
                            (OS_STK*        )&COM_TASK_STK[COM_STK_SIZE-1],
@@ -169,6 +184,26 @@ void start_task(void *pdata)
                            (INT16U         )COM_TASK_PRIO,            
                            (OS_STK*        )&COM_TASK_STK[0],         
                            (INT32U         )COM_STK_SIZE,             
+                           (void*          )0,                         
+                           (INT16U         )OS_TASK_OPT_STK_CHK|OS_TASK_OPT_STK_CLR|OS_TASK_OPT_SAVE_FP);
+
+	cpu_sr=OSTaskCreateExt((void(*)(void*) )IDLE_Task,                 
+                           (void*          )0,
+                           (OS_STK*        )&IDLE_TASK_STK[IDLE_STK_SIZE-1],
+                           (INT8U          )IDLE_TASK_PRIO,            
+                           (INT16U         )IDLE_TASK_PRIO,            
+                           (OS_STK*        )&IDLE_TASK_STK[0],         
+                           (INT32U         )IDLE_STK_SIZE,             
+                           (void*          )0,                         
+                           (INT16U         )OS_TASK_OPT_STK_CHK|OS_TASK_OPT_STK_CLR|OS_TASK_OPT_SAVE_FP);
+    
+    cpu_sr=OSTaskCreateExt((void(*)(void*) )Laser_Task,                 
+                           (void*          )0,
+                           (OS_STK*        )&LASER_TASK_STK[LASER_STK_SIZE-1],
+                           (INT8U          )LASER_TASK_PRIO,            
+                           (INT16U         )LASER_TASK_PRIO,            
+                           (OS_STK*        )&LASER_TASK_STK[0],         
+                           (INT32U         )LASER_STK_SIZE,             
                            (void*          )0,                         
                            (INT16U         )OS_TASK_OPT_STK_CHK|OS_TASK_OPT_STK_CLR|OS_TASK_OPT_SAVE_FP);
 

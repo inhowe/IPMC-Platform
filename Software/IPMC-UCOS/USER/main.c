@@ -12,12 +12,24 @@
 static void MX_NVIC_Init(void);
 static void BSP_Init(void);
 
-OS_EVENT *CAN_Q;
-void* CAN_QTbl[64];
-OS_EVENT *UART1_Q;
+OS_EVENT * CAN_Q;
+OS_EVENT * UART1_Q;
+OS_EVENT * COM2Msg;
+void*   CAN_QTbl[64];
 void* UART1_QTbl[64];
 
-uint8_t BoardID=0x00;
+/*
+ErrCode Description
+---------------------------------------------------------------------------
+Bit15-8 : 15       14       13       12       11       10       09       08
+Define  : Laser    
+---------------------------------------------------------------------------
+Bit7-0  : 07       06       05       04       03       02       01       00
+Define  : 
+---------------------------------------------------------------------------
+*/
+INT16U ErrCode=0;
+INT16U BoardID=0x00;
 
 int main(void)
 {
@@ -30,7 +42,8 @@ int main(void)
 	
 	UART1_Q=OSQCreate(&UART1_QTbl[0],64);
 	CAN_Q  =OSQCreate(&CAN_QTbl[0],64);
-	
+	COM2Msg =OSMboxCreate((void *)0);
+
     OSTaskCreateExt((void(*)(void*) )start_task,                //任务函数
                     (void*          )0,                         //传递给任务函数的参数
                     (OS_STK*        )&START_TASK_STK[START_STK_SIZE-1],//任务堆栈栈顶

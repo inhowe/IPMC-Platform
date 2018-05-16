@@ -98,7 +98,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef *huart)
 
 		GPIO_Initure.Pin=GPIO_PIN_10;			//PA10
 		HAL_GPIO_Init(GPIOA,&GPIO_Initure);	   	//初始化PA10
-		__HAL_UART_DISABLE_IT(huart,UART_IT_TC);
+
 		__HAL_UART_ENABLE_IT(huart,UART_IT_RXNE);		//开启接收中断
 	}
 	else if(huart->Instance==USART2)
@@ -130,82 +130,36 @@ void HAL_UART_MspInit(UART_HandleTypeDef *huart)
 //串口1中断服务程序
 void USART1_IRQHandler(void)                	
 { 
-	char Res;
+	//local variety does not have its address,but the array with at least 5 elements has,why?
+	INT8U tmp;
 	OSIntEnter();    
 	if((__HAL_UART_GET_FLAG(&UART1_Handler,UART_FLAG_RXNE)!=RESET))  //接收中断(接收到的数据必须是0x0d 0x0a结尾)
 	{
-		Res=USART1->DR;
-//        OSQPost(UART1_Q,(void*)&Res);
-		Queue_Enqueue(&UART_RXqueue,Res);
+		tmp=USART1->DR;
+//        OSQPost(UART1_Q,(void*)tmp);
+//		OSMboxPost(COM1Msg,&tmp);
+		Queue_Enqueue(&UART_RXqueue,tmp);
 	}	
 	OSIntExit();  											 
 } 
 
-//串口1中断服务程序
+//串口2中断服务程序
+u8 COM2Tbl[11];
 void USART2_IRQHandler(void)                	
 { 
-	char Res;
+	static INT8U i=0;
 	OSIntEnter();    
 	if((__HAL_UART_GET_FLAG(&UART2_Handler,UART_FLAG_RXNE)!=RESET))  //接收中断(接收到的数据必须是0x0d 0x0a结尾)
 	{
-		Res=USART2->DR;
-////        OSQPost(UART1_Q,(void*)&Res);
-//		Queue_Enqueue(&UART_RXqueue,Res);
+		COM2Tbl[i++]=USART2->DR;
+		if(COM2Tbl[i-1]==0x0D)
+		{
+		    i=0;
+			OSMboxPost(COM2Msg,&COM2Tbl);
+		}
 	}	
 	OSIntExit();  											 
 }
 
-/****************************************************************************************/
-/****************************************************************************************/
-/*************************下面程序通过在回调函数中编写中断控制逻辑*********************/
-/****************************************************************************************
-***************************************************************************************************
-
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
-{
-	if(huart->Instance==USART1)//如果是串口1
-	{
-		if((USART_RX_STA&0x8000)==0)//接收未完成
-		{
-			if(USART_RX_STA&0x4000)//接收到了0x0d
-			{
-				if(aRxBuffer[0]!=0x0a)USART_RX_STA=0;//接收错误,重新开始
-				else USART_RX_STA|=0x8000;	//接收完成了 
-			}
-			else //还没收到0X0D
-			{	
-				if(aRxBuffer[0]==0x0d)USART_RX_STA|=0x4000;
-				else
-				{
-					USART_RX_BUF[USART_RX_STA&0X3FFF]=aRxBuffer[0] ;
-					USART_RX_STA++;
-					if(USART_RX_STA>(USART_REC_LEN-1))USART_RX_STA=0;//接收数据错误,重新开始接收	  
-				}		 
-			}
-		}
-
-	}
-}
- 
-//串口1中断服务程序
-void USART1_IRQHandler(void)                	
-{ 
-#if SYSTEM_SUPPORT_OS	 	//使用OS
-	OSIntEnter();    
-#endif
-	
-	HAL_UART_IRQHandler(&UART1_Handler);	//调用HAL库中断处理公用函数
-	
-    while (HAL_UART_GetState(&UART1_Handler) != HAL_UART_STATE_READY);//等待就绪
-
-	while(HAL_UART_Receive_IT(&UART1_Handler, (u8 *)aRxBuffer, RXBUFFERSIZE) != HAL_OK);//一次处理完成之后，重新开启中断并设置RxXferCount为1
-	
-#if SYSTEM_SUPPORT_OS	 	//使用OS
-	OSIntExit();  											 
-#endif
-} 
- 
-
-**************************************/
 
 

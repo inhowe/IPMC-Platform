@@ -142,7 +142,6 @@
 			<Item Name="CDK_sTypeDef_Languages.ctl" Type="VI" URL="/&lt;resource&gt;/Framework/Providers/Builds/Installer/CDK_sTypeDef_Languages.ctl"/>
 			<Item Name="mxLvGetItem.vi" Type="VI" URL="/&lt;resource&gt;/Framework/Providers/API/mxLvGetItem.vi"/>
 			<Item Name="mxLvProvider.mxx" Type="Document" URL="/&lt;resource&gt;/Framework/Providers/mxLvProvider.mxx"/>
-			<Item Name="运行时菜单.rtm" Type="Document" URL="../运行时菜单.rtm"/>
 		</Item>
 		<Item Name="程序生成规范" Type="Build">
 			<Item Name="launch" Type="EXE">

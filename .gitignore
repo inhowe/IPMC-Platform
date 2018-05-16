@@ -18,6 +18,7 @@
 /Software/IPMC_Platform/EWARM/IPMC_Platform/*
 /Software/IPMC-UCOS/Project/MDK/Output/*
 /Software/IPMC-UCOS/Project/MDK/DebugConfig/*
+/Software/IPMC-UCOS/Project/IAR/IPMC-UCOS/*
 
 /IPMC Driver/*
 !/IPMC Driver/DriverPro.rar

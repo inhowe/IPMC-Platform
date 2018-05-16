@@ -3,6 +3,9 @@
 版本索取API：https://api.github.com/repos/drinow/IPMC-Platform/releases/latest
 
 ## 更新日志
+- 20180516更新
+	- 新增激光位移传感器检测
+	- 新增错误码指示，LED快闪表示出现错误
 - 20180511更新
 	- 上位机增加自动获取管理员权限功能
 	- 修正了多次安装后在应用程序删除列表下可能出现的多个应用的问题

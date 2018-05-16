@@ -25,7 +25,7 @@ if not "%~1" == "" goto debugFile
 
 @echo on 
 
-"C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\common\bin\cspybat" -f "E:\MyData\IPMC-Platform\Software\IPMC_Platform\EWARM\settings\IPMC_Platform.IPMC_Platform.general.xcl" --backend -f "E:\MyData\IPMC-Platform\Software\IPMC_Platform\EWARM\settings\IPMC_Platform.IPMC_Platform.driver.xcl" 
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\common\bin\cspybat" -f "E:\MyData\IPMC-Platform\Software\IPMC-UCOS\Project\IAR\settings\IPMC-UCOS.IPMC_Platform.general.xcl" --backend -f "E:\MyData\IPMC-Platform\Software\IPMC-UCOS\Project\IAR\settings\IPMC-UCOS.IPMC_Platform.driver.xcl" 
 
 @echo off 
 goto end 
@@ -34,7 +34,7 @@ goto end
 
 @echo on 
 
-"C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\common\bin\cspybat" -f "E:\MyData\IPMC-Platform\Software\IPMC_Platform\EWARM\settings\IPMC_Platform.IPMC_Platform.general.xcl" "--debug_file=%~1" --backend -f "E:\MyData\IPMC-Platform\Software\IPMC_Platform\EWARM\settings\IPMC_Platform.IPMC_Platform.driver.xcl" 
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\common\bin\cspybat" -f "E:\MyData\IPMC-Platform\Software\IPMC-UCOS\Project\IAR\settings\IPMC-UCOS.IPMC_Platform.general.xcl" "--debug_file=%~1" --backend -f "E:\MyData\IPMC-Platform\Software\IPMC-UCOS\Project\IAR\settings\IPMC-UCOS.IPMC_Platform.driver.xcl" 
 
 @echo off 
 :end
