@@ -59,7 +59,7 @@ void ADS1x15_Config(adsChannel_t channel)
 	cfgValue=	 ADS1x15_REG_CONFIG_OS_SINGLE
 						|channel
 						|ADS1x15_REG_CONFIG_PGA_6_144V
-						|ADS1x15_REG_CONFIG_MODE_CONTIN
+						|ADS1x15_REG_CONFIG_MODE_SINGLE
 						|ADS1x15_REG_CONFIG_DR_3300SPS
 						|ADS1x15_REG_CONFIG_CMODE_TRAD
 						|ADS1x15_REG_CONFIG_CPOL_ACTVLOW
@@ -83,7 +83,7 @@ int16_t ADS1x15_ReadLastValue(void)
 int16_t ADS1x15_GetValue(adsChannel_t channel)
 {
 	ADS1x15_Config(channel);
-	ADS1x15_Delay_ms(5);
+	ADS1x15_Delay_ms(10);
 	return ADS1x15_ReadData(ADS1x15_REG_POINTER_CONVERT);
 }
 

@@ -12,14 +12,14 @@
 #define   DBG_TASK_PRIO       49
 #define START_TASK_PRIO       50 
 
-#define   DAC_STK_SIZE        256
-#define   ADC_STK_SIZE        256
-#define   COM_STK_SIZE        256
+#define   DAC_STK_SIZE        128
+#define   ADC_STK_SIZE        128
+#define   COM_STK_SIZE        128
 #define LASER_STK_SIZE        128
-#define   LED_STK_SIZE        128
-#define   DBG_STK_SIZE        128
-#define START_STK_SIZE        128
-#define  IDLE_STK_SIZE        128
+#define   DBG_STK_SIZE        256
+#define   LED_STK_SIZE        64
+#define START_STK_SIZE        64
+#define  IDLE_STK_SIZE        64
 //ÈÎÎñ¶ÑÕ»
 extern OS_STK LED_TASK_STK[LED_STK_SIZE];
 extern OS_STK DAC_TASK_STK[DAC_STK_SIZE];

@@ -416,6 +416,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\USER\wave.c</FilePath>
             </File>
+            <File>
+              <FileName>algorithm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\USER\algorithm.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -445,11 +450,6 @@
               <FileName>laser.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\HARDWARE\laser.c</FilePath>
-            </File>
-            <File>
-              <FileName>laser.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\HARDWARE\laser.h</FilePath>
             </File>
           </Files>
         </Group>
