@@ -3,6 +3,8 @@
 版本索取API：https://api.github.com/repos/drinow/IPMC-Platform/releases/latest
 
 ## 更新日志
+- 20180519更新
+	- 上位机支持波形显示等相关功能
 - 20180518更新
 	- 新增简单的ADC归零程序，电压完成校准
 	- 新增自定义ftoa函数，格式化输出

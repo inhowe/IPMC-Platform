@@ -94,7 +94,7 @@ typedef enum DA_CODETYPE_e{
 
 /*Output Control Block*/
 typedef struct AD5722_OCB_s{
-	double      	Value;
+	double        Value;
 	DA_CHANNEL_t  CH;
 	DA_RANGE_t 	  Range;
 //	enum DA_CODETYPE CodeType;

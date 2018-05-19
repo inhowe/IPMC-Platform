@@ -6,7 +6,10 @@ double WaveCLK0=0,WaveCLK1=0;
 
 void Channel_Group_Init(void)
 {
-  CGroup.DA0.type=DC;
+    CGroup.DA0.type=DC;
+    CGroup.DA1.type=DC;
+    CGroup.DA0.DC = 0;
+    CGroup.DA0.DC = 0;
 }
 
 void WaveFunc(void)
@@ -34,7 +37,7 @@ void WaveFunc(void)
       AD5722_Output(CGroup.DA0.PWM.LV,CH0);
     WaveCLK0=WaveCLK0+0.005;break;
   case DC:
-    AD5722_Output(DA_OCB.Value=CGroup.DA0.DC,CH0);
+    AD5722_Output(CGroup.DA0.DC,CH0);
     WaveCLK0=WaveCLK0+0.005;break;
   case UNKNOWN:
     WaveCLK0=WaveCLK0+0.005;break;
@@ -61,7 +64,7 @@ void WaveFunc(void)
       AD5722_Output(CGroup.DA1.PWM.LV,CH1);
     WaveCLK1=WaveCLK1+0.005;break;
   case DC:
-    AD5722_Output(DA_OCB.Value=CGroup.DA1.DC,CH1);
+    AD5722_Output(CGroup.DA1.DC,CH1);
     WaveCLK1=WaveCLK1+0.005;break;
   case UNKNOWN:
     WaveCLK1=WaveCLK1+0.005;break;

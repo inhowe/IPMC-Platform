@@ -83,13 +83,17 @@ void DBG_Task(void* pdata)
 	while(1)
 	{
         myftoa((ADS_Buff[0]-RefV[0])/32768.0*6.144/251.7614/0.01,array);
-        printf("C:%sV ",array);
+        printf("C:%sA ",array);
         myftoa((ADS_Buff[1]-RefV[1])*0.000375,array);//0.00375 = 1/32768.0*6.144*2
         printf("V:%sV ",array);
         myftoa((ADS_Buff[2]-RefV[2])*0.0001875,array);//0.0001875 = 1/32768.0*6.144
-        printf("F:%sV ",array);
+        printf("F:%sN ",array);
         myftoa(LaserOffset,array);
         printf("L:%smm ",array);
+        myftoa(WaveCLK0,array);
+        printf("T0:%sS ",array);
+        myftoa(WaveCLK1,array);
+        printf("T1:%sS ",array);
 
 //        printf("C:%.4fA ",(ADS_Buff[0]-RefV[0])/32768.0*6.144/251.7614/0.01); //VM=(VO-2.5)/248/0.01 , I=VM/R
 //        printf("V:%.4fV ",(ADS_Buff[1]-RefV[1])/32768.0*6.144*2);
@@ -112,7 +116,7 @@ void DBG_Task(void* pdata)
 
 //        printf("%.4f \r\n",(ADS_Buff[0]-RefV[0])/32768.0*6.144*(49400/200+1));
         printf("\r\n");
-		delay_ms(1000);
+		delay_ms(20);
 	}
 }
 

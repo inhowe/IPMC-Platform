@@ -165,7 +165,10 @@ void AD5722_SetRange(void)
 void AD5722_Output(double value,DA_CHANNEL_t channel)
 {
 	uint16_t data=0;
-	
+    
+	DA_OCB.Value = value;
+    DA_OCB.CH    = channel;
+    
 	data=AD5722_DataFormatTransfer(value);
 	AD5722_SendData(DA_WRITE|DAC_REG|channel|data);
 //	AD5722_LoadDAC();
