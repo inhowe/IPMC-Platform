@@ -34,5 +34,8 @@ void myftoa(double data,char str[])
     
     memset(str,0,strlen(strHead));
 	strcat(str, strHead);
-	if (str[0] == '0')str[0] = '+';
+	if (data>=0)
+        str[0] = '+';
+    else
+        str[0] = '-';
 }

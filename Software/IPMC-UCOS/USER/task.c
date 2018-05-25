@@ -116,7 +116,7 @@ void DBG_Task(void* pdata)
 
 //        printf("%.4f \r\n",(ADS_Buff[0]-RefV[0])/32768.0*6.144*(49400/200+1));
         printf("\r\n");
-		delay_ms(20);
+		delay_ms(10);
 	}
 }
 
@@ -125,7 +125,7 @@ void DAC_Task(void* pdata)
 	while(1)
 	{
 		WaveFunc();
-		delay_ms(5);
+		delay_ms(1);
 	}
 }
 

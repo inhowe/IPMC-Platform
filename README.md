@@ -3,6 +3,8 @@
 版本索取API：https://api.github.com/repos/drinow/IPMC-Platform/releases/latest
 
 ## 更新日志
+- 20180525更新
+	- 修改上位机协议解析函数，提高了解析准确度，未解决长时间运行程序变慢的问题（可能是图表）
 - 20180519更新
 	- 上位机支持波形显示等相关功能
 - 20180518更新
