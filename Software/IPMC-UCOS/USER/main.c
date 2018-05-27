@@ -18,6 +18,7 @@ OS_EVENT * COM2Msg;
 void*   CAN_QTbl[64];
 void* UART1_QTbl[64];
 
+float TEMP=0,HUMI=0;
 /*
 ErrCode Description
 ---------------------------------------------------------------------------
@@ -68,7 +69,8 @@ static void BSP_Init(void)
 	CAN1_Mode_Init(CAN_SJW_1TQ,CAN_BS2_6TQ,CAN_BS1_8TQ,6,CAN_MODE_NORMAL); //CAN初始化,波特率500Kbps      
     AD5722_Init();
 	Channel_Group_Init();	
-	
+	SHT2x_Init();
+    
 	Queue_Init(&UART_RXqueue);
 	Queue_Init(&CAN_RXqueue);
 }

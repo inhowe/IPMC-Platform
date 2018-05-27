@@ -15,6 +15,7 @@
 		<Property Name="server.vi.propertiesEnabled" Type="Bool">true</Property>
 		<Property Name="specify.custom.address" Type="Bool">false</Property>
 		<Item Name="Sub VI" Type="Folder">
+			<Item Name="解析协议.vi" Type="VI" URL="../Sub VI/解析协议.vi"/>
 			<Item Name="浮点转字节数组.vi" Type="VI" URL="../Sub VI/浮点转字节数组.vi"/>
 			<Item Name="自动搜寻串口.vi" Type="VI" URL="../Sub VI/自动搜寻串口.vi"/>
 			<Item Name="运行时菜单.rtm" Type="Document" URL="../Sub VI/运行时菜单.rtm"/>
@@ -35,7 +36,6 @@
 		<Item Name="version.ini" Type="Document" URL="../version.ini"/>
 		<Item Name="protocol.xlsx" Type="Document" URL="../protocol.xlsx"/>
 		<Item Name="launch.manifest" Type="Document" URL="../launch.manifest"/>
-		<Item Name="解析协议.vi" Type="VI" URL="../Sub VI/解析协议.vi"/>
 		<Item Name="依赖关系" Type="Dependencies">
 			<Item Name="vi.lib" Type="Folder">
 				<Item Name="BuildHelpPath.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/BuildHelpPath.vi"/>
@@ -246,7 +246,7 @@
 				<Property Name="Bld_supportedLanguage[0]" Type="Str">ChineseS</Property>
 				<Property Name="Bld_supportedLanguage[1]" Type="Str">English</Property>
 				<Property Name="Bld_supportedLanguageCount" Type="Int">2</Property>
-				<Property Name="Bld_version.build" Type="Int">41</Property>
+				<Property Name="Bld_version.build" Type="Int">43</Property>
 				<Property Name="Bld_version.major" Type="Int">1</Property>
 				<Property Name="Destination[0].destName" Type="Str">IPMC.exe</Property>
 				<Property Name="Destination[0].path" Type="Path">../builds/IPMC-Platform/NI_AB_PROJECTNAME/IPMC.exe</Property>

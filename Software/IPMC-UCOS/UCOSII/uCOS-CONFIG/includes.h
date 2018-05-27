@@ -35,6 +35,7 @@
 #include "can.h"
 #include "laser.h"
 #include "algorithm.h"
+#include "SHT2x.h"
 
 #define  SetBit(x,y)   x|=(1<<y) //将X的第Y位置1
 #define  ClrBit(x,y)   x&=~(1<<y) //将X的第Y位清0
@@ -53,6 +54,7 @@ extern void* CAN_QTbl[64];
 extern void* UART1_QTbl[64];
 extern INT16U BoardID;
 extern INT16U ErrCode;
+extern float TEMP,HUMI;
 #endif
 
 

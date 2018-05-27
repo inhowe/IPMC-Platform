@@ -451,6 +451,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\HARDWARE\laser.c</FilePath>
             </File>
+            <File>
+              <FileName>SHT2x.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\HARDWARE\SHT2x.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

@@ -140,7 +140,7 @@ typedef struct ADS1x15_t{
 }ADS1x15_t;
 
 extern ADS1x15_t  ADS;
-extern int32_t   ADS_Buff[4];
+extern int16_t   ADS_Buff[4];
 
 void ADS1x15_Init(void);
 void ADS1x15_Config(adsChannel_t channel);

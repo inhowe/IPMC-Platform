@@ -1,6 +1,7 @@
 #include "algorithm.h"
 
 INT16U RefV[4];
+
 void ADCCarlib(void)
 {
     static INT8U i=20;
@@ -23,19 +24,21 @@ void myftoa(double data,char str[])
 {
 	int Int, Dec;
 	char strHead[9], strTail[5], pt[] = ".";
-
 	Int = (int)data;
-	Dec = 10000.0*fabs(data - Int);
-
-	sprintf(strHead, "%03d", Int);
-	sprintf(strTail, "%04d", Dec);
-	strcat(strHead, pt);
-	strcat(strHead, strTail);
     
-    memset(str,0,strlen(strHead));
-	strcat(str, strHead);
-	if (data>=0)
-        str[0] = '+';
-    else
-        str[0] = '-';
+	Dec = 10000.0*fabs(data - Int);//要注意-1<data<1时的情况！
+
+	sprintf(strHead, "%03d", Int);//整数部分转字符串
+	sprintf(strTail, "%04d", Dec);//小数部分转字符串
+	strcat(strHead, pt);//整数字符串后加点
+	strcat(strHead, strTail);//再加小数字符串
+    
+    memset(str,0,strlen(strHead)); //清除str地址起strHead长度的内容
+	
+    if (strHead[0]=='0')
+        strHead[0] = '+';
+    if(data<0)
+        strHead[0] = '-'; //-0.8取整为0，丢失符号！
+    
+    strcat(str, strHead);
 }

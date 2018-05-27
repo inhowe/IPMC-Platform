@@ -1,7 +1,7 @@
 #include "ADS1115.h"
 
 ADS1x15_t ADS;
-int32_t   ADS_Buff[4];
+int16_t   ADS_Buff[4];
 
 void ADS1x15_Delay_ms(uint32_t cnt)
 {

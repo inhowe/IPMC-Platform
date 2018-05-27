@@ -8,6 +8,7 @@ OS_STK DBG_TASK_STK[DBG_STK_SIZE];
 OS_STK START_TASK_STK[START_STK_SIZE];
 OS_STK IDLE_TASK_STK[IDLE_STK_SIZE];
 OS_STK LASER_TASK_STK[LASER_STK_SIZE];
+OS_STK SHT20_TASK_STK[SHT20_STK_SIZE];
 
 //LED0任务
 void led_task(void *pdata)
@@ -39,6 +40,25 @@ void IDLE_Task(void* pdata)
 	{
         delay_ms(2000);
 	}
+}
+
+void SHT20_Task(void* pdata)
+{
+    float T=0,H=0;
+    INT8U i=0;
+    while(1)
+    {
+        T+=SHT2x_GetTempPoll();
+        H+=SHT2x_GetHumiPoll();
+        i++;
+        if(i==10)
+        {
+            TEMP=T/10.0;
+            HUMI=H/10.0;
+            T=H=i=0;
+        }
+        delay_ms(50);
+    }
 }
 
 void Laser_Task(void* pdata)
@@ -78,7 +98,6 @@ void COM_Task(void* pdata)
 
 void DBG_Task(void* pdata)
 {
-//    OS_STK_DATA UsedSTK;
     char array[9];
 	while(1)
 	{
@@ -94,7 +113,10 @@ void DBG_Task(void* pdata)
         printf("T0:%sS ",array);
         myftoa(WaveCLK1,array);
         printf("T1:%sS ",array);
-
+        myftoa(TEMP,array);
+        printf("TP:%sC ",array);
+        myftoa(HUMI,array);
+        printf("RH:%s%% ",array);
 //        printf("C:%.4fA ",(ADS_Buff[0]-RefV[0])/32768.0*6.144/251.7614/0.01); //VM=(VO-2.5)/248/0.01 , I=VM/R
 //        printf("V:%.4fV ",(ADS_Buff[1]-RefV[1])/32768.0*6.144*2);
 //        printf("F:%.4fV ",(ADS_Buff[2]-RefV[2])/32768.0*6.144);
@@ -116,7 +138,7 @@ void DBG_Task(void* pdata)
 
 //        printf("%.4f \r\n",(ADS_Buff[0]-RefV[0])/32768.0*6.144*(49400/200+1));
         printf("\r\n");
-		delay_ms(10);
+		delay_ms(20);
 	}
 }
 
@@ -240,6 +262,15 @@ void start_task(void *pdata)
                             (void*          )0,                         
                             (INT16U         )OS_TASK_OPT_STK_CHK|OS_TASK_OPT_STK_CLR|OS_TASK_OPT_SAVE_FP);
 
+    cpu_sr=OSTaskCreateExt( (void(*)(void*) )SHT20_Task,                 
+                            (void*          )0,
+                            (OS_STK*        )&SHT20_TASK_STK[SHT20_STK_SIZE-1],
+                            (INT8U          )SHT20_TASK_PRIO,            
+                            (INT16U         )SHT20_TASK_PRIO,            
+                            (OS_STK*        )&SHT20_TASK_STK[0],         
+                            (INT32U         )SHT20_STK_SIZE,             
+                            (void*          )0,                         
+                            (INT16U         )OS_TASK_OPT_STK_CHK|OS_TASK_OPT_STK_CLR|OS_TASK_OPT_SAVE_FP);
 
     OSTaskSuspend(LED_TASK_PRIO);
     OS_EXIT_CRITICAL();             //退出临界区(开中断)
