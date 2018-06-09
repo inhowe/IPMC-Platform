@@ -24,8 +24,9 @@
 
 extern UART_HandleTypeDef UART1_Handler; //UART¾ä±ú
 extern UART_HandleTypeDef UART2_Handler; //UART¾ä±ú
+extern UART_HandleTypeDef UART3_Handler; //UART¾ä±ú
 
 void uart1_init(u32 bound);
 void uart2_init(u32 bound);
-
+void uart3_init(u32 bound);
 #endif

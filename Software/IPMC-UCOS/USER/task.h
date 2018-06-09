@@ -8,9 +8,9 @@
 #define   COM_TASK_PRIO       13
 #define LASER_TASK_PRIO       14
 #define SHT20_TASK_PRIO       15
-#define   LED_TASK_PRIO       20
+#define   DBG_TASK_PRIO       16
+#define   LED_TASK_PRIO       47
 #define  IDLE_TASK_PRIO       48
-#define   DBG_TASK_PRIO       49
 #define START_TASK_PRIO       50 
 
 #define   DBG_STK_SIZE        256

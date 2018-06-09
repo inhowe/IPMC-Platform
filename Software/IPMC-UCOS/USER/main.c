@@ -61,8 +61,9 @@ static void BSP_Init(void)
 {
 	MX_NVIC_Init();
 	
-    uart1_init(115200);              //初始化USART
-	uart2_init(115200);
+    uart1_init(115200);//USART
+	uart2_init(115200);//RS232
+    uart3_init(115200);//RS485
     LED_Init();                     //初始化LED
 	KeyInit();
 	IIC_Init();

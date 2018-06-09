@@ -29,8 +29,10 @@ void led_task(void *pdata)
             {	LED1=1;LED0=1;}
             delay_ms(75);
         }
-        if(ErrCode&LASERErr)time=2; else time=1;
-        delay_ms(850);
+        time=1;
+        if(ReadBit(ErrCode,LASERErrBIT))    time=2; 
+        if(ReadBit(ErrCode,OverCurrentBIT)) time=8; 
+        delay_ms(1500-75*2*time);
     }
 }
 
@@ -38,25 +40,49 @@ void IDLE_Task(void* pdata)
 {
 	while(1)
 	{
-        delay_ms(2000);
+//        CGroup.DA0.type=DC;
+//        //catch 1
+//        CGroup.DA0.DC=4;
+//        delay_ms(2000);
+//        CGroup.DA0.DC=-4;
+//        delay_ms(2000);
+//        
+//        //catch 2
+//        CGroup.DA0.DC=4;
+//        delay_ms(2000);
+//        CGroup.DA0.DC=-4;
+//        delay_ms(2000);
+//        
+//        //catch 3
+//        CGroup.DA0.DC=4;
+//        delay_ms(2000);
+//        CGroup.DA0.DC=-4;
+//        delay_ms(2000);
+//        
+//        //catch 4
+//        CGroup.DA0.DC=4;
+//        delay_ms(2000);
+//        CGroup.DA0.DC=-4;
+//        delay_ms(2000);
+        delay_ms(1000);
 	}
 }
 
 void SHT20_Task(void* pdata)
 {
-    float T=0,H=0;
+    OS_CPU_SR cpu_sr=0;
+    float T[10],H[10];
     INT8U i=0;
     while(1)
     {
-        T+=SHT2x_GetTempPoll();
-        H+=SHT2x_GetHumiPoll();
+        T[i]=SHT2x_GetTempPoll();
+        H[i]=SHT2x_GetHumiPoll();
+        OS_ENTER_CRITICAL();
+        TEMP=(T[0]+T[1]+T[2]+T[3]+T[4]+T[5]+T[6]+T[7]+T[8]+T[9])/(float)10.0;
+        HUMI=(H[0]+H[1]+H[2]+H[3]+H[4]+H[5]+H[6]+H[7]+H[8]+H[9])/(float)10.0;
+        OS_EXIT_CRITICAL();
         i++;
-        if(i==10)
-        {
-            TEMP=T/10.0;
-            HUMI=H/10.0;
-            T=H=i=0;
-        }
+        if(i==10) i=0;
         delay_ms(50);
     }
 }
@@ -99,13 +125,17 @@ void COM_Task(void* pdata)
 void DBG_Task(void* pdata)
 {
     char array[9];
+    double tmp=0;
 	while(1)
-	{
-        myftoa((ADS_Buff[0]-RefV[0])/32768.0*6.144/251.7614/0.01,array);
+	{   
+        tmp = (ADS_Buff[0]-RefV[0])*0.0001875/213.766/0.01*0.97530522;
+        myftoa(tmp,array);//0.0001875 = 1/32768.0*6.144
         printf("C:%sA ",array);
+        if(tmp>1.0||tmp<-1.0) SetBit(ErrCode,OverCurrentBIT);
+        else ClrBit(ErrCode,OverCurrentBIT);
         myftoa((ADS_Buff[1]-RefV[1])*0.000375,array);//0.00375 = 1/32768.0*6.144*2
         printf("V:%sV ",array);
-        myftoa((ADS_Buff[2]-RefV[2])*0.0001875,array);//0.0001875 = 1/32768.0*6.144
+        myftoa((ADS_Buff[2]-RefV[2])*0.0001875*0.3*0.725925925926,array);//468R //0.0001875 = 1/32768.0*6.144
         printf("F:%sN ",array);
         myftoa(LaserOffset,array);
         printf("L:%smm ",array);
@@ -138,6 +168,7 @@ void DBG_Task(void* pdata)
 
 //        printf("%.4f \r\n",(ADS_Buff[0]-RefV[0])/32768.0*6.144*(49400/200+1));
         printf("\r\n");
+        
 		delay_ms(20);
 	}
 }
@@ -179,7 +210,7 @@ void ADC_Task(void* pdata)
 		state++;
 		if(state==4)state=0;
 		
-		delay_ms(5);
+		delay_ms(20);
 	}
 }
 
@@ -274,7 +305,6 @@ void start_task(void *pdata)
 
     OSTaskSuspend(LED_TASK_PRIO);
     OS_EXIT_CRITICAL();             //退出临界区(开中断)
-    delay_ms(100);
     ADCCarlib();
     OSTaskResume(LED_TASK_PRIO);
     OSTaskSuspend(START_TASK_PRIO); //挂起开始任务

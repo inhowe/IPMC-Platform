@@ -1,7 +1,7 @@
 #include "ADS1115.h"
 
 ADS1x15_t ADS;
-int16_t   ADS_Buff[4];
+int32_t   ADS_Buff[4];
 
 void ADS1x15_Delay_ms(uint32_t cnt)
 {
@@ -60,7 +60,7 @@ void ADS1x15_Config(adsChannel_t channel)
 						|channel
 						|ADS1x15_REG_CONFIG_PGA_6_144V
 						|ADS1x15_REG_CONFIG_MODE_SINGLE
-						|ADS1x15_REG_CONFIG_DR_3300SPS
+						|ADS1x15_REG_CONFIG_DR_920SPS
 						|ADS1x15_REG_CONFIG_CMODE_TRAD
 						|ADS1x15_REG_CONFIG_CPOL_ACTVLOW
 						|ADS1x15_REG_CONFIG_CLAT_NONLAT

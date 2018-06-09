@@ -1,22 +1,23 @@
 #include "algorithm.h"
 
-INT16U RefV[4];
+INT32S RefV[4];
 
 void ADCCarlib(void)
 {
-    static INT8U i=20;
-    int D0,D1,D2;
+    static INT8U i=10;
+    int D0=0,D1=0,D2=0;
+    delay_ms(100);
     while(i>0)
     {
         D0+=ADS_Buff[0];
         D1+=ADS_Buff[1];
         D2+=ADS_Buff[2];
-        delay_ms(5*4*2);//let OS scheduling
+        delay_ms(20*4*2);//let OS scheduling
         i--;
     }
-    RefV[0]=D0/20;
-    RefV[1]=D1/20;
-    RefV[2]=0;
+    RefV[0]=D0/10.0;
+    RefV[1]=D1/10.0;
+    RefV[2]=D2/10.0;
 }
 
 //4位精度浮点数转ASCII

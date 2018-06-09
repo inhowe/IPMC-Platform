@@ -48,6 +48,7 @@ int fputc(int ch, FILE *f)
 
 UART_HandleTypeDef UART1_Handler; //UART句柄
 UART_HandleTypeDef UART2_Handler;
+UART_HandleTypeDef UART3_Handler;
 //初始化IO 串口1 
 //bound:波特率
 void uart1_init(u32 bound)
@@ -74,6 +75,19 @@ void uart2_init(u32 bound)
 	UART2_Handler.Init.HwFlowCtl=UART_HWCONTROL_NONE;   //无硬件流控
 	UART2_Handler.Init.Mode=UART_MODE_TX_RX;		    //收发模式
 	HAL_UART_Init(&UART2_Handler);					    //HAL_UART_Init()会使能UART1
+}
+
+void uart3_init(u32 bound)
+{	
+	//UART 初始化设置
+	UART3_Handler.Instance=USART3;					    //USART1
+	UART3_Handler.Init.BaudRate=bound;				    //波特率
+	UART3_Handler.Init.WordLength=UART_WORDLENGTH_8B;   //字长为8位数据格式
+	UART3_Handler.Init.StopBits=UART_STOPBITS_1;	    //一个停止位
+	UART3_Handler.Init.Parity=UART_PARITY_NONE;		    //无奇偶校验位
+	UART3_Handler.Init.HwFlowCtl=UART_HWCONTROL_NONE;   //无硬件流控
+	UART3_Handler.Init.Mode=UART_MODE_TX_RX;		    //收发模式
+	HAL_UART_Init(&UART3_Handler);					    //HAL_UART_Init()会使能UART1
 }
 
 //UART底层初始化，时钟使能，引脚配置，中断配置
@@ -123,6 +137,28 @@ void HAL_UART_MspInit(UART_HandleTypeDef *huart)
     __HAL_UART_ENABLE_IT(huart,UART_IT_RXNE);		//开启接收中断
 
 	}
+    else if(huart->Instance==USART3)
+	{
+	/* USART3 clock enable */
+	__HAL_RCC_USART3_CLK_ENABLE();
+
+	GPIO_Initure.Pin = GPIO_PIN_10|GPIO_PIN_11;
+	GPIO_Initure.Mode = GPIO_MODE_AF_PP;
+	GPIO_Initure.Pull = GPIO_PULLUP;
+	GPIO_Initure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+	GPIO_Initure.Alternate = GPIO_AF7_USART3;
+	HAL_GPIO_Init(GPIOC, &GPIO_Initure);
+    
+    __HAL_UART_ENABLE_IT(huart,UART_IT_RXNE);		//开启接收中断
+    
+    __HAL_RCC_GPIOD_CLK_ENABLE();   //RS485收发控制引脚
+    GPIO_Initure.Pin = GPIO_PIN_2;
+	GPIO_Initure.Mode = GPIO_MODE_OUTPUT_PP;
+	GPIO_Initure.Pull = GPIO_PULLDOWN;
+	GPIO_Initure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+	HAL_GPIO_Init(GPIOD, &GPIO_Initure);
+        
+	}
 
 }
 
@@ -157,9 +193,17 @@ void USART2_IRQHandler(void)
 		    i=0;
 			OSMboxPost(COM2Msg,&COM2Tbl);
 		}
-	}	
+	}
 	OSIntExit();  											 
 }
 
-
+void USART3_IRQHandler(void)                	
+{ 
+	OSIntEnter();    
+	if((__HAL_UART_GET_FLAG(&UART3_Handler,UART_FLAG_RXNE)!=RESET))  
+	{
+		USART2->DR;
+	}
+	OSIntExit();  											 
+}
 
