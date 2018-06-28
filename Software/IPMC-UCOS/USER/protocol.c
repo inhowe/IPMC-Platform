@@ -47,11 +47,12 @@ uint8_t LengthCal(uint8_t* data)
   uint8_t len;
   switch(*data)
   {
-  case SLOPE :	len=12;break;
-  case SINE  :	len=16;break;
-  case PWM   :	len=16;break;
-  case DC    :	len=8;break;
-  default    : len=0 ;break;
+    case SLOPE :    len=12;break;
+    case SINE  :    len=16;break;
+    case PWM   :	len=16;break;
+    case DC    :	len=8;break;
+    case 0x55  :    len=6;break; //carlib cmd
+    default    :    len=0 ;break;
   }
   return len;
 }
@@ -165,6 +166,12 @@ void Data_anysis(uint8_t* buff,uint8_t* channel)
     default:break;
     }
     break;
+  case 0x55:
+    if(buff[0]=='C'&&buff[1]=='A'&&buff[2]=='R'&&buff[3]=='L'&&buff[4]=='I'&&buff[5]=='B')  
+    {
+        Carlib();
+    }
+    break;
   }
 }
 
@@ -206,6 +213,7 @@ void DealQueueBuff(Queue_t* queue)
           CGroup.DA1.type=(WaveType)queue->DequeueData;break;
         case 2:
           CGroup.DA01.type=(WaveType)queue->DequeueData;break;
+        case 0x55:break;
         default:break;
         }
       }

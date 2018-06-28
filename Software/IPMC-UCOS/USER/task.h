@@ -20,7 +20,7 @@
 #define LASER_STK_SIZE        128
 #define SHT20_STK_SIZE        128
 #define   LED_STK_SIZE        64
-#define START_STK_SIZE        64
+#define START_STK_SIZE        128
 #define  IDLE_STK_SIZE        64
 //ÈÎÎñ¶ÑÕ»
 extern OS_STK LED_TASK_STK[LED_STK_SIZE];

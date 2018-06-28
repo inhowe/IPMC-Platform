@@ -71,7 +71,7 @@ static void BSP_Init(void)
     AD5722_Init();
 	Channel_Group_Init();	
 	SHT2x_Init();
-    
+    LaserCMDToZero();
 	Queue_Init(&UART_RXqueue);
 	Queue_Init(&CAN_RXqueue);
 }

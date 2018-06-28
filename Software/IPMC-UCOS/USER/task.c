@@ -128,14 +128,14 @@ void DBG_Task(void* pdata)
     double tmp=0;
 	while(1)
 	{   
-        tmp = (ADS_Buff[0]-RefV[0])*0.0001875/213.766/0.01*0.97530522;
+        tmp = (ADS_Buff[0]-RefV[0])*0.0001875/457.62100/0.01; // /215.59227/0.01
         myftoa(tmp,array);//0.0001875 = 1/32768.0*6.144
         printf("C:%sA ",array);
         if(tmp>1.0||tmp<-1.0) SetBit(ErrCode,OverCurrentBIT);
         else ClrBit(ErrCode,OverCurrentBIT);
         myftoa((ADS_Buff[1]-RefV[1])*0.000375,array);//0.00375 = 1/32768.0*6.144*2
         printf("V:%sV ",array);
-        myftoa((ADS_Buff[2]-RefV[2])*0.0001875*0.3*0.725925925926,array);//468R //0.0001875 = 1/32768.0*6.144
+        myftoa((ADS_Buff[2]-RefV[2])*0.0001875*0.3*0.725925925926*0.98,array);//468R //0.0001875 = 1/32768.0*6.144
         printf("F:%sN ",array);
         myftoa(LaserOffset,array);
         printf("L:%smm ",array);
@@ -199,17 +199,17 @@ void ADC_Task(void* pdata)
 		  break;
 		case 2:
 		  ADS_Buff[2]=ADS1x15_ReadLastValue();
-		  ADS1x15_SelectChannel(ADS_CH3);
-		  break;
-		case 3:
-		  ADS_Buff[3]=ADS1x15_ReadLastValue();
 		  ADS1x15_SelectChannel(ADS_CH0);
 		  break;
+//		case 3:
+//		  ADS_Buff[3]=ADS1x15_ReadLastValue();
+//		  ADS1x15_SelectChannel(ADS_CH0);
+//		  break;
 		default:break;
 		}
 		state++;
-		if(state==4)state=0;
-		
+//		if(state==4)state=0;
+		if(state==3)state=0;
 		delay_ms(20);
 	}
 }
@@ -303,10 +303,11 @@ void start_task(void *pdata)
                             (void*          )0,                         
                             (INT16U         )OS_TASK_OPT_STK_CHK|OS_TASK_OPT_STK_CLR|OS_TASK_OPT_SAVE_FP);
 
-    OSTaskSuspend(LED_TASK_PRIO);
+    
     OS_EXIT_CRITICAL();             //退出临界区(开中断)
-    ADCCarlib();
-    OSTaskResume(LED_TASK_PRIO);
-    OSTaskSuspend(START_TASK_PRIO); //挂起开始任务
+    
+    Carlib();
+    
+    OSTaskDel(START_TASK_PRIO); //挂起开始任务
 }
 

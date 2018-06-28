@@ -6,4 +6,4 @@ extern float LaserOffset;
 
 void  LaserCMDMessure(void);
 float LaserBAKMessure(unsigned char array[]);
-
+void  LaserCMDToZero(void);

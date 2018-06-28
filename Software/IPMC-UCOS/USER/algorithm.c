@@ -2,22 +2,32 @@
 
 INT32S RefV[4];
 
-void ADCCarlib(void)
+void Carlib(void)
 {
-    static INT8U i=10;
+    OS_CPU_SR cpu_sr=0;
+    INT8U i=20;
     int D0=0,D1=0,D2=0;
-    delay_ms(100);
+    OS_ENTER_CRITICAL();
+    OSTaskSuspend(LED_TASK_PRIO);
+    OSTaskSuspend(DBG_TASK_PRIO);
+    OS_EXIT_CRITICAL();
+    LED0=0;
     while(i>0)
     {
+        delay_ms(20*4*2);//let OS scheduling to acquire data;
         D0+=ADS_Buff[0];
         D1+=ADS_Buff[1];
         D2+=ADS_Buff[2];
-        delay_ms(20*4*2);//let OS scheduling
         i--;
     }
-    RefV[0]=D0/10.0;
-    RefV[1]=D1/10.0;
-    RefV[2]=D2/10.0;
+    RefV[0]=D0/20.0;
+    RefV[1]=D1/20.0;
+    RefV[2]=D2/20.0;
+    LaserCMDToZero();
+    LED0=1;
+
+    OSTaskResume(LED_TASK_PRIO);
+    OSTaskResume(DBG_TASK_PRIO);
 }
 
 //4位精度浮点数转ASCII
