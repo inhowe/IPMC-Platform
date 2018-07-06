@@ -69,6 +69,7 @@ void WaveFunc(void)
   case UNKNOWN:
     WaveCLK1=WaveCLK1+0.001;break;
   }
+
 }
 
 

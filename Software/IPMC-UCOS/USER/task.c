@@ -306,6 +306,7 @@ void start_task(void *pdata)
     
     OS_EXIT_CRITICAL();             //退出临界区(开中断)
     
+    delay_ms(150);
     Carlib();
     
     OSTaskDel(START_TASK_PRIO); //挂起开始任务

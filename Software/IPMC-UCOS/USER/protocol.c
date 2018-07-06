@@ -136,23 +136,26 @@ void Data_anysis(uint8_t* buff,uint8_t* channel)
     switch(CGroup.DA01.type)
     {
     case SLOPE:
-      CGroup.DA01.SLOPE.k=(double)((buff[0]<<24)+(buff[1]<<16)+(buff[2]<<8)+buff[3])/100.0;
-      CGroup.DA01.SLOPE.b=(double)((buff[4]<<24)+(buff[5]<<16)+(buff[6]<<8)+buff[7])/100.0;
-      CGroup.DA01.SLOPE.extreme=(double)((buff[8]<<24)+(buff[9]<<16)+(buff[10]<<8)+buff[11])/100.0;
+      CGroup.DA0.SLOPE.k        =CGroup.DA1.SLOPE.k         =(double)((buff[0]<<24)+(buff[1]<<16)+(buff[2]<<8)+buff[3])/100.0;
+      CGroup.DA0.SLOPE.b        =CGroup.DA1.SLOPE.b         =(double)((buff[4]<<24)+(buff[5]<<16)+(buff[6]<<8)+buff[7])/100.0;
+      CGroup.DA0.SLOPE.extreme  =CGroup.DA1.SLOPE.extreme   =(double)((buff[8]<<24)+(buff[9]<<16)+(buff[10]<<8)+buff[11])/100.0;
+      CGroup.DA0.type = CGroup.DA1.type = SLOPE;
       WaveCLK0=WaveCLK1=0;
       break;
     case SINE:
-      CGroup.DA01.SINE.amp=(double)((buff[0]<<24)+(buff[1]<<16)+(buff[2]<<8)+buff[3])/100.0;
-      CGroup.DA01.SINE.wfrq=(double)((buff[4]<<24)+(buff[5]<<16)+(buff[6]<<8)+buff[7])/100.0;
-      CGroup.DA01.SINE.pha=(double)((buff[8]<<24)+(buff[9]<<16)+(buff[10]<<8)+buff[11])/100.0;
-      CGroup.DA01.SINE.Yoffset=(double)((buff[12]<<24)+(buff[13]<<16)+(buff[14]<<8)+buff[15])/100.0;
+      CGroup.DA0.SINE.amp    =CGroup.DA1.SINE.amp     =(double)((buff[0]<<24)+(buff[1]<<16)+(buff[2]<<8)+buff[3])/100.0;
+      CGroup.DA0.SINE.wfrq   =CGroup.DA1.SINE.wfrq    =(double)((buff[4]<<24)+(buff[5]<<16)+(buff[6]<<8)+buff[7])/100.0;
+      CGroup.DA0.SINE.pha    =CGroup.DA1.SINE.pha     =(double)((buff[8]<<24)+(buff[9]<<16)+(buff[10]<<8)+buff[11])/100.0;
+      CGroup.DA0.SINE.Yoffset=CGroup.DA1.SINE.Yoffset =(double)((buff[12]<<24)+(buff[13]<<16)+(buff[14]<<8)+buff[15])/100.0;
+      CGroup.DA0.type = CGroup.DA1.type = SINE;
       WaveCLK0=WaveCLK1=0;
       break;
     case PWM:
-      CGroup.DA01.PWM.HV   =(double)((buff[0]<<24)+(buff[1]<<16)+(buff[2]<<8)+buff[3])/100.0;
-      CGroup.DA01.PWM.LV   =(double)((buff[4]<<24)+(buff[5]<<16)+(buff[6]<<8)+buff[7])/100.0;
-      CGroup.DA01.PWM.frq  =(double)((buff[8]<<24)+(buff[9]<<16)+(buff[10]<<8)+buff[11])/100.0;
-      CGroup.DA01.PWM.duty =(double)((buff[12]<<24)+(buff[13]<<16)+(buff[14]<<8)+buff[15])/100.0;
+      CGroup.DA0.PWM.HV   =CGroup.DA1.PWM.HV   =(double)((buff[0]<<24)+(buff[1]<<16)+(buff[2]<<8)+buff[3])/100.0;
+      CGroup.DA0.PWM.LV   =CGroup.DA1.PWM.LV   =(double)((buff[4]<<24)+(buff[5]<<16)+(buff[6]<<8)+buff[7])/100.0;
+      CGroup.DA0.PWM.frq  =CGroup.DA1.PWM.frq  =(double)((buff[8]<<24)+(buff[9]<<16)+(buff[10]<<8)+buff[11])/100.0;
+      CGroup.DA0.PWM.duty =CGroup.DA1.PWM.duty =(double)((buff[12]<<24)+(buff[13]<<16)+(buff[14]<<8)+buff[15])/100.0;
+      CGroup.DA0.type = CGroup.DA1.type = PWM;
       WaveCLK0=WaveCLK1=0;
       break;
     case DC:
@@ -161,7 +164,7 @@ void Data_anysis(uint8_t* buff,uint8_t* channel)
       CGroup.DA0.type = DC;
       CGroup.DA1.type = DC;
       WaveCLK0=WaveCLK1=0;
-      CGroup.DA01.DC =(double)((buff[0]<<24)+(buff[1]<<16)+(buff[2]<<8)+buff[3])/100.0;
+      //CGroup.DA01.DC =(double)((buff[0]<<24)+(buff[1]<<16)+(buff[2]<<8)+buff[3])/100.0;
       break;
     default:break;
     }
