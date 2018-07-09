@@ -35,8 +35,8 @@ INT16U BoardID=0x00;
 int main(void)
 {
     HAL_Init();                     //初始化HAL库   
-    Stm32_Clock_Init(360,25,2,8);   //设置时钟,180Mhz
-    delay_init(180);                //初始化延时函数
+    Stm32_Clock_Init(336,25,2,8);   //设置时钟,180Mhz
+    delay_init(168);                //初始化延时函数
 	BSP_Init();
 	
 	OSInit();                       //UCOS初始化
@@ -61,7 +61,7 @@ static void BSP_Init(void)
 {
 	MX_NVIC_Init();
 	
-    uart1_init(115200);//USART
+    uart1_init(460800);//USART
 	uart2_init(115200);//RS232
     uart3_init(115200);//RS485
     LED_Init();                     //初始化LED

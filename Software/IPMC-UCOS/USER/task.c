@@ -90,7 +90,7 @@ void SHT20_Task(void* pdata)
 void Laser_Task(void* pdata)
 {
     INT8U err,*COM2Buff;
-    INT16U time=20;
+    INT16U time=10;
     while(1)
     {
         LaserCMDMessure();
@@ -99,7 +99,7 @@ void Laser_Task(void* pdata)
         {
             LaserBAKMessure(COM2Buff);
             ClrBit(ErrCode,LASERErrBIT);
-            time = 20;
+            time = 5;
         }
         else
         {   //通信失败时暂停发送数据等待传感器恢复
@@ -124,18 +124,19 @@ void COM_Task(void* pdata)
 
 void DBG_Task(void* pdata)
 {
-    char array[9];
+    char array[9]={'0','0','.','0','0','0','0'};
     double tmp=0;
 	while(1)
-	{   
-        tmp = (ADS_Buff[0]-RefV[0])*0.0001875/457.62100/0.01; // /215.59227/0.01
+	{
+        // 一个myftoa函数约1.5-2ms，现在是15ms
+        tmp = (ADS_Buff[0]-RefV[0])*0.00004097277; // 00006744402706230 0.00004097277=0.0001875/457.62100/0.01
         myftoa(tmp,array);//0.0001875 = 1/32768.0*6.144
         printf("C:%sA ",array);
-        if(tmp>1.0||tmp<-1.0) SetBit(ErrCode,OverCurrentBIT);
+        if(tmp>0.3||tmp<-0.3) SetBit(ErrCode,OverCurrentBIT);
         else ClrBit(ErrCode,OverCurrentBIT);
-        myftoa((ADS_Buff[1]-RefV[1])*0.000375,array);//0.00375 = 1/32768.0*6.144*2
+        myftoa((ADS_Buff[1]-RefV[1])/32768.0*6.144*2,array);//0.000375 = 1/32768.0*6.144*2
         printf("V:%sV ",array);
-        myftoa((ADS_Buff[2]-RefV[2])*0.0001875*0.3*0.725925925926*0.98,array);//468R //0.0001875 = 1/32768.0*6.144
+        myftoa((ADS_Buff[2]-RefV[2])*0.00004001667,array);//0.00004001667=0.0001875*0.3*0.725925925926*0.98
         printf("F:%sN ",array);
         myftoa(LaserOffset,array);
         printf("L:%smm ",array);
@@ -147,10 +148,6 @@ void DBG_Task(void* pdata)
         printf("TP:%sC ",array);
         myftoa(HUMI,array);
         printf("RH:%s%% ",array);
-//        printf("C:%.4fA ",(ADS_Buff[0]-RefV[0])/32768.0*6.144/251.7614/0.01); //VM=(VO-2.5)/248/0.01 , I=VM/R
-//        printf("V:%.4fV ",(ADS_Buff[1]-RefV[1])/32768.0*6.144*2);
-//        printf("F:%.4fV ",(ADS_Buff[2]-RefV[2])/32768.0*6.144);
-//        printf("L:%.4fmm ",LaserOffset);
         
         printf("|");
         printf("CPU:%02d%% ",OSCPUUsage);
@@ -166,10 +163,9 @@ void DBG_Task(void* pdata)
 //        OSTaskStkChk(LED_TASK_PRIO,&UsedSTK);
 //        printf("LED:%.1f%% ",(float)UsedSTK.OSUsed/LED_STK_SIZE);
 
-//        printf("%.4f \r\n",(ADS_Buff[0]-RefV[0])/32768.0*6.144*(49400/200+1));
         printf("\r\n");
         
-		delay_ms(20);
+		delay_ms(6);
 	}
 }
 
@@ -201,16 +197,11 @@ void ADC_Task(void* pdata)
 		  ADS_Buff[2]=ADS1x15_ReadLastValue();
 		  ADS1x15_SelectChannel(ADS_CH0);
 		  break;
-//		case 3:
-//		  ADS_Buff[3]=ADS1x15_ReadLastValue();
-//		  ADS1x15_SelectChannel(ADS_CH0);
-//		  break;
 		default:break;
 		}
 		state++;
-//		if(state==4)state=0;
 		if(state==3)state=0;
-		delay_ms(20);
+		delay_ms(3);
 	}
 }
 
