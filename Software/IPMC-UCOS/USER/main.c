@@ -63,7 +63,11 @@ static void BSP_Init(void)
 	
     uart1_init(460800);//USART
 	uart2_init(115200);//RS232
-    uart3_init(115200);//RS485
+    #ifdef PLATFORM
+        IPMC_Init();
+    #else
+        uart3_init(115200);//RS485
+    #endif
     LED_Init();                     //≥ı ºªØLED
 	KeyInit();
 	IIC_Init();

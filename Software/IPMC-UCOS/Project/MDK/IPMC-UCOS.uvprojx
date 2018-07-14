@@ -421,6 +421,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\USER\algorithm.c</FilePath>
             </File>
+            <File>
+              <FileName>ipmc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\USER\ipmc.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

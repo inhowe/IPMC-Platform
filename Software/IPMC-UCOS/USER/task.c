@@ -1,14 +1,14 @@
 #include "task.h"
 
-OS_STK LED_TASK_STK[LED_STK_SIZE];
-OS_STK DAC_TASK_STK[DAC_STK_SIZE];
-OS_STK ADC_TASK_STK[ADC_STK_SIZE];
-OS_STK COM_TASK_STK[COM_STK_SIZE];
-OS_STK DBG_TASK_STK[DBG_STK_SIZE];
-OS_STK START_TASK_STK[START_STK_SIZE];
-OS_STK IDLE_TASK_STK[IDLE_STK_SIZE];
-OS_STK LASER_TASK_STK[LASER_STK_SIZE];
-OS_STK SHT20_TASK_STK[SHT20_STK_SIZE];
+__align(8) OS_STK LED_TASK_STK[LED_STK_SIZE];
+__align(8) OS_STK DAC_TASK_STK[DAC_STK_SIZE];
+__align(8) OS_STK ADC_TASK_STK[ADC_STK_SIZE];
+__align(8) OS_STK COM_TASK_STK[COM_STK_SIZE];
+__align(8) OS_STK DBG_TASK_STK[DBG_STK_SIZE];
+__align(8) OS_STK START_TASK_STK[START_STK_SIZE];
+__align(8) OS_STK IDLE_TASK_STK[IDLE_STK_SIZE];
+__align(8) OS_STK LASER_TASK_STK[LASER_STK_SIZE];
+__align(8) OS_STK SHT20_TASK_STK[SHT20_STK_SIZE];
 
 //LED0ÈÎÎñ
 void led_task(void *pdata)
@@ -40,31 +40,8 @@ void IDLE_Task(void* pdata)
 {
 	while(1)
 	{
-//        CGroup.DA0.type=DC;
-//        //catch 1
-//        CGroup.DA0.DC=4;
-//        delay_ms(2000);
-//        CGroup.DA0.DC=-4;
-//        delay_ms(2000);
-//        
-//        //catch 2
-//        CGroup.DA0.DC=4;
-//        delay_ms(2000);
-//        CGroup.DA0.DC=-4;
-//        delay_ms(2000);
-//        
-//        //catch 3
-//        CGroup.DA0.DC=4;
-//        delay_ms(2000);
-//        CGroup.DA0.DC=-4;
-//        delay_ms(2000);
-//        
-//        //catch 4
-//        CGroup.DA0.DC=4;
-//        delay_ms(2000);
-//        CGroup.DA0.DC=-4;
-//        delay_ms(2000);
-        delay_ms(1000);
+        
+        delay_ms(2000);
 	}
 }
 

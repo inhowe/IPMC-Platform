@@ -3,6 +3,7 @@
 #include "stm32f4xx.h"
 #include "math.h"
 #include "AD5722.h"
+#include "ipmc.h"
 
 typedef enum WaveType_e{
 	SLOPE=0,

@@ -36,6 +36,7 @@
 #include "laser.h"
 #include "algorithm.h"
 #include "SHT2x.h"
+#include "ipmc.h"
 
 #define  SetBit(x,y)   x|=(1<<y) //将X的第Y位置1
 #define  ClrBit(x,y)   x&=~(1<<y) //将X的第Y位清0
