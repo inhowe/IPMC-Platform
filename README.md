@@ -3,6 +3,11 @@
 版本索取API：https://api.github.com/repos/drinow/IPMC-Platform/releases/latest
 
 ## 更新日志
+- 20180912更新
+	- 新增XY图
+	- 新增提示消息
+	- 新增一些功能开关
+	- 优化部分逻辑
 - 20180714更新
 	- 提高串口速率至460800，提高采样率至10ms；
 	- 修改上位机相应解析代码；

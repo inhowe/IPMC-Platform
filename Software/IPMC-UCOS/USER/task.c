@@ -40,7 +40,6 @@ void IDLE_Task(void* pdata)
 {
 	while(1)
 	{
-        
         delay_ms(2000);
 	}
 }
