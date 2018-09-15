@@ -3,6 +3,8 @@
 版本索取API：https://api.github.com/repos/drinow/IPMC-Platform/releases/latest
 
 ## 更新日志
+- 20180915更新
+	- 修改界面为NXP风格
 - 20180912更新
 	- 新增XY图
 	- 新增提示消息

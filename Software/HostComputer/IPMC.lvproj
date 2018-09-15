@@ -1,5 +1,5 @@
 ﻿<?xml version='1.0' encoding='UTF-8'?>
-<Project Type="Project" LVVersion="17008000">
+<Project Type="Project" LVVersion="18008000">
 	<Property Name="CCSymbols" Type="Str"></Property>
 	<Property Name="NI.LV.All.SourceOnly" Type="Bool">false</Property>
 	<Property Name="NI.Project.Description" Type="Str"></Property>
@@ -106,12 +106,6 @@
 				<Item Name="NI_Unzip.lvlib" Type="Library" URL="/&lt;vilib&gt;/zip/NI_Unzip.lvlib"/>
 				<Item Name="Create Directory Recursive.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/libraryn.llb/Create Directory Recursive.vi"/>
 				<Item Name="subTimeDelay.vi" Type="VI" URL="/&lt;vilib&gt;/express/express execution control/TimeDelayBlock.llb/subTimeDelay.vi"/>
-				<Item Name="New Session.vi" Type="VI" URL="/&lt;vilib&gt;/Enthought/Python Integration Toolkit/API/New Session.vi"/>
-				<Item Name="Close Session.vi" Type="VI" URL="/&lt;vilib&gt;/Enthought/Python Integration Toolkit/API/Close Session.vi"/>
-				<Item Name="Pack.vi" Type="VI" URL="/&lt;vilib&gt;/Enthought/Python Integration Toolkit/API/Pack.vi"/>
-				<Item Name="Call.vi" Type="VI" URL="/&lt;vilib&gt;/Enthought/Python Integration Toolkit/API/Call.vi"/>
-				<Item Name="Unpack.vi" Type="VI" URL="/&lt;vilib&gt;/Enthought/Python Integration Toolkit/API/Unpack.vi"/>
-				<Item Name="Unpack String.vi" Type="VI" URL="/&lt;vilib&gt;/Enthought/Python Integration Toolkit/API/Unpack String.vi"/>
 				<Item Name="VISA Configure Serial Port (Instr).vi" Type="VI" URL="/&lt;vilib&gt;/Instr/_visa.llb/VISA Configure Serial Port (Instr).vi"/>
 				<Item Name="VISA Configure Serial Port (Serial Instr).vi" Type="VI" URL="/&lt;vilib&gt;/Instr/_visa.llb/VISA Configure Serial Port (Serial Instr).vi"/>
 				<Item Name="VISA Configure Serial Port" Type="VI" URL="/&lt;vilib&gt;/Instr/_visa.llb/VISA Configure Serial Port"/>
@@ -330,7 +324,7 @@
 				<Property Name="INST_productVersion" Type="Str">1.0.38</Property>
 				<Property Name="INST_requireLVDevSys" Type="Bool">true</Property>
 				<Property Name="InstSpecBitness" Type="Str">32-bit</Property>
-				<Property Name="InstSpecVersion" Type="Str">17008011</Property>
+				<Property Name="InstSpecVersion" Type="Str">18008007</Property>
 				<Property Name="MSI_arpCompany" Type="Str">NUAA</Property>
 				<Property Name="MSI_distID" Type="Str">{3DFD03DB-F3DC-4BBB-8E97-B3AA8FABD93B}</Property>
 				<Property Name="MSI_hideNonRuntimes" Type="Bool">true</Property>
