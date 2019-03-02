@@ -61,6 +61,7 @@ void uart1_init(u32 bound)
 	UART1_Handler.Init.Parity=UART_PARITY_NONE;		    //无奇偶校验位
 	UART1_Handler.Init.HwFlowCtl=UART_HWCONTROL_NONE;   //无硬件流控
 	UART1_Handler.Init.Mode=UART_MODE_TX_RX;		    //收发模式
+	
 	HAL_UART_Init(&UART1_Handler);					    //HAL_UART_Init()会使能UART1
 }
 

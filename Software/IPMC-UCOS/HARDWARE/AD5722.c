@@ -233,7 +233,8 @@ void AD5722_Test(void)
 	printf("Pwr:%d ",(AD5722_ReadBack(PWR_REG)));
 	printf("Out0:%d ",(AD5722_ReadBack(DAC_REG|DAC_A))>>4);
 	printf("Out1:%d ",(AD5722_ReadBack(DAC_REG|DAC_B))>>4);
-	while(1);
+	printf("\r\n");
+	//while(1);
 //	AD5722_SendData(0x2AAA0); //ch1=1.665
 //	while(1);
 //	AD5722_SendData(0x4AAA0); //both=1.665

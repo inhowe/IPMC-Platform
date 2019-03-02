@@ -1,6 +1,6 @@
 #include "protocol.h"
 
-uint8_t Rx1Buff[20];
+uint8_t Rx1Buff[36];
 uint8_t ibuff=0,ican=0;
 uint8_t canbuf[8],NbrOfTx=0;
 void ToBoard_Transpond(uint8_t* TargetID,uint8_t *channel,uint8_t* type,uint8_t* buff,uint8_t* bufflen)
@@ -52,6 +52,8 @@ uint8_t LengthCal(uint8_t* data)
     case PWM   :	len=16;break;
     case DC    :	len=8;break;
     case 0x55  :    len=6;break; //carlib cmd
+    case 0x56  :    len=1;break; //switch cmd
+    case 0x57  :    len=22;break; //control cmd
     default    :    len=0 ;break;
   }
   return len;
@@ -70,6 +72,7 @@ void ChannelSelect(uint8_t* data)
 
 void Data_anysis(uint8_t* buff,uint8_t* channel)
 {
+  u8 SmallEnd[4];
   switch(*channel)
   {
   case 0:
@@ -169,12 +172,62 @@ void Data_anysis(uint8_t* buff,uint8_t* channel)
     default:break;
     }
     break;
-  case 0x55:
-    if(buff[0]=='C'&&buff[1]=='A'&&buff[2]=='R'&&buff[3]=='L'&&buff[4]=='I'&&buff[5]=='B')  
-    {
-        Carlib();
-    }
-    break;
+    case 0x55://校准
+        if(buff[0]=='C'&&buff[1]=='A'&&buff[2]=='R'&&buff[3]=='L'&&buff[4]=='I'&&buff[5]=='B')  
+        {
+            Carlib();
+        }
+        break;
+    case 0x56://开关 bit7:控制模式开关 bit6：调试模式开关 bit5：清空波形
+        if(buff[0]&0x80)  
+        {
+            CTR_Flag=true;
+        }
+        else
+            CTR_Flag=false;
+        if(buff[0]&0x40)  
+        {
+            DBG_Flag=true;
+        }
+        else
+            DBG_Flag=false;
+        if(buff[0]&0x20)  
+        {
+            CGroup.DA0.DC =0;
+            CGroup.DA1.DC =0;
+            CGroup.DA0.type = DC;
+            CGroup.DA1.type = DC;
+            AD5722_Output(0,CH0);
+            AD5722_Output(0,CH1);
+        }
+        else
+            DBG_Flag=false;
+        break;
+    case 0x57://控制功能
+        if(buff[0]==0x00)//PID
+        {
+            //不知道为啥直接赋值就硬件错误
+            SmallEnd[0]=buff[1];SmallEnd[1]=buff[2];SmallEnd[2]=buff[3];SmallEnd[3]=buff[4];
+            algPID.SetPoint=(double)(*((float*)SmallEnd));
+            
+            SmallEnd[0]=buff[9];SmallEnd[1]=buff[10];SmallEnd[2]=buff[11];SmallEnd[3]=buff[12];
+            algPID.KP= (double)(*((float*)SmallEnd));
+//            
+            SmallEnd[0]=buff[13];SmallEnd[1]=buff[14];SmallEnd[2]=buff[15];SmallEnd[3]=buff[16];
+            algPID.KI= (double)(*((float*)SmallEnd));
+//            
+            SmallEnd[0]=buff[17];SmallEnd[1]=buff[18];SmallEnd[2]=buff[19];SmallEnd[3]=buff[20];
+            algPID.KD= (double)(*((float*)SmallEnd));
+        }
+        else if(buff[0]==0x01)//BangBang
+        {
+            SmallEnd[0]=buff[1];SmallEnd[1]=buff[2];SmallEnd[2]=buff[3];SmallEnd[3]=buff[4];
+            algBang.SetPoint= (double)(*((float*)SmallEnd));
+            
+            SmallEnd[0]=buff[5];SmallEnd[1]=buff[6];SmallEnd[2]=buff[7];SmallEnd[3]=buff[8];
+            algBang.Bind= (double)(*((float*)SmallEnd));
+        }
+        break;
   }
 }
 

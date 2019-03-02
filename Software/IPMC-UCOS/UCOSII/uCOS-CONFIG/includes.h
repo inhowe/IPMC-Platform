@@ -24,6 +24,8 @@
 #include "delay.h"
 #include "myiic.h"
 #include "usart.h"
+#include "dma.h"
+
 #include "led.h"
 #include "task.h"
 #include "wave.h"
@@ -41,10 +43,12 @@
 #define  SetBit(x,y)   x|=(1<<y) //将X的第Y位置1
 #define  ClrBit(x,y)   x&=~(1<<y) //将X的第Y位清0
 #define  ReadBit(x,y)  (x>>y)&0x01
-//ErrCode Bit Define
+
+//ErrCodeBitDefine
 #define LASERErrBIT      0
 #define OverCurrentBIT   15
-//#define LASERErr         0x8000
+#define OverValtageBIT   14
+#define OverForceBIT     13
 
 #define MAXBoardID 0x01
 
@@ -60,6 +64,7 @@ extern void* UART1_QTbl[64];
 extern INT16U BoardID;
 extern INT16U ErrCode;
 extern float TEMP,HUMI;
+extern bool DBG_Flag,CTR_Flag,CARLIB_OK_Flag;
 #endif
 
 

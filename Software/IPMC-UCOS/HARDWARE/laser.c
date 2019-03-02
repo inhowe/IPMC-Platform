@@ -1,5 +1,6 @@
 #include "laser.h"
 
+//¼¤¹âÎ»ÒÆ
 float LaserOffset=0.0;
 
 void LaserCMDMessure(void)
@@ -24,7 +25,7 @@ float LaserBAKMessure(unsigned char array[])
     if(array[3]=='-')
         data=-data;
     if((int)data==-244) //if out of the range, the data will be -244.4442
-        data=-99.9999;
+        data=Laser_OutOfRange;
     
     LaserOffset = data;
     return data;

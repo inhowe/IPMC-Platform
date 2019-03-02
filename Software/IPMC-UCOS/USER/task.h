@@ -14,7 +14,7 @@
 #define START_TASK_PRIO       50 
 
 #define   DBG_STK_SIZE        256
-#define   DAC_STK_SIZE        128
+#define   DAC_STK_SIZE        256
 #define   ADC_STK_SIZE        128
 #define   COM_STK_SIZE        128
 #define LASER_STK_SIZE        128

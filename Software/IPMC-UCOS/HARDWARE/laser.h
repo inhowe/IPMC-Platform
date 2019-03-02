@@ -2,6 +2,8 @@
 
 #define SendData(array,len) HAL_UART_Transmit(&UART2_Handler,array,len,100);
 
+#define Laser_OutOfRange -99.9999
+
 extern float LaserOffset;
 
 void  LaserCMDMessure(void);
