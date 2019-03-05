@@ -90,13 +90,16 @@ void Laser_Task(void* pdata)
 {
     INT8U err,*COM2Buff;
     INT16U time=10;
+    OS_CPU_SR cpu_sr=0;
     while(1)
     {
         LaserCMDMessure();
         COM2Buff = OSMboxPend(COM2Msg,time,&err);
         if(err == OS_ERR_NONE)
         {
+            OS_ENTER_CRITICAL();
             LaserBAKMessure(COM2Buff);
+            OS_EXIT_CRITICAL();
             ClrBit(ErrCode,LASERErrBIT);
             time = 5;
         }
@@ -125,7 +128,7 @@ void DBG_Task(void* pdata)
 {
     char array[9]={'0','0','.','0','0','0','0'};
     char SendBuff[128]={0};
-    OS_STK_DATA UsedSTK;
+//    OS_STK_DATA UsedSTK;
     double tmp=0;
 	while(1)
 	{
@@ -138,69 +141,44 @@ void DBG_Task(void* pdata)
             if(tmp>0.3||tmp<-0.3) SetBit(ErrCode,OverCurrentBIT);//过流检测 安培
             else ClrBit(ErrCode,OverCurrentBIT);
     //        printf("C:%sA ",array);
-            strcat(SendBuff,"C:");
-            strcat(SendBuff,array);
-            strcat(SendBuff,"A ");
+            strcat(SendBuff,"C:");strcat(SendBuff,array);strcat(SendBuff,"A ");
 
             myftoa((ADS_Buff[1]-RefV[1])/32768.0*6.144*2,array);//0.000375 = 1/32768.0*6.144*2
             if(ADS_Buff[1]>24000||ADS_Buff[1]<2666) SetBit(ErrCode,OverValtageBIT); //ADC绝对值高于4.5V和低于0.5V警告
             else ClrBit(ErrCode,OverValtageBIT);
     //        printf("V:%sV ",array);
-            strcat(SendBuff,"V:");
-            strcat(SendBuff,array);
-            strcat(SendBuff,"V ");
+            strcat(SendBuff,"V:");strcat(SendBuff,array);strcat(SendBuff,"V ");
             
             myftoa((ADS_Buff[2]-RefV[2])*0.00004001667,array);//0.00004001667=0.0001875*0.3*0.725925925926*0.98
             if(ADS_Buff[2]>24000||ADS_Buff[2]<2666) SetBit(ErrCode,OverForceBIT); //ADC绝对值高于4.5V和低于0.5V警告
             else ClrBit(ErrCode,OverForceBIT);
     //        printf("F:%sN ",array);
-            strcat(SendBuff,"F:");
-            strcat(SendBuff,array);
-            strcat(SendBuff,"N ");
+            strcat(SendBuff,"F:");strcat(SendBuff,array);strcat(SendBuff,"N ");
             
             myftoa(LaserOffset,array);
     //        printf("L:%smm ",array);
-            strcat(SendBuff,"L:");
-            strcat(SendBuff,array);
-            strcat(SendBuff,"mm ");
+            strcat(SendBuff,"L:");strcat(SendBuff,array);strcat(SendBuff,"mm ");
             
             myftoa(WaveCLK0,array);
     //        printf("T0:%sS ",array);
-            strcat(SendBuff,"T0:");
-            strcat(SendBuff,array);
-            strcat(SendBuff,"S ");
+            strcat(SendBuff,"T0:");strcat(SendBuff,array);strcat(SendBuff,"S ");
             
             myftoa(WaveCLK1,array);
     //        printf("T1:%sS ",array);
-            strcat(SendBuff,"T1:");
-            strcat(SendBuff,array);
-            strcat(SendBuff,"S ");
+            strcat(SendBuff,"T1:");strcat(SendBuff,array);strcat(SendBuff,"S ");
             
             myftoa(TEMP,array);
     //        printf("TP:%sC ",array);
-            strcat(SendBuff,"TP:");
-            strcat(SendBuff,array);
-            strcat(SendBuff,"C ");
+            strcat(SendBuff,"TP:");strcat(SendBuff,array);strcat(SendBuff,"C ");
             
             myftoa(HUMI,array);
     //        printf("RH:%s%% ",array);
-            strcat(SendBuff,"RH:");
-            strcat(SendBuff,array);
-            strcat(SendBuff,"% ");
+            strcat(SendBuff,"RH:");strcat(SendBuff,array);strcat(SendBuff,"% ");
             
-    //        printf("|");
-    //        printf("CPU:%02d%% ",OSCPUUsage);
-    //        printf("|");
-
+    //        printf("|");printf("CPU:%02d%% ",OSCPUUsage);printf("|");
             strcat(SendBuff,"|CPU:");
             memset(array,0,sizeof(array));
-            array[0]='0'+OSCPUUsage/10;
-            array[1]='0'+OSCPUUsage%10;
-            array[2]='%';
-            array[3]=' ';
-            array[4]='|';
-            array[5]='\r';
-            array[6]='\n';
+            array[0]='0'+OSCPUUsage/10;array[1]='0'+OSCPUUsage%10;array[2]='%';array[3]=' ';array[4]='|';array[5]='\r';array[6]='\n';
             strcat(SendBuff,array);
             
             if(__HAL_DMA_GET_FLAG(&UART1TxDMA_Handler,DMA_FLAG_TCIF3_7))//判断上次DMA2_Steam7传输完成
@@ -208,8 +186,6 @@ void DBG_Task(void* pdata)
                 //清除DMA2_Steam7传输完成标志
                 __HAL_DMA_CLEAR_FLAG(&UART1TxDMA_Handler,DMA_FLAG_TCIF3_7);
                 HAL_UART_DMAStop(&UART1_Handler);      //传输完成以后关闭串口DMA
-              //在这里可以使用printf函数
-
             }
                 
             MYDMA_USART_Transmit(&UART1_Handler,(u8*)SendBuff,113); //启动传输   
@@ -217,20 +193,19 @@ void DBG_Task(void* pdata)
         else
         {
             printf("ADS_Buff[0-2]:%d %d %d ",ADS_Buff[0],ADS_Buff[1],ADS_Buff[2]);
-            printf("ErrCode:0x%x (15:OC 14:OV 13:OF 0:LE) ",ErrCode);
+            printf("ErrCode:0x%x (15:C 14:V 13:F 0:L) ",ErrCode);
             printf("CPU:%02d%% ",OSCPUUsage);
-            OSTaskStkChk(DAC_TASK_PRIO,&UsedSTK);
-            printf("DAC:%.1f%% ",(float)UsedSTK.OSUsed/DAC_STK_SIZE*100);
-            OSTaskStkChk(ADC_TASK_PRIO,&UsedSTK);
-            printf("ADC:%.1f%% ",(float)UsedSTK.OSUsed/ADC_STK_SIZE*100);
-            OSTaskStkChk(COM_TASK_PRIO,&UsedSTK);
-            printf("COM:%.1f%% ",(float)UsedSTK.OSUsed/COM_STK_SIZE*100);
-            OSTaskStkChk(LASER_TASK_PRIO,&UsedSTK);
-            printf("LASER:%.1f%% ",(float)UsedSTK.OSUsed/LASER_STK_SIZE*100);
-            OSTaskStkChk(LED_TASK_PRIO,&UsedSTK);
-            printf("LED:%.1f%% ",(float)UsedSTK.OSUsed/LED_STK_SIZE*100);
-            OSTaskStkChk(DBG_TASK_PRIO,&UsedSTK);
-            printf("DBG:%.1f%% ",(float)UsedSTK.OSUsed/DBG_STK_SIZE*100);
+            printf("ST:%.2f ",algPID.SetPoint);
+            printf("LS:%.2f ",LaserOffset );
+            printf("Err:%.2f ",algPID.Err);
+            printf("SumErr:%.2f ",algPID.SumErr);
+            printf("dErr:%.2f ",algPID.dErr);
+//            OSTaskStkChk(DAC_TASK_PRIO,&UsedSTK);printf("DAC:%.1f%% ",(float)UsedSTK.OSUsed/DAC_STK_SIZE*100);
+//            OSTaskStkChk(ADC_TASK_PRIO,&UsedSTK);printf("ADC:%.1f%% ",(float)UsedSTK.OSUsed/ADC_STK_SIZE*100);
+//            OSTaskStkChk(COM_TASK_PRIO,&UsedSTK);printf("COM:%.1f%% ",(float)UsedSTK.OSUsed/COM_STK_SIZE*100);
+//            OSTaskStkChk(LASER_TASK_PRIO,&UsedSTK);printf("LASER:%.1f%% ",(float)UsedSTK.OSUsed/LASER_STK_SIZE*100);
+//            OSTaskStkChk(LED_TASK_PRIO,&UsedSTK);printf("LED:%.1f%% ",(float)UsedSTK.OSUsed/LED_STK_SIZE*100);
+//            OSTaskStkChk(DBG_TASK_PRIO,&UsedSTK);printf("DBG:%.1f%% ",(float)UsedSTK.OSUsed/DBG_STK_SIZE*100);
             printf("\r\n");
         }
 		delay_ms(10);
@@ -246,13 +221,15 @@ void DAC_Task(void* pdata)
         else if(CARLIB_OK_Flag==true)
         {
 //            BangBangController(5.0,1.0);
-            PIDController(5.0,1.0);
+            PIDController(&algPID);
         }
         
         if(CTR_Flag==false)
             delay_ms(1);
         else
+        {
             delay_ms(10);
+        }
 	}
 }
 

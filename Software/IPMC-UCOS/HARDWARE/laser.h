@@ -4,7 +4,7 @@
 
 #define Laser_OutOfRange -99.9999
 
-extern float LaserOffset;
+extern float __IO LaserOffset;
 
 void  LaserCMDMessure(void);
 float LaserBAKMessure(unsigned char array[]);

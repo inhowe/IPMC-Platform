@@ -178,13 +178,17 @@ void Data_anysis(uint8_t* buff,uint8_t* channel)
             Carlib();
         }
         break;
-    case 0x56://开关 bit7:控制模式开关 bit6：调试模式开关 bit5：清空波形
+    case 0x56://开关 bit7:控制模式开关 bit6：调试模式开关 bit5：清空波形 Bit4：1-校准 Bit3：1-复位芯片；
         if(buff[0]&0x80)  
         {
+            Carlib();
             CTR_Flag=true;
         }
         else
+        {
+            ClearController();
             CTR_Flag=false;
+        }
         if(buff[0]&0x40)  
         {
             DBG_Flag=true;
@@ -200,8 +204,14 @@ void Data_anysis(uint8_t* buff,uint8_t* channel)
             AD5722_Output(0,CH0);
             AD5722_Output(0,CH1);
         }
-        else
-            DBG_Flag=false;
+        if(buff[0]&0x10)  
+        {
+            Carlib();
+        }
+        if(buff[0]&0x08)  
+        {
+            HAL_NVIC_SystemReset();
+        }
         break;
     case 0x57://控制功能
         if(buff[0]==0x00)//PID
@@ -226,6 +236,12 @@ void Data_anysis(uint8_t* buff,uint8_t* channel)
             
             SmallEnd[0]=buff[5];SmallEnd[1]=buff[6];SmallEnd[2]=buff[7];SmallEnd[3]=buff[8];
             algBang.Bind= (double)(*((float*)SmallEnd));
+            
+            SmallEnd[0]=buff[9];SmallEnd[1]=buff[10];SmallEnd[2]=buff[11];SmallEnd[3]=buff[12];
+            algBang.HV= (double)(*((float*)SmallEnd));
+     
+            SmallEnd[0]=buff[13];SmallEnd[1]=buff[14];SmallEnd[2]=buff[15];SmallEnd[3]=buff[16];
+            algBang.LV= (double)(*((float*)SmallEnd));
         }
         break;
   }
@@ -298,51 +314,51 @@ void DealQueueBuff(Queue_t* queue)
 //adcbuf has symbol
 void ToPC_ADCData(int32_t adcbuf[],int32_t timestamp0,int32_t timestamp1)
 {
-  uint8_t buff[26+4]={0};
-  uint8_t cnt=0;  
+//  uint8_t buff[26+4]={0};
+//  uint8_t cnt=0;  
+//  
+//  buff[cnt++]=0xAA;//header
+//  buff[cnt++]=0xAF;
+//  
+//  buff[cnt++]=0x00;//function
+//  buff[cnt++]=0x00;//type
+//  buff[cnt++]=0x00;//channel
+//  
+//  buff[cnt++]=BYTE0(adcbuf[0]);//Current
+//  buff[cnt++]=BYTE1(adcbuf[0]);
+//  buff[cnt++]=BYTE2(adcbuf[0]);
+//  buff[cnt++]=BYTE3(adcbuf[0]);
+//  
+//  buff[cnt++]=BYTE0(adcbuf[1]);//Voltage
+//  buff[cnt++]=BYTE1(adcbuf[1]);
+//  buff[cnt++]=BYTE2(adcbuf[1]);
+//  buff[cnt++]=BYTE3(adcbuf[1]);
+//  
+//  buff[cnt++]=BYTE0(adcbuf[2]);//Force
+//  buff[cnt++]=BYTE1(adcbuf[2]);
+//  buff[cnt++]=BYTE2(adcbuf[2]);
+//  buff[cnt++]=BYTE3(adcbuf[2]);
+//  
+//  buff[cnt++]=0x00;//Displacement
+//  buff[cnt++]=0x00;
+//  buff[cnt++]=0x00;
+//  buff[cnt++]=0x00;
+//  
+//  buff[cnt++]=BYTE0(timestamp0);//Time stamp0
+//  buff[cnt++]=BYTE1(timestamp0);
+//  buff[cnt++]=BYTE2(timestamp0);
+//  buff[cnt++]=BYTE3(timestamp0);
+//  
+//  buff[cnt++]=BYTE0(timestamp1);//Time stamp1
+//  buff[cnt++]=BYTE1(timestamp1);
+//  buff[cnt++]=BYTE2(timestamp1);
+//  buff[cnt++]=BYTE3(timestamp1);
+//  
+//  buff[cnt++]=0x00;//reserved
   
-  buff[cnt++]=0xAA;//header
-  buff[cnt++]=0xAF;
-  
-  buff[cnt++]=0x00;//function
-  buff[cnt++]=0x00;//type
-  buff[cnt++]=0x00;//channel
-  
-  buff[cnt++]=BYTE0(adcbuf[0]);//Current
-  buff[cnt++]=BYTE1(adcbuf[0]);
-  buff[cnt++]=BYTE2(adcbuf[0]);
-  buff[cnt++]=BYTE3(adcbuf[0]);
-  
-  buff[cnt++]=BYTE0(adcbuf[1]);//Voltage
-  buff[cnt++]=BYTE1(adcbuf[1]);
-  buff[cnt++]=BYTE2(adcbuf[1]);
-  buff[cnt++]=BYTE3(adcbuf[1]);
-  
-  buff[cnt++]=BYTE0(adcbuf[2]);//Force
-  buff[cnt++]=BYTE1(adcbuf[2]);
-  buff[cnt++]=BYTE2(adcbuf[2]);
-  buff[cnt++]=BYTE3(adcbuf[2]);
-  
-  buff[cnt++]=0x00;//Displacement
-  buff[cnt++]=0x00;
-  buff[cnt++]=0x00;
-  buff[cnt++]=0x00;
-  
-  buff[cnt++]=BYTE0(timestamp0);//Time stamp0
-  buff[cnt++]=BYTE1(timestamp0);
-  buff[cnt++]=BYTE2(timestamp0);
-  buff[cnt++]=BYTE3(timestamp0);
-  
-  buff[cnt++]=BYTE0(timestamp1);//Time stamp1
-  buff[cnt++]=BYTE1(timestamp1);
-  buff[cnt++]=BYTE2(timestamp1);
-  buff[cnt++]=BYTE3(timestamp1);
-  
-  buff[cnt++]=0x00;//reserved
-  
-  uint8_t i=0;
-  for(i=0;i<cnt;i++)
-    printf("%d",buff[i]);
+//  uint8_t i=0;
+//  for(i=0;i<cnt;i++)
+//    printf("%d",buff[i]);
 }
 
 void ToPC_WaveData(void)

@@ -1,14 +1,16 @@
 #include "laser.h"
 
 //激光位移
-float LaserOffset=0.0;
+float __IO LaserOffset=0.0;
 
+//发送测量命令
 void LaserCMDMessure(void)
 {
 	unsigned char array[3]={'M','1',0x0D};
 	SendData(array,3);
 }
 
+//解析收到的测量数据
 float LaserBAKMessure(unsigned char array[])
 {
     //Data format: M1,+12.3456
@@ -31,6 +33,7 @@ float LaserBAKMessure(unsigned char array[])
     return data;
 }
 
+//当前位移Set to zero
 void LaserCMDToZero(void)
 {
     unsigned char array[3]={'V','1',0x0D};
