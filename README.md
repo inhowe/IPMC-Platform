@@ -3,8 +3,13 @@
 版本索取API：https://api.github.com/repos/drinow/IPMC-Platform/releases/latest
 
 ## 更新日志
+- 20190305更新
+    - 新增PID控制、BangBang控制功能及界面
+    - BUG修复
+    - 新增协议，包括支持开关DEBUG模式、开关控制模式、系统复位等功能
+    - 过流、过压等超量程指示灯改为红色
 - 20180915更新
-	- 修改界面为NXP风格
+	- 修改界面为NXP风格（需要使用最新的LabView驱动）
 - 20180912更新
 	- 新增XY图
 	- 新增提示消息
