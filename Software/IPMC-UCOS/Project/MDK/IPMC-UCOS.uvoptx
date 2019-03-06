@@ -298,7 +298,7 @@
         <Ww>
           <count>29</count>
           <WinNumber>1</WinNumber>
-          <ItemText>cpu_sr</ItemText>
+          <ItemText>buff[0]</ItemText>
         </Ww>
       </WatchWindow1>
       <MemoryWindow1>

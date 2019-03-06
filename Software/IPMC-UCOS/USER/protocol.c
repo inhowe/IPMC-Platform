@@ -181,13 +181,19 @@ void Data_anysis(uint8_t* buff,uint8_t* channel)
     case 0x56://开关 bit7:控制模式开关 bit6：调试模式开关 bit5：清空波形 Bit4：1-校准 Bit3：1-复位芯片；
         if(buff[0]&0x80)  
         {
-            Carlib();
-            CTR_Flag=true;
+            if(CTR_Flag==false)//仅第一次执行
+            {
+                Carlib();
+                CTR_Flag=true;
+            }
         }
         else
         {
-            ClearController();
-            CTR_Flag=false;
+            if(CTR_Flag)
+            {
+                ClearController();
+                CTR_Flag=false;
+            }
         }
         if(buff[0]&0x40)  
         {
