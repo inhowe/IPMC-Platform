@@ -1,5 +1,5 @@
 ﻿<?xml version='1.0' encoding='UTF-8'?>
-<Project Type="Project" LVVersion="18008000">
+<Project Type="Project" LVVersion="17008000">
 	<Property Name="CCSymbols" Type="Str"></Property>
 	<Property Name="NI.LV.All.SourceOnly" Type="Bool">false</Property>
 	<Property Name="NI.Project.Description" Type="Str"></Property>
@@ -34,6 +34,11 @@
 			<Item Name="CH341SER.EXE" Type="Document" URL="../other/CH341SER.EXE"/>
 			<Item Name="NUAA圆角.ico" Type="Document" URL="../other/NUAA圆角.ico"/>
 			<Item Name="download.exe" Type="Document" URL="../download.exe"/>
+		</Item>
+		<Item Name="Ctrl" Type="Folder">
+			<Item Name="XYGraph.ctl" Type="VI" URL="../Ctrl/XYGraph.ctl"/>
+			<Item Name="led.ctl" Type="VI" URL="../Ctrl/led.ctl"/>
+			<Item Name="wave.ctl" Type="VI" URL="../Ctrl/wave.ctl"/>
 		</Item>
 		<Item Name="main.vi" Type="VI" URL="../main.vi"/>
 		<Item Name="launch.vi" Type="VI" URL="../launch.vi"/>
@@ -162,7 +167,7 @@
 				<Property Name="Bld_localDestDirType" Type="Str">relativeToCommon</Property>
 				<Property Name="Bld_modifyLibraryFile" Type="Bool">true</Property>
 				<Property Name="Bld_previewCacheID" Type="Str">{B714A26D-D1F7-43E2-8329-EBC11EF6A241}</Property>
-				<Property Name="Bld_version.build" Type="Int">46</Property>
+				<Property Name="Bld_version.build" Type="Int">48</Property>
 				<Property Name="Bld_version.major" Type="Int">1</Property>
 				<Property Name="Destination[0].destName" Type="Str">launch.exe</Property>
 				<Property Name="Destination[0].path" Type="Path">../builds/IPMC-Platform/launch/launch.exe</Property>
@@ -246,7 +251,7 @@
 				<Property Name="Bld_supportedLanguage[0]" Type="Str">ChineseS</Property>
 				<Property Name="Bld_supportedLanguage[1]" Type="Str">English</Property>
 				<Property Name="Bld_supportedLanguageCount" Type="Int">2</Property>
-				<Property Name="Bld_version.build" Type="Int">65</Property>
+				<Property Name="Bld_version.build" Type="Int">68</Property>
 				<Property Name="Bld_version.major" Type="Int">1</Property>
 				<Property Name="Destination[0].destName" Type="Str">IPMC.exe</Property>
 				<Property Name="Destination[0].path" Type="Path">../builds/IPMC-Platform/NI_AB_PROJECTNAME/IPMC.exe</Property>
@@ -255,46 +260,46 @@
 				<Property Name="Destination[1].destName" Type="Str">支持目录</Property>
 				<Property Name="Destination[1].path" Type="Path">../builds/IPMC-Platform/NI_AB_PROJECTNAME/data</Property>
 				<Property Name="DestinationCount" Type="Int">2</Property>
-				<Property Name="Exe_actXinfo_enumCLSID[0]" Type="Str">{87CE259B-5224-4E4E-93BD-FBB9F6A5E0B2}</Property>
-				<Property Name="Exe_actXinfo_enumCLSID[1]" Type="Str">{B8C7DE6A-FF17-4983-A13B-32F0F7CC67DB}</Property>
-				<Property Name="Exe_actXinfo_enumCLSID[10]" Type="Str">{E9643DA1-A374-430C-A988-2546F724F435}</Property>
-				<Property Name="Exe_actXinfo_enumCLSID[11]" Type="Str">{0D829C85-AFBC-48AE-9C1D-6F82A5D92199}</Property>
-				<Property Name="Exe_actXinfo_enumCLSID[12]" Type="Str">{96C694C1-E73B-4AF7-AEEB-77BF63CED6DE}</Property>
-				<Property Name="Exe_actXinfo_enumCLSID[13]" Type="Str">{CBDC329E-2B44-4B1E-A6F1-5222562FD5EF}</Property>
-				<Property Name="Exe_actXinfo_enumCLSID[14]" Type="Str">{49C7A08D-538D-40AB-9FEC-374BEB24CAA2}</Property>
-				<Property Name="Exe_actXinfo_enumCLSID[15]" Type="Str">{A2EFF8A6-936B-48C8-B3E2-B13EADD9C80E}</Property>
-				<Property Name="Exe_actXinfo_enumCLSID[16]" Type="Str">{D60CD76F-AC08-474A-A9E3-D80EF9BD228D}</Property>
-				<Property Name="Exe_actXinfo_enumCLSID[2]" Type="Str">{246C8845-1487-4595-ACBC-558A85539EFB}</Property>
-				<Property Name="Exe_actXinfo_enumCLSID[3]" Type="Str">{B5D236BF-9A38-45AB-8FDE-191DA07E473E}</Property>
-				<Property Name="Exe_actXinfo_enumCLSID[4]" Type="Str">{C41BB76B-F7DF-4521-94A5-72222387A36F}</Property>
-				<Property Name="Exe_actXinfo_enumCLSID[5]" Type="Str">{9AF07DAD-C81D-432F-8B81-298856F3ED77}</Property>
-				<Property Name="Exe_actXinfo_enumCLSID[6]" Type="Str">{78F96430-4E39-40C3-9C26-8539BA1E4E81}</Property>
-				<Property Name="Exe_actXinfo_enumCLSID[7]" Type="Str">{BC1CC44F-AA64-4D37-BFA2-B79D4EFE1374}</Property>
-				<Property Name="Exe_actXinfo_enumCLSID[8]" Type="Str">{1B1A2496-E3D7-4645-8C68-05E5686A4EDD}</Property>
-				<Property Name="Exe_actXinfo_enumCLSID[9]" Type="Str">{4B0F4F24-4759-4C55-B5E7-AF03F74DD6CD}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[0]" Type="Str">{5DF58730-A3A8-410C-BA11-ECBA29A276AC}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[1]" Type="Str">{5400220A-C0D3-45CE-9F97-BB74CE866CD7}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[10]" Type="Str">{885ED0A9-B108-4EA9-898C-BDCEE4458948}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[11]" Type="Str">{F0F08304-1D0A-419C-B335-47A74209D450}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[12]" Type="Str">{3946F745-C3EB-445C-BB37-65AA9278C061}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[13]" Type="Str">{7CAE3430-6745-4A1A-A8CF-A6CE85FC5EBB}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[14]" Type="Str">{2D7AE6CA-D843-4A38-A5EE-29297BE2217B}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[15]" Type="Str">{2BA57A43-E1E0-45CF-886B-A28CF26DC0DF}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[16]" Type="Str">{B927EBCD-FB14-4981-AAE0-BEDFF297F699}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[2]" Type="Str">{BF6D8800-C89E-4F5C-989F-D1FF413FAA76}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[3]" Type="Str">{29D61ED2-4E56-4E08-BD3F-96DCADAB85D0}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[4]" Type="Str">{A759C64F-FABC-4152-A08B-ADE74162509C}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[5]" Type="Str">{DB893646-9BA0-46AE-993F-90C25B56AD58}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[6]" Type="Str">{035EB3E1-00BF-4383-BDDD-8D63BAB4E279}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[7]" Type="Str">{62011E96-6F96-41A2-85D3-163F60035B09}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[8]" Type="Str">{CF48B8C2-C00E-4FE7-84EA-281631A0241A}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[9]" Type="Str">{219EBAAF-C6EF-43E5-AE99-DD6C856D2EE0}</Property>
 				<Property Name="Exe_actXinfo_enumCLSIDsCount" Type="Int">17</Property>
 				<Property Name="Exe_actXinfo_majorVersion" Type="Int">5</Property>
 				<Property Name="Exe_actXinfo_minorVersion" Type="Int">5</Property>
-				<Property Name="Exe_actXinfo_objCLSID[0]" Type="Str">{8A7EC88C-6B40-4449-8682-238D6DBC0874}</Property>
-				<Property Name="Exe_actXinfo_objCLSID[1]" Type="Str">{957EF5DD-509E-45A3-B87B-9E19DB3A7B94}</Property>
-				<Property Name="Exe_actXinfo_objCLSID[10]" Type="Str">{F7DFECFF-D3CF-461F-A892-AFEDB8854EA8}</Property>
-				<Property Name="Exe_actXinfo_objCLSID[11]" Type="Str">{81935F04-135E-4927-ADFF-65474EB0B9FF}</Property>
-				<Property Name="Exe_actXinfo_objCLSID[12]" Type="Str">{104D4F50-2607-40B6-B119-EBD6BDA0ADCF}</Property>
-				<Property Name="Exe_actXinfo_objCLSID[13]" Type="Str">{3D87B4A7-3516-4400-9E13-6F355BC0D3BC}</Property>
-				<Property Name="Exe_actXinfo_objCLSID[2]" Type="Str">{97EA0B8F-3AAD-491B-8654-A98F8D0BA7E1}</Property>
-				<Property Name="Exe_actXinfo_objCLSID[3]" Type="Str">{F623B656-B19A-45D2-A1BB-91CFB7B67424}</Property>
-				<Property Name="Exe_actXinfo_objCLSID[4]" Type="Str">{294A2182-9C21-47DA-8816-07921150F740}</Property>
-				<Property Name="Exe_actXinfo_objCLSID[5]" Type="Str">{D911470F-1FB8-4451-9066-EC00106F601E}</Property>
-				<Property Name="Exe_actXinfo_objCLSID[6]" Type="Str">{EEC5E769-BBA2-43E9-BB2F-E08C7D41E9FA}</Property>
-				<Property Name="Exe_actXinfo_objCLSID[7]" Type="Str">{47603E52-0435-4058-B0BC-D4BE1F792D51}</Property>
-				<Property Name="Exe_actXinfo_objCLSID[8]" Type="Str">{1D8A3A44-8B68-4ECE-AB0B-CC367C5D91DD}</Property>
-				<Property Name="Exe_actXinfo_objCLSID[9]" Type="Str">{FCD238E8-190E-4108-8369-F4586DB4E027}</Property>
+				<Property Name="Exe_actXinfo_objCLSID[0]" Type="Str">{941A5942-909C-4884-9400-147502B35C91}</Property>
+				<Property Name="Exe_actXinfo_objCLSID[1]" Type="Str">{96548604-96A6-433C-8758-AB3366297C50}</Property>
+				<Property Name="Exe_actXinfo_objCLSID[10]" Type="Str">{203C874E-8BD7-4DC6-AC21-44D610A90DB7}</Property>
+				<Property Name="Exe_actXinfo_objCLSID[11]" Type="Str">{9EFF3A13-E2B9-43A9-8FC2-6CD05E3A6D72}</Property>
+				<Property Name="Exe_actXinfo_objCLSID[12]" Type="Str">{65FCC7E9-77A7-4463-8134-AB1197CA23BC}</Property>
+				<Property Name="Exe_actXinfo_objCLSID[13]" Type="Str">{9B4468AF-28E4-4D94-92D2-826C5C7F802D}</Property>
+				<Property Name="Exe_actXinfo_objCLSID[2]" Type="Str">{4EFCEA72-0D39-4E64-92EF-A8A8BD74FE8F}</Property>
+				<Property Name="Exe_actXinfo_objCLSID[3]" Type="Str">{BD91343E-BBFA-4DD1-87FF-A77C585F0456}</Property>
+				<Property Name="Exe_actXinfo_objCLSID[4]" Type="Str">{D3801071-7BBD-4F9F-A0AE-F2A54CB3459D}</Property>
+				<Property Name="Exe_actXinfo_objCLSID[5]" Type="Str">{F701BBB2-BF2D-48FE-A698-0CFF6854F5CC}</Property>
+				<Property Name="Exe_actXinfo_objCLSID[6]" Type="Str">{BC45FF57-2FA9-47B9-91E8-0DFE119F04C2}</Property>
+				<Property Name="Exe_actXinfo_objCLSID[7]" Type="Str">{1B767258-E735-4826-9FAC-C0287908DE15}</Property>
+				<Property Name="Exe_actXinfo_objCLSID[8]" Type="Str">{B89A4F48-7043-471A-82C5-4D328C27B6F5}</Property>
+				<Property Name="Exe_actXinfo_objCLSID[9]" Type="Str">{34078862-1F61-4B14-9E0A-B033C278B2DB}</Property>
 				<Property Name="Exe_actXinfo_objCLSIDsCount" Type="Int">14</Property>
 				<Property Name="Exe_actXinfo_progIDPrefix" Type="Str">IPMC</Property>
 				<Property Name="Exe_actXServerName" Type="Str">IPMC</Property>
 				<Property Name="Exe_actXServerNameGUID" Type="Str">{6E0AB8FC-F1E0-4EAE-BCAD-4D0B2D8A905B}</Property>
 				<Property Name="Exe_iconItemID" Type="Ref">/我的电脑/other/NUAA圆角.ico</Property>
-				<Property Name="Source[0].itemID" Type="Str">{2DA2DA2A-491A-490D-B74A-398E3E01E33C}</Property>
+				<Property Name="Source[0].itemID" Type="Str">{510867DD-FF37-4F38-87D2-ED2E1542E0B8}</Property>
 				<Property Name="Source[0].type" Type="Str">Container</Property>
 				<Property Name="Source[1].destinationIndex" Type="Int">0</Property>
 				<Property Name="Source[1].itemID" Type="Ref">/我的电脑/main.vi</Property>
@@ -316,59 +321,55 @@
 				<Property Name="Destination[0].tag" Type="Str">{BAAA530A-532E-4D52-86A1-7A340E9FD0F2}</Property>
 				<Property Name="Destination[0].type" Type="Str">userFolder</Property>
 				<Property Name="DestinationCount" Type="Int">1</Property>
-				<Property Name="DistPart[0].flavorID" Type="Str">_full_</Property>
-				<Property Name="DistPart[0].productID" Type="Str">{5270CDA8-6512-4F0E-8BAE-1CE3ECC2FDFD}</Property>
-				<Property Name="DistPart[0].productName" Type="Str">NI-Serial运行引擎 17.5</Property>
-				<Property Name="DistPart[0].upgradeCode" Type="Str">{01D82F43-B48D-46FF-8601-FC4FAAE20F41}</Property>
-				<Property Name="DistPart[1].flavorID" Type="Str">_deployment_</Property>
-				<Property Name="DistPart[1].productID" Type="Str">{A0A2CF10-0C02-41DF-AC3F-1EBA24038C19}</Property>
-				<Property Name="DistPart[1].productName" Type="Str">NI-VISA运行引擎 18.0</Property>
-				<Property Name="DistPart[1].upgradeCode" Type="Str">{8627993A-3F66-483C-A562-0D3BA3F267B1}</Property>
-				<Property Name="DistPart[2].flavorID" Type="Str">DefaultFull</Property>
-				<Property Name="DistPart[2].productID" Type="Str">{1A304EEE-52F4-4217-A14E-A1B409FA933E}</Property>
-				<Property Name="DistPart[2].productName" Type="Str">NI LabVIEW运行引擎 2018 f2</Property>
-				<Property Name="DistPart[2].SoftDep[0].exclude" Type="Bool">false</Property>
-				<Property Name="DistPart[2].SoftDep[0].productName" Type="Str">NI LabVIEW运行引擎 2018非英语语言支持</Property>
-				<Property Name="DistPart[2].SoftDep[0].upgradeCode" Type="Str">{3C68D03D-EF38-41B5-9977-E27520759DD6}</Property>
-				<Property Name="DistPart[2].SoftDep[1].exclude" Type="Bool">false</Property>
-				<Property Name="DistPart[2].SoftDep[1].productName" Type="Str">NI ActiveX容器</Property>
-				<Property Name="DistPart[2].SoftDep[1].upgradeCode" Type="Str">{1038A887-23E1-4289-B0BD-0C4B83C6BA21}</Property>
-				<Property Name="DistPart[2].SoftDep[10].exclude" Type="Bool">false</Property>
-				<Property Name="DistPart[2].SoftDep[10].productName" Type="Str">NI mDNS Responder 17.0</Property>
-				<Property Name="DistPart[2].SoftDep[10].upgradeCode" Type="Str">{9607874B-4BB3-42CB-B450-A2F5EF60BA3B}</Property>
-				<Property Name="DistPart[2].SoftDep[11].exclude" Type="Bool">false</Property>
-				<Property Name="DistPart[2].SoftDep[11].productName" Type="Str">NI Deployment Framework 2018</Property>
-				<Property Name="DistPart[2].SoftDep[11].upgradeCode" Type="Str">{838942E4-B73C-492E-81A3-AA1E291FD0DC}</Property>
-				<Property Name="DistPart[2].SoftDep[12].exclude" Type="Bool">false</Property>
-				<Property Name="DistPart[2].SoftDep[12].productName" Type="Str">NI错误报告 2018</Property>
-				<Property Name="DistPart[2].SoftDep[12].upgradeCode" Type="Str">{42E818C6-2B08-4DE7-BD91-B0FD704C119A}</Property>
-				<Property Name="DistPart[2].SoftDep[2].exclude" Type="Bool">false</Property>
-				<Property Name="DistPart[2].SoftDep[2].productName" Type="Str">数学核心库 2017</Property>
-				<Property Name="DistPart[2].SoftDep[2].upgradeCode" Type="Str">{699C1AC5-2CF2-4745-9674-B19536EBA8A3}</Property>
-				<Property Name="DistPart[2].SoftDep[3].exclude" Type="Bool">false</Property>
-				<Property Name="DistPart[2].SoftDep[3].productName" Type="Str">数学核心库 2018</Property>
-				<Property Name="DistPart[2].SoftDep[3].upgradeCode" Type="Str">{33A780B9-8BDE-4A3A-9672-24778EFBEFC4}</Property>
-				<Property Name="DistPart[2].SoftDep[4].exclude" Type="Bool">false</Property>
-				<Property Name="DistPart[2].SoftDep[4].productName" Type="Str">NI Logos 18.0</Property>
-				<Property Name="DistPart[2].SoftDep[4].upgradeCode" Type="Str">{5E4A4CE3-4D06-11D4-8B22-006008C16337}</Property>
-				<Property Name="DistPart[2].SoftDep[5].exclude" Type="Bool">false</Property>
-				<Property Name="DistPart[2].SoftDep[5].productName" Type="Str">NI TDM Streaming 18.0</Property>
-				<Property Name="DistPart[2].SoftDep[5].upgradeCode" Type="Str">{4CD11BE6-6BB7-4082-8A27-C13771BC309B}</Property>
-				<Property Name="DistPart[2].SoftDep[6].exclude" Type="Bool">false</Property>
-				<Property Name="DistPart[2].SoftDep[6].productName" Type="Str">NI LabVIEW Web服务器 2018</Property>
-				<Property Name="DistPart[2].SoftDep[6].upgradeCode" Type="Str">{0960380B-EA86-4E0C-8B57-14CD8CCF2C15}</Property>
-				<Property Name="DistPart[2].SoftDep[7].exclude" Type="Bool">false</Property>
-				<Property Name="DistPart[2].SoftDep[7].productName" Type="Str">NI LabVIEW Real-Time NBFifo 2018</Property>
-				<Property Name="DistPart[2].SoftDep[7].upgradeCode" Type="Str">{EF4708F6-5A34-4DBA-B12B-79CC2004E20B}</Property>
-				<Property Name="DistPart[2].SoftDep[8].exclude" Type="Bool">false</Property>
-				<Property Name="DistPart[2].SoftDep[8].productName" Type="Str">NI VC2010MSMs</Property>
-				<Property Name="DistPart[2].SoftDep[8].upgradeCode" Type="Str">{EFBA6F9E-F934-4BD7-AC51-60CCA480489C}</Property>
-				<Property Name="DistPart[2].SoftDep[9].exclude" Type="Bool">false</Property>
-				<Property Name="DistPart[2].SoftDep[9].productName" Type="Str">NI VC2015 Runtime</Property>
-				<Property Name="DistPart[2].SoftDep[9].upgradeCode" Type="Str">{D42E7BAE-6589-4570-B6A3-3E28889392E7}</Property>
-				<Property Name="DistPart[2].SoftDepCount" Type="Int">13</Property>
-				<Property Name="DistPart[2].upgradeCode" Type="Str">{3B195EBF-4A09-46E6-8EAD-931568C1344C}</Property>
-				<Property Name="DistPartCount" Type="Int">3</Property>
+				<Property Name="DistPart[0].flavorID" Type="Str">_deployment_</Property>
+				<Property Name="DistPart[0].productID" Type="Str">{74AAFC3E-50DD-40A4-9DD7-155E87481F63}</Property>
+				<Property Name="DistPart[0].productName" Type="Str">NI-VISA运行引擎 17.5</Property>
+				<Property Name="DistPart[0].upgradeCode" Type="Str">{8627993A-3F66-483C-A562-0D3BA3F267B1}</Property>
+				<Property Name="DistPart[1].flavorID" Type="Str">DefaultFull</Property>
+				<Property Name="DistPart[1].productID" Type="Str">{DA546982-6C74-4630-BC46-B7B8CB4D6A6F}</Property>
+				<Property Name="DistPart[1].productName" Type="Str">NI LabVIEW运行引擎 2017 SP1 f1</Property>
+				<Property Name="DistPart[1].SoftDep[0].exclude" Type="Bool">false</Property>
+				<Property Name="DistPart[1].SoftDep[0].productName" Type="Str">NI LabVIEW运行引擎 2017 SP1非英语语言支持</Property>
+				<Property Name="DistPart[1].SoftDep[0].upgradeCode" Type="Str">{182AE811-85B6-4238-B67E-F19497CC186B}</Property>
+				<Property Name="DistPart[1].SoftDep[1].exclude" Type="Bool">false</Property>
+				<Property Name="DistPart[1].SoftDep[1].productName" Type="Str">NI ActiveX容器</Property>
+				<Property Name="DistPart[1].SoftDep[1].upgradeCode" Type="Str">{1038A887-23E1-4289-B0BD-0C4B83C6BA21}</Property>
+				<Property Name="DistPart[1].SoftDep[10].exclude" Type="Bool">false</Property>
+				<Property Name="DistPart[1].SoftDep[10].productName" Type="Str">NI mDNS Responder 17.0</Property>
+				<Property Name="DistPart[1].SoftDep[10].upgradeCode" Type="Str">{9607874B-4BB3-42CB-B450-A2F5EF60BA3B}</Property>
+				<Property Name="DistPart[1].SoftDep[11].exclude" Type="Bool">false</Property>
+				<Property Name="DistPart[1].SoftDep[11].productName" Type="Str">NI Deployment Framework 2018</Property>
+				<Property Name="DistPart[1].SoftDep[11].upgradeCode" Type="Str">{838942E4-B73C-492E-81A3-AA1E291FD0DC}</Property>
+				<Property Name="DistPart[1].SoftDep[12].exclude" Type="Bool">false</Property>
+				<Property Name="DistPart[1].SoftDep[12].productName" Type="Str">NI错误报告 2018</Property>
+				<Property Name="DistPart[1].SoftDep[12].upgradeCode" Type="Str">{42E818C6-2B08-4DE7-BD91-B0FD704C119A}</Property>
+				<Property Name="DistPart[1].SoftDep[2].exclude" Type="Bool">false</Property>
+				<Property Name="DistPart[1].SoftDep[2].productName" Type="Str">数学核心库</Property>
+				<Property Name="DistPart[1].SoftDep[2].upgradeCode" Type="Str">{699C1AC5-2CF2-4745-9674-B19536EBA8A3}</Property>
+				<Property Name="DistPart[1].SoftDep[3].exclude" Type="Bool">false</Property>
+				<Property Name="DistPart[1].SoftDep[3].productName" Type="Str">NI Logos 18.0</Property>
+				<Property Name="DistPart[1].SoftDep[3].upgradeCode" Type="Str">{5E4A4CE3-4D06-11D4-8B22-006008C16337}</Property>
+				<Property Name="DistPart[1].SoftDep[4].exclude" Type="Bool">false</Property>
+				<Property Name="DistPart[1].SoftDep[4].productName" Type="Str">NI TDM Streaming 18.0</Property>
+				<Property Name="DistPart[1].SoftDep[4].upgradeCode" Type="Str">{4CD11BE6-6BB7-4082-8A27-C13771BC309B}</Property>
+				<Property Name="DistPart[1].SoftDep[5].exclude" Type="Bool">false</Property>
+				<Property Name="DistPart[1].SoftDep[5].productName" Type="Str">NI LabVIEW Web服务器 2017</Property>
+				<Property Name="DistPart[1].SoftDep[5].upgradeCode" Type="Str">{0960380B-EA86-4E0C-8B57-14CD8CCF2C15}</Property>
+				<Property Name="DistPart[1].SoftDep[6].exclude" Type="Bool">false</Property>
+				<Property Name="DistPart[1].SoftDep[6].productName" Type="Str">NI LabVIEW Real-Time NBFifo 2017</Property>
+				<Property Name="DistPart[1].SoftDep[6].upgradeCode" Type="Str">{4F261250-2C38-488D-A9EC-9D1EFCC24D4B}</Property>
+				<Property Name="DistPart[1].SoftDep[7].exclude" Type="Bool">false</Property>
+				<Property Name="DistPart[1].SoftDep[7].productName" Type="Str">NI VC2008MSMs</Property>
+				<Property Name="DistPart[1].SoftDep[7].upgradeCode" Type="Str">{FDA3F8BB-BAA9-45D7-8DC7-22E1F5C76315}</Property>
+				<Property Name="DistPart[1].SoftDep[8].exclude" Type="Bool">false</Property>
+				<Property Name="DistPart[1].SoftDep[8].productName" Type="Str">NI VC2010MSMs</Property>
+				<Property Name="DistPart[1].SoftDep[8].upgradeCode" Type="Str">{EFBA6F9E-F934-4BD7-AC51-60CCA480489C}</Property>
+				<Property Name="DistPart[1].SoftDep[9].exclude" Type="Bool">false</Property>
+				<Property Name="DistPart[1].SoftDep[9].productName" Type="Str">NI VC2015 Runtime</Property>
+				<Property Name="DistPart[1].SoftDep[9].upgradeCode" Type="Str">{D42E7BAE-6589-4570-B6A3-3E28889392E7}</Property>
+				<Property Name="DistPart[1].SoftDepCount" Type="Int">13</Property>
+				<Property Name="DistPart[1].upgradeCode" Type="Str">{620DBAE1-B159-4204-8186-0813C8A6434C}</Property>
+				<Property Name="DistPartCount" Type="Int">2</Property>
 				<Property Name="INST_autoIncrement" Type="Bool">true</Property>
 				<Property Name="INST_buildLocation" Type="Path">../builds/IPMC-Platform/IPMC-Platform-Install</Property>
 				<Property Name="INST_buildLocation.type" Type="Str">relativeToCommon</Property>
@@ -376,18 +377,17 @@
 				<Property Name="INST_defaultDir" Type="Str">{BAAA530A-532E-4D52-86A1-7A340E9FD0F2}</Property>
 				<Property Name="INST_language" Type="Int">2052</Property>
 				<Property Name="INST_productName" Type="Str">IPMC-Platform</Property>
-				<Property Name="INST_productVersion" Type="Str">1.0.46</Property>
-				<Property Name="INST_requireLVDevSys" Type="Bool">true</Property>
+				<Property Name="INST_productVersion" Type="Str">1.0.57</Property>
 				<Property Name="InstSpecBitness" Type="Str">32-bit</Property>
-				<Property Name="InstSpecVersion" Type="Str">18008011</Property>
-				<Property Name="MSI_arpCompany" Type="Str">NUAA</Property>
+				<Property Name="InstSpecVersion" Type="Str">17008011</Property>
+				<Property Name="MSI_arpCompany" Type="Str">NUAA IBSS</Property>
 				<Property Name="MSI_autoselectDrivers" Type="Bool">true</Property>
 				<Property Name="MSI_distID" Type="Str">{3DFD03DB-F3DC-4BBB-8E97-B3AA8FABD93B}</Property>
 				<Property Name="MSI_hideNonRuntimes" Type="Bool">true</Property>
 				<Property Name="MSI_licenseID" Type="Ref">/我的电脑/description.rtf</Property>
 				<Property Name="MSI_osCheck" Type="Int">0</Property>
 				<Property Name="MSI_upgradeCode" Type="Str">{58DE01B1-85E2-4587-8731-826340020405}</Property>
-				<Property Name="MSI_windowMessage" Type="Str">1、IPMC.exe  为主体程序，可以单独运行
+				<Property Name="MSI_windowMessage" Type="Str">1、IPMC.exe  为主体程序，安装好运行环境后可以单独运行
 2、launch.exe  为更新检测程序，完成IPMC.exe的自动更新
 3、GitHub连接太慢时不建议运行launch.exe</Property>
 				<Property Name="MSI_windowTitle" Type="Str">IPMC-Platform</Property>
@@ -421,6 +421,134 @@
 				<Property Name="Source[2].type" Type="Str">EXE</Property>
 				<Property Name="Source[3].dest" Type="Str">{BAAA530A-532E-4D52-86A1-7A340E9FD0F2}</Property>
 				<Property Name="Source[3].name" Type="Str">CH341SER.EXE</Property>
+				<Property Name="Source[3].runEXE" Type="Bool">true</Property>
+				<Property Name="Source[3].tag" Type="Ref">/我的电脑/other/CH341SER.EXE</Property>
+				<Property Name="Source[3].type" Type="Str">File</Property>
+				<Property Name="Source[4].dest" Type="Str">{BAAA530A-532E-4D52-86A1-7A340E9FD0F2}</Property>
+				<Property Name="Source[4].File[0].dest" Type="Str">{BAAA530A-532E-4D52-86A1-7A340E9FD0F2}</Property>
+				<Property Name="Source[4].File[0].name" Type="Str">launch.exe</Property>
+				<Property Name="Source[4].File[0].tag" Type="Str">{2C86AE60-F264-48A1-BB6F-718E2296279C}</Property>
+				<Property Name="Source[4].name" Type="Str">NUAA圆角.ico</Property>
+				<Property Name="Source[4].tag" Type="Ref">/我的电脑/other/NUAA圆角.ico</Property>
+				<Property Name="Source[4].type" Type="Str">File</Property>
+				<Property Name="Source[5].dest" Type="Str">{BAAA530A-532E-4D52-86A1-7A340E9FD0F2}</Property>
+				<Property Name="Source[5].name" Type="Str">version.ini</Property>
+				<Property Name="Source[5].tag" Type="Ref">/我的电脑/version.ini</Property>
+				<Property Name="Source[5].type" Type="Str">File</Property>
+				<Property Name="Source[6].dest" Type="Str">{BAAA530A-532E-4D52-86A1-7A340E9FD0F2}</Property>
+				<Property Name="Source[6].name" Type="Str">download.exe</Property>
+				<Property Name="Source[6].tag" Type="Ref">/我的电脑/other/download.exe</Property>
+				<Property Name="Source[6].type" Type="Str">File</Property>
+				<Property Name="SourceCount" Type="Int">7</Property>
+			</Item>
+			<Item Name="IPMC-Platform-Install-simple" Type="Installer">
+				<Property Name="AB_Class_Path" Type="Path">/D/National Instruments/LabVIEW 2017/vi.lib/AppBuilder/IB_Classes/MSI/IB_MSI.lvclass</Property>
+				<Property Name="AB_UIClass_Path" Type="Path">/D/National Instruments/LabVIEW 2017/vi.lib/AppBuilder/IB_Classes/Installer/UI/AB_UI_Frmwk_Installer.lvclass</Property>
+				<Property Name="Destination[0].name" Type="Str">IPMC-Platform</Property>
+				<Property Name="Destination[0].parent" Type="Str">{3912416A-D2E5-411B-AFEE-B63654D690C0}</Property>
+				<Property Name="Destination[0].tag" Type="Str">{BAAA530A-532E-4D52-86A1-7A340E9FD0F2}</Property>
+				<Property Name="Destination[0].type" Type="Str">userFolder</Property>
+				<Property Name="DestinationCount" Type="Int">1</Property>
+				<Property Name="DistPart[0].flavorID" Type="Str">_deployment_</Property>
+				<Property Name="DistPart[0].productID" Type="Str">{74AAFC3E-50DD-40A4-9DD7-155E87481F63}</Property>
+				<Property Name="DistPart[0].productName" Type="Str">NI-VISA运行引擎 17.5</Property>
+				<Property Name="DistPart[0].upgradeCode" Type="Str">{8627993A-3F66-483C-A562-0D3BA3F267B1}</Property>
+				<Property Name="DistPart[1].flavorID" Type="Str">DefaultFull</Property>
+				<Property Name="DistPart[1].productID" Type="Str">{DA546982-6C74-4630-BC46-B7B8CB4D6A6F}</Property>
+				<Property Name="DistPart[1].productName" Type="Str">NI LabVIEW运行引擎 2017 SP1 f1</Property>
+				<Property Name="DistPart[1].SoftDep[0].exclude" Type="Bool">false</Property>
+				<Property Name="DistPart[1].SoftDep[0].productName" Type="Str">NI LabVIEW运行引擎 2017 SP1非英语语言支持</Property>
+				<Property Name="DistPart[1].SoftDep[0].upgradeCode" Type="Str">{182AE811-85B6-4238-B67E-F19497CC186B}</Property>
+				<Property Name="DistPart[1].SoftDep[1].exclude" Type="Bool">false</Property>
+				<Property Name="DistPart[1].SoftDep[1].productName" Type="Str">NI ActiveX容器</Property>
+				<Property Name="DistPart[1].SoftDep[1].upgradeCode" Type="Str">{1038A887-23E1-4289-B0BD-0C4B83C6BA21}</Property>
+				<Property Name="DistPart[1].SoftDep[10].exclude" Type="Bool">false</Property>
+				<Property Name="DistPart[1].SoftDep[10].productName" Type="Str">NI mDNS Responder 17.0</Property>
+				<Property Name="DistPart[1].SoftDep[10].upgradeCode" Type="Str">{9607874B-4BB3-42CB-B450-A2F5EF60BA3B}</Property>
+				<Property Name="DistPart[1].SoftDep[11].exclude" Type="Bool">false</Property>
+				<Property Name="DistPart[1].SoftDep[11].productName" Type="Str">NI Deployment Framework 2018</Property>
+				<Property Name="DistPart[1].SoftDep[11].upgradeCode" Type="Str">{838942E4-B73C-492E-81A3-AA1E291FD0DC}</Property>
+				<Property Name="DistPart[1].SoftDep[12].exclude" Type="Bool">false</Property>
+				<Property Name="DistPart[1].SoftDep[12].productName" Type="Str">NI错误报告 2018</Property>
+				<Property Name="DistPart[1].SoftDep[12].upgradeCode" Type="Str">{42E818C6-2B08-4DE7-BD91-B0FD704C119A}</Property>
+				<Property Name="DistPart[1].SoftDep[2].exclude" Type="Bool">false</Property>
+				<Property Name="DistPart[1].SoftDep[2].productName" Type="Str">数学核心库</Property>
+				<Property Name="DistPart[1].SoftDep[2].upgradeCode" Type="Str">{699C1AC5-2CF2-4745-9674-B19536EBA8A3}</Property>
+				<Property Name="DistPart[1].SoftDep[3].exclude" Type="Bool">false</Property>
+				<Property Name="DistPart[1].SoftDep[3].productName" Type="Str">NI Logos 18.0</Property>
+				<Property Name="DistPart[1].SoftDep[3].upgradeCode" Type="Str">{5E4A4CE3-4D06-11D4-8B22-006008C16337}</Property>
+				<Property Name="DistPart[1].SoftDep[4].exclude" Type="Bool">false</Property>
+				<Property Name="DistPart[1].SoftDep[4].productName" Type="Str">NI TDM Streaming 18.0</Property>
+				<Property Name="DistPart[1].SoftDep[4].upgradeCode" Type="Str">{4CD11BE6-6BB7-4082-8A27-C13771BC309B}</Property>
+				<Property Name="DistPart[1].SoftDep[5].exclude" Type="Bool">false</Property>
+				<Property Name="DistPart[1].SoftDep[5].productName" Type="Str">NI LabVIEW Web服务器 2017</Property>
+				<Property Name="DistPart[1].SoftDep[5].upgradeCode" Type="Str">{0960380B-EA86-4E0C-8B57-14CD8CCF2C15}</Property>
+				<Property Name="DistPart[1].SoftDep[6].exclude" Type="Bool">false</Property>
+				<Property Name="DistPart[1].SoftDep[6].productName" Type="Str">NI LabVIEW Real-Time NBFifo 2017</Property>
+				<Property Name="DistPart[1].SoftDep[6].upgradeCode" Type="Str">{4F261250-2C38-488D-A9EC-9D1EFCC24D4B}</Property>
+				<Property Name="DistPart[1].SoftDep[7].exclude" Type="Bool">false</Property>
+				<Property Name="DistPart[1].SoftDep[7].productName" Type="Str">NI VC2008MSMs</Property>
+				<Property Name="DistPart[1].SoftDep[7].upgradeCode" Type="Str">{FDA3F8BB-BAA9-45D7-8DC7-22E1F5C76315}</Property>
+				<Property Name="DistPart[1].SoftDep[8].exclude" Type="Bool">false</Property>
+				<Property Name="DistPart[1].SoftDep[8].productName" Type="Str">NI VC2010MSMs</Property>
+				<Property Name="DistPart[1].SoftDep[8].upgradeCode" Type="Str">{EFBA6F9E-F934-4BD7-AC51-60CCA480489C}</Property>
+				<Property Name="DistPart[1].SoftDep[9].exclude" Type="Bool">false</Property>
+				<Property Name="DistPart[1].SoftDep[9].productName" Type="Str">NI VC2015 Runtime</Property>
+				<Property Name="DistPart[1].SoftDep[9].upgradeCode" Type="Str">{D42E7BAE-6589-4570-B6A3-3E28889392E7}</Property>
+				<Property Name="DistPart[1].SoftDepCount" Type="Int">13</Property>
+				<Property Name="DistPart[1].upgradeCode" Type="Str">{620DBAE1-B159-4204-8186-0813C8A6434C}</Property>
+				<Property Name="DistPartCount" Type="Int">2</Property>
+				<Property Name="INST_autoIncrement" Type="Bool">true</Property>
+				<Property Name="INST_buildLocation" Type="Path">../builds/IPMC-Platform/IPMC-Platform-Install-simple</Property>
+				<Property Name="INST_buildLocation.type" Type="Str">relativeToCommon</Property>
+				<Property Name="INST_buildSpecName" Type="Str">IPMC-Platform-Install-simple</Property>
+				<Property Name="INST_defaultDir" Type="Str">{BAAA530A-532E-4D52-86A1-7A340E9FD0F2}</Property>
+				<Property Name="INST_language" Type="Int">2052</Property>
+				<Property Name="INST_productName" Type="Str">IPMC-Platform</Property>
+				<Property Name="INST_productVersion" Type="Str">1.0.57</Property>
+				<Property Name="InstSpecBitness" Type="Str">32-bit</Property>
+				<Property Name="InstSpecVersion" Type="Str">17008011</Property>
+				<Property Name="MSI_arpCompany" Type="Str">NUAA IBSS</Property>
+				<Property Name="MSI_distID" Type="Str">{0053CC14-934C-4832-9F01-8E8CFB9D8F69}</Property>
+				<Property Name="MSI_hideNonRuntimes" Type="Bool">true</Property>
+				<Property Name="MSI_licenseID" Type="Ref">/我的电脑/description.rtf</Property>
+				<Property Name="MSI_osCheck" Type="Int">0</Property>
+				<Property Name="MSI_upgradeCode" Type="Str">{CB524A89-12A7-40DE-9D65-D4F24B8CFF74}</Property>
+				<Property Name="MSI_windowMessage" Type="Str">1、IPMC.exe  为主体程序，安装好运行环境后可以单独运行
+2、launch.exe  为更新检测程序，完成IPMC.exe的自动更新
+3、GitHub连接太慢时不建议运行launch.exe</Property>
+				<Property Name="MSI_windowTitle" Type="Str">IPMC-Platform</Property>
+				<Property Name="RegDest[0].dirName" Type="Str">Software</Property>
+				<Property Name="RegDest[0].dirTag" Type="Str">{DDFAFC8B-E728-4AC8-96DE-B920EBB97A86}</Property>
+				<Property Name="RegDest[0].parentTag" Type="Str">2</Property>
+				<Property Name="RegDestCount" Type="Int">1</Property>
+				<Property Name="Source[0].dest" Type="Str">{BAAA530A-532E-4D52-86A1-7A340E9FD0F2}</Property>
+				<Property Name="Source[0].File[0].dest" Type="Str">{BAAA530A-532E-4D52-86A1-7A340E9FD0F2}</Property>
+				<Property Name="Source[0].File[0].name" Type="Str">IPMC.exe</Property>
+				<Property Name="Source[0].File[0].tag" Type="Str">{73F965B0-56CD-4AB9-A0FB-D2E9DD2086B4}</Property>
+				<Property Name="Source[0].FileCount" Type="Int">1</Property>
+				<Property Name="Source[0].name" Type="Str">IPMC</Property>
+				<Property Name="Source[0].tag" Type="Ref">/我的电脑/程序生成规范/IPMC</Property>
+				<Property Name="Source[0].type" Type="Str">EXE</Property>
+				<Property Name="Source[1].dest" Type="Str">{BAAA530A-532E-4D52-86A1-7A340E9FD0F2}</Property>
+				<Property Name="Source[1].name" Type="Str">protocol.xlsx</Property>
+				<Property Name="Source[1].tag" Type="Ref">/我的电脑/protocol.xlsx</Property>
+				<Property Name="Source[1].type" Type="Str">File</Property>
+				<Property Name="Source[2].dest" Type="Str">{BAAA530A-532E-4D52-86A1-7A340E9FD0F2}</Property>
+				<Property Name="Source[2].File[0].dest" Type="Str">{BAAA530A-532E-4D52-86A1-7A340E9FD0F2}</Property>
+				<Property Name="Source[2].File[0].name" Type="Str">launch.exe</Property>
+				<Property Name="Source[2].File[0].Shortcut[0].destIndex" Type="Int">1</Property>
+				<Property Name="Source[2].File[0].Shortcut[0].name" Type="Str">IPMC-Platform</Property>
+				<Property Name="Source[2].File[0].Shortcut[0].subDir" Type="Str"></Property>
+				<Property Name="Source[2].File[0].ShortcutCount" Type="Int">1</Property>
+				<Property Name="Source[2].File[0].tag" Type="Str">{2C86AE60-F264-48A1-BB6F-718E2296279C}</Property>
+				<Property Name="Source[2].FileCount" Type="Int">1</Property>
+				<Property Name="Source[2].name" Type="Str">launch</Property>
+				<Property Name="Source[2].tag" Type="Ref">/我的电脑/程序生成规范/launch</Property>
+				<Property Name="Source[2].type" Type="Str">EXE</Property>
+				<Property Name="Source[3].dest" Type="Str">{BAAA530A-532E-4D52-86A1-7A340E9FD0F2}</Property>
+				<Property Name="Source[3].name" Type="Str">CH341SER.EXE</Property>
+				<Property Name="Source[3].runEXE" Type="Bool">true</Property>
 				<Property Name="Source[3].tag" Type="Ref">/我的电脑/other/CH341SER.EXE</Property>
 				<Property Name="Source[3].type" Type="Str">File</Property>
 				<Property Name="Source[4].dest" Type="Str">{BAAA530A-532E-4D52-86A1-7A340E9FD0F2}</Property>
