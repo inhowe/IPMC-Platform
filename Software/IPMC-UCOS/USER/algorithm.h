@@ -3,7 +3,23 @@
 
 #include "includes.h"
 
+typedef enum CtrlObj_s{
+    LASER=0,
+    POWER,
+    CURRENT,
+    FORCE
+}CtrlObj_t;
+
+typedef enum CtrlType_s{
+    TYPE_PID=0,
+    TYPE_BANG,
+    TYPE_SERIAL_PID,
+    TYPE_UNKNOWN=0xff
+}CtrlType_t;
+
 typedef struct PID_s{
+    CtrlObj_t ObjType;//被控对象
+    double CurrntPoint;
     double SetPoint;
     double KP;//P系数
     double KI;//I系数
@@ -15,6 +31,7 @@ typedef struct PID_s{
 
 typedef struct Bang_s{
     double SetPoint;
+    CtrlObj_t ObjType;
     double Bind;//死区
     double HV;//高电压
     double LV;//低电压
@@ -22,9 +39,9 @@ typedef struct Bang_s{
 }Bang_t;
 
 extern INT32S   RefV[4];
-extern PID_t    algPID;
+extern PID_t    algPID,algOuterPID;
 extern Bang_t   algBang;
-
+extern CtrlType_t CtrlType;
 void Carlib(void);
 void myftoa(double data,char str[]);
 bool BangBangController(Bang_t* Ctrl);

@@ -3,6 +3,10 @@
 版本索取API：https://api.github.com/repos/drinow/IPMC-Platform/releases/latest
 
 ## 更新日志
+- 20190316更新
+    - 新增PID等控制功能
+    - 界面降级并优化
+    - 细节修复
 - 20190305更新
     - 新增PID控制、BangBang控制功能及界面
     - BUG修复

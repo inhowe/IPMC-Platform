@@ -101,6 +101,7 @@ void Laser_Task(void* pdata)
             LaserBAKMessure(COM2Buff);
             OS_EXIT_CRITICAL();
             ClrBit(ErrCode,LASERErrBIT);
+            Laser_mm = LaserOffset;
             time = 5;
         }
         else
@@ -137,19 +138,24 @@ void DBG_Task(void* pdata)
             memset(SendBuff,0,sizeof(SendBuff));
             
             tmp = (ADS_Buff[0]-RefV[0])*0.00004097277; // 00006744402706230 0.00004097277=0.0001875/457.62100/0.01
+            Current_mA=tmp*1000;
             myftoa(tmp,array);//0.0001875 = 1/32768.0*6.144
             if(tmp>0.3||tmp<-0.3) SetBit(ErrCode,OverCurrentBIT);//过流检测 安培
             else ClrBit(ErrCode,OverCurrentBIT);
     //        printf("C:%sA ",array);
             strcat(SendBuff,"C:");strcat(SendBuff,array);strcat(SendBuff,"A ");
 
-            myftoa((ADS_Buff[1]-RefV[1])/32768.0*6.144*2,array);//0.000375 = 1/32768.0*6.144*2
+            tmp = (ADS_Buff[1]-RefV[1])*0.000375;
+            Power_mW = tmp * Current_mA; //mV*mA!=mW
+            myftoa(tmp,array);//0.000375 = 1/32768.0*6.144*2
             if(ADS_Buff[1]>24000||ADS_Buff[1]<2666) SetBit(ErrCode,OverValtageBIT); //ADC绝对值高于4.5V和低于0.5V警告
             else ClrBit(ErrCode,OverValtageBIT);
     //        printf("V:%sV ",array);
             strcat(SendBuff,"V:");strcat(SendBuff,array);strcat(SendBuff,"V ");
             
-            myftoa((ADS_Buff[2]-RefV[2])*0.00004001667,array);//0.00004001667=0.0001875*0.3*0.725925925926*0.98
+            tmp = (ADS_Buff[2]-RefV[2])*0.00004110667;
+            Force_mN = tmp*1000;
+            myftoa(tmp,array);//0.00004001667=0.000375/2*0.3*0.725925925926*0.98
             if(ADS_Buff[2]>24000||ADS_Buff[2]<2666) SetBit(ErrCode,OverForceBIT); //ADC绝对值高于4.5V和低于0.5V警告
             else ClrBit(ErrCode,OverForceBIT);
     //        printf("F:%sN ",array);
@@ -196,7 +202,9 @@ void DBG_Task(void* pdata)
             printf("ErrCode:0x%x (15:C 14:V 13:F 0:L) ",ErrCode);
             printf("CPU:%02d%% ",OSCPUUsage);
             printf("ST:%.2f ",algPID.SetPoint);
-            printf("LS:%.2f ",LaserOffset );
+            printf("CRT:%.2f ",algPID.CurrntPoint );
+            printf("OBJ:%d ",algPID.ObjType );
+            printf("WAY:%d ",CtrlType );
             printf("Err:%.2f ",algPID.Err);
             printf("SumErr:%.2f ",algPID.SumErr);
             printf("dErr:%.2f ",algPID.dErr);
@@ -219,9 +227,16 @@ void DAC_Task(void* pdata)
         if(CTR_Flag==false)
             WaveFunc();
         else if(CARLIB_OK_Flag==true)
-        {
-//            BangBangController(5.0,1.0);
-            PIDController(&algPID);
+        {    
+            switch(CtrlType)
+            {
+                case TYPE_PID:PIDController(&algPID);break;
+                case TYPE_BANG:BangBangController(&algBang);break;
+                case TYPE_SERIAL_PID:break;
+                case TYPE_UNKNOWN:break;
+                default:break;
+            }
+            
         }
         
         if(CTR_Flag==false)

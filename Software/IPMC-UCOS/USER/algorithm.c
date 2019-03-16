@@ -1,8 +1,9 @@
 #include "algorithm.h"
 
 INT32S RefV[4];
-PID_t   algPID ={0};
+PID_t   algPID ={0},algOuterPID={0};
 Bang_t  algBang={0};
+CtrlType_t CtrlType=TYPE_UNKNOWN;
 
 void Carlib(void)
 {
@@ -89,24 +90,35 @@ double PIDController(PID_t* Ctrl)
     #define OUT_UPPERLIM  3.5 //输出信号的上下限
     #define OUT_LOWERLIM -3.5
     
-//    static double KP=0.5;//P系数
-//    static double KI=0.05;//I系数
-//    static double KD=0.01;//D系数
-//    static double LastErr1,LastErr2,SumErr,dErr,Err;//err[k-1],err[k-2],积分，微分，偏差
-//    static double output;
-//    static int8_t direction=0;//方向，综合bangbang控制？
     
     double UpperLim,LowerLim;//位移的控制上下限
     
-    if(ReadBit(ErrCode,LASERErrBIT))//激光传感器失效时停止控制
-        return 0;
-    if(LaserOffset>30||LaserOffset<-30)//错误数据时不予处理，这个很重要，因为程序逻辑没有处理好导致数据可能会变化
-        return 0;
+    if(Ctrl->ObjType==LASER)
+    {
+        Ctrl->CurrntPoint = Laser_mm;
+        if(ReadBit(ErrCode,LASERErrBIT))//激光传感器失效时停止控制
+            return 0;
+        if(LaserOffset>30||LaserOffset<-30)//错误数据时不予处理，这个很重要，因为程序逻辑没有处理好导致数据可能会变化
+            return 0;
+    }
+    else if(Ctrl->ObjType==POWER)
+    {
+         Ctrl->CurrntPoint = Power_mW;
+    }
+    else if(Ctrl->ObjType==CURRENT)
+    {
+        Ctrl->CurrntPoint = Current_mA ;
+    }
+    else if(Ctrl->ObjType==FORCE)
+    {
+        Ctrl->CurrntPoint = Force_mN ;
+    }
+    else return 0;
     
     LowerLim=Ctrl->SetPoint - Ctrl->Bind /2.0;
     UpperLim=Ctrl->SetPoint + Ctrl->Bind /2.0;
     
-    Ctrl->Err=Ctrl->SetPoint-LaserOffset;
+    Ctrl->Err=Ctrl->SetPoint-Ctrl->CurrntPoint;
     if(Ctrl->output>OUT_LOWERLIM&&Ctrl->output<OUT_UPPERLIM)//抗饱和
         Ctrl->SumErr+=Ctrl->Err;
 //    if(LaserOffset>LowerLim&&LaserOffset<UpperLim)SumErr=0;//积分死区，接近目标时关闭积分

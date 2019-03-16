@@ -28,6 +28,9 @@ INT16U BoardID=0x00;
 bool DBG_Flag=false;
 bool CTR_Flag=false;
 bool CARLIB_OK_Flag=false;
+
+double Current_mA,Power_mW,Laser_mm,Force_mN;
+
 int main(void)
 {
 	HAL_Init();                     //≥ı ºªØHALø‚   

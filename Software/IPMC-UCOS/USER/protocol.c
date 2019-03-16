@@ -177,7 +177,7 @@ void Data_anysis(uint8_t* buff,uint8_t* channel)
         {
             Carlib();
         }
-        break;
+    break;
     case 0x56://开关 bit7:控制模式开关 bit6：调试模式开关 bit5：清空波形 Bit4：1-校准 Bit3：1-复位芯片；
         if(buff[0]&0x80)  
         {
@@ -218,10 +218,11 @@ void Data_anysis(uint8_t* buff,uint8_t* channel)
         {
             HAL_NVIC_SystemReset();
         }
-        break;
+    break;
     case 0x57://控制功能
-        if(buff[0]==0x00)//PID
+        if(buff[0]==TYPE_PID)//PID
         {
+            CtrlType = TYPE_PID;
             //不知道为啥直接赋值就硬件错误
             SmallEnd[0]=buff[1];SmallEnd[1]=buff[2];SmallEnd[2]=buff[3];SmallEnd[3]=buff[4];
             algPID.SetPoint=(double)(*((float*)SmallEnd));
@@ -234,9 +235,12 @@ void Data_anysis(uint8_t* buff,uint8_t* channel)
 //            
             SmallEnd[0]=buff[17];SmallEnd[1]=buff[18];SmallEnd[2]=buff[19];SmallEnd[3]=buff[20];
             algPID.KD= (double)(*((float*)SmallEnd));
+            
+            algPID.ObjType=(CtrlObj_t)buff[21];//被控对象
         }
-        else if(buff[0]==0x01)//BangBang
+        else if(buff[0]==TYPE_BANG)//BangBang
         {
+            CtrlType = TYPE_BANG;
             SmallEnd[0]=buff[1];SmallEnd[1]=buff[2];SmallEnd[2]=buff[3];SmallEnd[3]=buff[4];
             algBang.SetPoint= (double)(*((float*)SmallEnd));
             
@@ -248,8 +252,10 @@ void Data_anysis(uint8_t* buff,uint8_t* channel)
      
             SmallEnd[0]=buff[13];SmallEnd[1]=buff[14];SmallEnd[2]=buff[15];SmallEnd[3]=buff[16];
             algBang.LV= (double)(*((float*)SmallEnd));
+            
+            algBang.ObjType=(CtrlObj_t)buff[21];//被控对象
         }
-        break;
+    break;
   }
 }
 
