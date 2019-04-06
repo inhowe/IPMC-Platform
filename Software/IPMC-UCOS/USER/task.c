@@ -13,7 +13,7 @@ __align(8) OS_STK SHT20_TASK_STK[SHT20_STK_SIZE];
 //LED0任务
 void led_task(void *pdata)
 {
-    #define SHORT_DELAY 150
+    #define SHORT_DELAY 120
     //0是亮
     INT8U time=1,i=0;
     while(1)
@@ -102,7 +102,7 @@ void Laser_Task(void* pdata)
             OS_EXIT_CRITICAL();
             ClrBit(ErrCode,LASERErrBIT);
             Laser_mm = LaserOffset;
-            time = 5;
+            time = 3;
         }
         else
         {   //通信失败时暂停发送数据等待传感器恢复

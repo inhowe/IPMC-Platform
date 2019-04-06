@@ -3,6 +3,11 @@
 版本索取API：https://api.github.com/repos/drinow/IPMC-Platform/releases/latest
 
 ## 更新日志
+- 20190406更新
+    - 新增许多说明资料以及TIPS提示框
+    - 修改了更新URL
+    - 新增LICENCE
+    - 其他优化
 - 20190316更新
     - 新增PID等控制功能
     - 界面降级并优化
