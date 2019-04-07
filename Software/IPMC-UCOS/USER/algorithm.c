@@ -7,7 +7,7 @@ CtrlType_t CtrlType=TYPE_UNKNOWN;
 
 void Carlib(void)
 {
-    #define SAMPLES 10
+    #define SAMPLES 20
     OS_CPU_SR cpu_sr=0;
     INT8U i=SAMPLES;
     int D0=0,D1=0,D2=0;

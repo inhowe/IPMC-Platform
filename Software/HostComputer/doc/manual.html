@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+     <!--网页的title-->
+    <title>IPMC测控平台使用手册</title>
+    <!--设置ico图标-->
+    <link rel="shortcut icon" href="../NUAA圆角.ico">
+  	<!--自动刷新
+  	<meta http-equiv="refresh" content="0.5">
+	-->
+	<style type="text/css">
+	a:visited{color: blue}
+	a:hover  {color: blue} 
+	.link{
+		text-decoration:none;
+		color: #F0F8FF;
+	white-space: nowrap;
+    text-align: center; 
+    font-family: sans-serif;
+    margin: auto;
+	}
+
+	</style>
+
+</head>
+
+<body style="padding-left:4em; font-family: sans-serif;">
+	<h1 style="text-align: center;">IPMC测控平台使用手册</h1>
+
+	<div>
+		<h2>1.电路板使用说明</h2>
+		<h3>1.1接口说明</h3>
+		<div style="padding-left:2em;"><p>
+			<b>灯光：</b><br>
+			电源灯：常亮红色灯；<br>
+			蓝色灯：慢闪1下----程序运行正常；<br>
+	        &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;连闪2下----激光位移传感器通信失败；<br>
+	        &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;颜色--板子编号（蓝LED0、红LED1）；<br>		
+	        红色灯：亮起----电流传感器接近满量程/力传感器接近满量程；<br>
+	        板子编号：蓝灯作为闪烁灯----0号电路板；<br>
+	        &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;红灯作为闪烁灯----1号电路板；<br>
+	        &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;当电路板编号改变时，上述红蓝灯的含义互换。<br><br>
+
+			<b>按键：</b><br>
+			&ensp;&ensp;KEY键（位于边缘）：切换板子编号，切换编号后，红蓝灯含义互换，原来蓝灯闪烁表示的含义由红灯闪烁代替。<br>
+			&ensp;&ensp;RESET键（位于中间）：系统复位。<br><br>
+			
+
+			<b>USB口：</b><br>
+			&ensp;&ensp;用于和电脑连接。<br><br>
+
+			<b>CAN口：</b><br>
+			&ensp;&ensp;用于多电路板连接，CANH连CANH，CANL连CANL，并保证闪烁的灯颜色不一致。<br><br>
+
+			<b>RJ11口（RS232）：</b><br>
+			&ensp;&ensp;用于和激光位移传感器KEYENCE LKGD500连接。<br>
+		</p></div>
+
+		<h3>1.2如何供电</h3>
+		<div style="padding-left:1em;"><p>
+			<ol>
+				<li>电路板的供电电压为±5V。</li>
+				<li>从常亮的电源指示灯侧起，分别是-5V，GND，+5V。</li>
+				<li>不可以接错也不可以使用其他规格的电压，否则可能导致设备损坏。</li>
+			</ol>
+		</p></div>
+
+		<h3>1.3抗干扰措施</h3>
+		<div style="padding-left:1em;"><p>
+			
+			<ol>
+				<li>测控板所处环境应该具有干净的电磁环境，应该远离各类射频设备或者非金属外壳的电源设备，尤其是无线路由器、正在通话的手机等设备。</li>
+				<li>应使用带有屏蔽线缆的力传感器</li>
+				<li>使用实验室的直流可调电源具有优良的纹波特性，用它供电可以有效提高力传感器的测量精度。由于该电源开机即供电，因此在连接电缆前应确保可调电源设置的电压规格符合测控板要求。</li>
+			</ol>
+		</p></div>
+
+	</div>
+
+	<br><br>
+	<div>
+		<h2>2.上位机使用说明</h2>
+
+		<h3>2.1如何保存数据</h3>
+		<p style="padding-left:2em;">
+			右键曲线框----导出----选择导出的文件格式即可。<br>
+			导出的数据范围取决于曲线坐标轴，请确保曲线框的标尺覆盖了所需的数据范围，如果没有，请调节坐标轴。<br>
+			导出的数据会导出所有数据，无需显示所有曲线，只需要确认数据范围是标尺范围的子集即可<br></p>
+
+		<h3>2.2如何显示/关闭曲线</h3>
+		<p style="padding-left:2em;">
+		双击右侧图例，即可显示/关闭曲线，该操作只是显示功能的开关，数据依然会在内存中记录。<br>
+		</p>
+			
+		<h3>2.3如何调节坐标轴</h3>
+		<p style="padding-left:2em;">点击曲线右侧的放大镜按钮，即可选择不同的模式对坐标轴放大或者缩小<br></p>
+			
+		<h3>2.4如何关闭坐标轴自动调节</h3>
+		<p style="padding-left:2em;">右键曲线框----关闭自动调节X/Y标尺。<br>
+			双击坐标轴两侧端点的数字，即可进行编辑，退出编辑即完成坐标轴的调节<br></p>
+
+		<h3>2.5如何自动测量</h3>
+		<p style="padding-left:2em;">
+			勾选“自动测量按钮”，此时“时长 S”选项框可以进行编辑<br>
+			选择好需要输出的波形，以及你需要测量的时长S<br>
+			点击“发送波形”，即可自动输出波形并测量，同时倒计时结束时停止信号输出。<br>
+		</p>
+	</div>
+
+	<br><br>
+	<div>
+		<h2>3.快速故障排查</h2>
+		<h3>3.1激光传感器无数据</h3>
+		<p style="padding-left:2em;">
+			<ol>
+				<li>等待10秒钟，看是否有数据；</li>
+				<li>检查激光传感器通信率是否为115200。<br>
+					传感器设置方法：<br>
+					<ol>
+					<li>长按SET（HEAD-A闪烁）；</li>
+					<li>按5下↑键（Enu闪烁）；</li>
+					<li>按2下ENT（A-B0闪烁）；</li>
+					<li>检查红色数字是否为115200，如果不是按↑键调出115200；</li>
+					<li>重复按SET直到显示出现位移为止。</li>
+					</ol>
+				</li>
+			</ol>
+		</p>
+
+		<h3>3.2测试夹无输出/输出异常</h3>
+		<p style="padding-left:2em;">
+			<ol>
+				<li>
+					设置1~2V的输出电压，短暂的闭合夹子（1秒），使输出短路，测控板是否会亮红灯<br>
+					<ul>
+					<li>不亮：用万用表检测DA口电压是否和预设一致。<br>
+					一致：接触不良。<br>不一致：电路板故障。<br></li>
+					<li>有时亮：可能是接触不良，尝试更换夹子电极，并给夹子捆绑橡皮筋增加接触力。</li>
+					</ul>
+				</li>
+				<li>
+					是否忘记对系统进行双电源供电？
+				</li>
+			</ol>
+		</p>	
+
+		<h3>3.3力传感器数据异常</h3>
+		<p style="padding-left:2em;">
+			<ol>
+				<li>是否超量程（红灯亮起）</li>
+				<li>应使用直流可调电源。</li>
+				<li>应避免震动。</li>
+				<li>应避免风。</li>
+			</ol>
+		</p>
+
+		<h3>3.4电流传感器数据异常</h3>
+		<p style="padding-left:2em;">
+			<ol>
+				<li>是否超量程（红灯亮起）</li>
+				<li>输出电压不应高于3.5V。</li>
+				<li>旁边是否有功率射频设备？如无线路由器、通话中的手机。</li>
+			</ol>
+		</p>
+
+	</div>
+
+	<br><br><br><br>
+	<div>
+	<p style="text-align: center;">
+		免责声明：作者不对本软件造成的任何影响承担任何责任 <br>
+		<a style="text-decoration: none;"  href="https://github.com/inhowe/IPMC-Platform">
+			© 2018-现在 INHOWE,IBSS,NUAA
+		</a>
+	</p>
+	</div>
+</body>
+
+</html>

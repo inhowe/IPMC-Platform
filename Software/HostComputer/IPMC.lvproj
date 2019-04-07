@@ -42,9 +42,9 @@
 		</Item>
 		<Item Name="doc" Type="Folder">
 			<Item Name="description.rtf" Type="Document" URL="../doc/description.rtf"/>
-			<Item Name="manual.txt" Type="Document" URL="../doc/manual.txt"/>
 			<Item Name="protocol.xlsx" Type="Document" URL="../doc/protocol.xlsx"/>
 			<Item Name="license.rtf" Type="Document" URL="../doc/license.rtf"/>
+			<Item Name="manual.html" Type="Document" URL="../doc/manual.html"/>
 		</Item>
 		<Item Name="main.vi" Type="VI" URL="../main.vi"/>
 		<Item Name="launch.vi" Type="VI" URL="../launch.vi"/>
@@ -263,7 +263,7 @@
 				<Property Name="Bld_supportedLanguage[0]" Type="Str">ChineseS</Property>
 				<Property Name="Bld_supportedLanguage[1]" Type="Str">English</Property>
 				<Property Name="Bld_supportedLanguageCount" Type="Int">2</Property>
-				<Property Name="Bld_version.build" Type="Int">83</Property>
+				<Property Name="Bld_version.build" Type="Int">85</Property>
 				<Property Name="Bld_version.major" Type="Int">1</Property>
 				<Property Name="Destination[0].destName" Type="Str">IPMC.exe</Property>
 				<Property Name="Destination[0].path" Type="Path">../builds/IPMC-Platform/NI_AB_PROJECTNAME/IPMC.exe</Property>
@@ -272,6 +272,42 @@
 				<Property Name="Destination[1].destName" Type="Str">支持目录</Property>
 				<Property Name="Destination[1].path" Type="Path">../builds/IPMC-Platform/NI_AB_PROJECTNAME/data</Property>
 				<Property Name="DestinationCount" Type="Int">2</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[0]" Type="Str">{844973E7-E6BA-4236-A89C-0D769CF2800D}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[1]" Type="Str">{7967EB9A-AAB0-4249-903A-07D625BEAEC6}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[10]" Type="Str">{20DB1F2B-180E-4D01-8D24-76BA3E42C8B0}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[11]" Type="Str">{CD3934D2-60BC-4E00-93DE-63C30D1BD7C2}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[12]" Type="Str">{E55B177C-2BDB-4581-9D6F-12F7667C4EA8}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[13]" Type="Str">{D5E79302-9A41-476C-B99E-C822DBCC3F3F}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[14]" Type="Str">{B59E6A16-A351-4E8B-A9D1-566BB53F6FE6}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[15]" Type="Str">{D5BED64F-D1DA-46A8-BFD6-ADF1C4DD5687}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[16]" Type="Str">{30461192-10B0-4043-91CA-D4A6B293FBE9}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[2]" Type="Str">{9123A882-1330-446E-91FB-B1CAE16CCCE2}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[3]" Type="Str">{CC3F38A7-9FC6-4A96-9865-9CF52BC44578}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[4]" Type="Str">{EA10AA43-E9D3-4565-B9A7-32108A0C67B9}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[5]" Type="Str">{D72C0571-8FB6-49D5-BCC4-20077C78B390}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[6]" Type="Str">{2EF0B25F-6EBD-4D4B-9C87-54429DDDFE56}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[7]" Type="Str">{8BF68014-FB0A-4637-9C91-FDDC0A6B8E5D}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[8]" Type="Str">{81272DC6-D334-4673-ACA6-512947FB419B}</Property>
+				<Property Name="Exe_actXinfo_enumCLSID[9]" Type="Str">{A17B491C-36A2-45F7-B81B-16BA311F1144}</Property>
+				<Property Name="Exe_actXinfo_enumCLSIDsCount" Type="Int">17</Property>
+				<Property Name="Exe_actXinfo_majorVersion" Type="Int">5</Property>
+				<Property Name="Exe_actXinfo_minorVersion" Type="Int">5</Property>
+				<Property Name="Exe_actXinfo_objCLSID[0]" Type="Str">{5C0DE651-7062-4291-88B0-B5338ED7B2BB}</Property>
+				<Property Name="Exe_actXinfo_objCLSID[1]" Type="Str">{7924E4E2-50AB-4481-B2EA-471B43735444}</Property>
+				<Property Name="Exe_actXinfo_objCLSID[10]" Type="Str">{A66E3BDA-7EA0-491A-946A-4B75E6481C5B}</Property>
+				<Property Name="Exe_actXinfo_objCLSID[11]" Type="Str">{6B38A32D-798E-460D-A74B-4BADBCE9A47B}</Property>
+				<Property Name="Exe_actXinfo_objCLSID[12]" Type="Str">{3D984C43-6F88-4B3E-B5D5-FAD6A7371532}</Property>
+				<Property Name="Exe_actXinfo_objCLSID[13]" Type="Str">{417EA54C-BB6B-43C9-BF9B-1C33993E11C3}</Property>
+				<Property Name="Exe_actXinfo_objCLSID[2]" Type="Str">{3E6C437A-024E-42E9-A128-A357C5FC433E}</Property>
+				<Property Name="Exe_actXinfo_objCLSID[3]" Type="Str">{90BFA1C9-40BA-44CF-A4B4-51DF7B0910EA}</Property>
+				<Property Name="Exe_actXinfo_objCLSID[4]" Type="Str">{4517AEA4-D5A9-4CC6-8C09-FD9390C8063A}</Property>
+				<Property Name="Exe_actXinfo_objCLSID[5]" Type="Str">{2C86E0CE-71B4-47C0-8356-F9C62A29FE3C}</Property>
+				<Property Name="Exe_actXinfo_objCLSID[6]" Type="Str">{FDAEE8EA-EA28-446B-99A0-C262055BDA55}</Property>
+				<Property Name="Exe_actXinfo_objCLSID[7]" Type="Str">{82634ACA-26CA-4158-A7EE-FACBFB1842F3}</Property>
+				<Property Name="Exe_actXinfo_objCLSID[8]" Type="Str">{C8C03DBD-C4C8-4A10-965F-8AF975C4D4AB}</Property>
+				<Property Name="Exe_actXinfo_objCLSID[9]" Type="Str">{423B807A-78AA-434E-ADB6-099C6C4240B4}</Property>
+				<Property Name="Exe_actXinfo_objCLSIDsCount" Type="Int">14</Property>
+				<Property Name="Exe_actXinfo_progIDPrefix" Type="Str">IPMC</Property>
 				<Property Name="Exe_actXServerName" Type="Str">IPMC</Property>
 				<Property Name="Exe_actXServerNameGUID" Type="Str">{6E0AB8FC-F1E0-4EAE-BCAD-4D0B2D8A905B}</Property>
 				<Property Name="Exe_iconItemID" Type="Ref">/我的电脑/other/NUAA圆角.ico</Property>
@@ -359,6 +395,7 @@
 				<Property Name="INST_buildLocation.type" Type="Str">relativeToCommon</Property>
 				<Property Name="INST_buildSpecName" Type="Str">IPMC-Platform-Install</Property>
 				<Property Name="INST_defaultDir" Type="Str">{BAAA530A-532E-4D52-86A1-7A340E9FD0F2}</Property>
+				<Property Name="INST_includeError" Type="Bool">false</Property>
 				<Property Name="INST_language" Type="Int">2052</Property>
 				<Property Name="INST_productName" Type="Str">IPMC-Platform</Property>
 				<Property Name="INST_productVersion" Type="Str">1.0.63</Property>
@@ -429,23 +466,22 @@
 				<Property Name="Source[5].type" Type="Str">File</Property>
 				<Property Name="Source[6].attributes" Type="Int">1</Property>
 				<Property Name="Source[6].dest" Type="Str">{CE0576DD-B701-42E7-A50A-A76C026185CB}</Property>
-				<Property Name="Source[6].name" Type="Str">manual.txt</Property>
-				<Property Name="Source[6].tag" Type="Ref">/我的电脑/doc/manual.txt</Property>
+				<Property Name="Source[6].name" Type="Str">protocol.xlsx</Property>
+				<Property Name="Source[6].tag" Type="Ref">/我的电脑/doc/protocol.xlsx</Property>
 				<Property Name="Source[6].type" Type="Str">File</Property>
-				<Property Name="Source[7].attributes" Type="Int">1</Property>
-				<Property Name="Source[7].dest" Type="Str">{CE0576DD-B701-42E7-A50A-A76C026185CB}</Property>
-				<Property Name="Source[7].name" Type="Str">protocol.xlsx</Property>
-				<Property Name="Source[7].tag" Type="Ref">/我的电脑/doc/protocol.xlsx</Property>
+				<Property Name="Source[7].dest" Type="Str">{78D6F01E-4F38-47EB-9201-2AC065BE959D}</Property>
+				<Property Name="Source[7].name" Type="Str">CH341SER.EXE</Property>
+				<Property Name="Source[7].runEXE" Type="Bool">true</Property>
+				<Property Name="Source[7].tag" Type="Ref">/我的电脑/other/CH341SER.EXE</Property>
 				<Property Name="Source[7].type" Type="Str">File</Property>
-				<Property Name="Source[8].dest" Type="Str">{78D6F01E-4F38-47EB-9201-2AC065BE959D}</Property>
-				<Property Name="Source[8].name" Type="Str">CH341SER.EXE</Property>
-				<Property Name="Source[8].runEXE" Type="Bool">true</Property>
-				<Property Name="Source[8].tag" Type="Ref">/我的电脑/other/CH341SER.EXE</Property>
+				<Property Name="Source[8].attributes" Type="Int">1</Property>
+				<Property Name="Source[8].dest" Type="Str">{CE0576DD-B701-42E7-A50A-A76C026185CB}</Property>
+				<Property Name="Source[8].name" Type="Str">license.rtf</Property>
+				<Property Name="Source[8].tag" Type="Ref">/我的电脑/doc/license.rtf</Property>
 				<Property Name="Source[8].type" Type="Str">File</Property>
-				<Property Name="Source[9].attributes" Type="Int">1</Property>
 				<Property Name="Source[9].dest" Type="Str">{CE0576DD-B701-42E7-A50A-A76C026185CB}</Property>
-				<Property Name="Source[9].name" Type="Str">license.rtf</Property>
-				<Property Name="Source[9].tag" Type="Ref">/我的电脑/doc/license.rtf</Property>
+				<Property Name="Source[9].name" Type="Str">manual.html</Property>
+				<Property Name="Source[9].tag" Type="Ref">/我的电脑/doc/manual.html</Property>
 				<Property Name="Source[9].type" Type="Str">File</Property>
 				<Property Name="SourceCount" Type="Int">10</Property>
 			</Item>
@@ -471,7 +507,7 @@
 				<Property Name="INST_includeError" Type="Bool">false</Property>
 				<Property Name="INST_language" Type="Int">2052</Property>
 				<Property Name="INST_productName" Type="Str">IPMC-Platform</Property>
-				<Property Name="INST_productVersion" Type="Str">1.0.67</Property>
+				<Property Name="INST_productVersion" Type="Str">1.0.71</Property>
 				<Property Name="INST_readmeID" Type="Ref">/我的电脑/doc/description.rtf</Property>
 				<Property Name="InstSpecBitness" Type="Str">32-bit</Property>
 				<Property Name="InstSpecVersion" Type="Str">17008011</Property>
@@ -537,22 +573,21 @@
 				<Property Name="Source[5].type" Type="Str">File</Property>
 				<Property Name="Source[6].attributes" Type="Int">1</Property>
 				<Property Name="Source[6].dest" Type="Str">{CE0576DD-B701-42E7-A50A-A76C026185CB}</Property>
-				<Property Name="Source[6].name" Type="Str">manual.txt</Property>
-				<Property Name="Source[6].tag" Type="Ref">/我的电脑/doc/manual.txt</Property>
+				<Property Name="Source[6].name" Type="Str">protocol.xlsx</Property>
+				<Property Name="Source[6].tag" Type="Ref">/我的电脑/doc/protocol.xlsx</Property>
 				<Property Name="Source[6].type" Type="Str">File</Property>
-				<Property Name="Source[7].attributes" Type="Int">1</Property>
-				<Property Name="Source[7].dest" Type="Str">{CE0576DD-B701-42E7-A50A-A76C026185CB}</Property>
-				<Property Name="Source[7].name" Type="Str">protocol.xlsx</Property>
-				<Property Name="Source[7].tag" Type="Ref">/我的电脑/doc/protocol.xlsx</Property>
+				<Property Name="Source[7].dest" Type="Str">{78D6F01E-4F38-47EB-9201-2AC065BE959D}</Property>
+				<Property Name="Source[7].name" Type="Str">CH341SER.EXE</Property>
+				<Property Name="Source[7].tag" Type="Ref">/我的电脑/other/CH341SER.EXE</Property>
 				<Property Name="Source[7].type" Type="Str">File</Property>
-				<Property Name="Source[8].dest" Type="Str">{78D6F01E-4F38-47EB-9201-2AC065BE959D}</Property>
-				<Property Name="Source[8].name" Type="Str">CH341SER.EXE</Property>
-				<Property Name="Source[8].tag" Type="Ref">/我的电脑/other/CH341SER.EXE</Property>
+				<Property Name="Source[8].attributes" Type="Int">1</Property>
+				<Property Name="Source[8].dest" Type="Str">{CE0576DD-B701-42E7-A50A-A76C026185CB}</Property>
+				<Property Name="Source[8].name" Type="Str">license.rtf</Property>
+				<Property Name="Source[8].tag" Type="Ref">/我的电脑/doc/license.rtf</Property>
 				<Property Name="Source[8].type" Type="Str">File</Property>
-				<Property Name="Source[9].attributes" Type="Int">1</Property>
 				<Property Name="Source[9].dest" Type="Str">{CE0576DD-B701-42E7-A50A-A76C026185CB}</Property>
-				<Property Name="Source[9].name" Type="Str">license.rtf</Property>
-				<Property Name="Source[9].tag" Type="Ref">/我的电脑/doc/license.rtf</Property>
+				<Property Name="Source[9].name" Type="Str">manual.html</Property>
+				<Property Name="Source[9].tag" Type="Ref">/我的电脑/doc/manual.html</Property>
 				<Property Name="Source[9].type" Type="Str">File</Property>
 				<Property Name="SourceCount" Type="Int">10</Property>
 			</Item>
