@@ -20,6 +20,7 @@ void Carlib(void)
     LED0=0;
     while(i>0)
     {
+        IWDG_Feed();
         delay_ms(SAMPLES*4*2);//let OS scheduling to acquire data;
         D0+=ADS_Buff[0];
         D1+=ADS_Buff[1];

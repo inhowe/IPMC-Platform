@@ -370,7 +370,7 @@ void start_task(void *pdata)
 
     delay_ms(150);//让任务都执行一次以获取相关数据
     Carlib();              
-    IWDG_Start();                        
+                            
     OSTaskDel(START_TASK_PRIO); //挂起开始任务
 }
 

@@ -12,6 +12,7 @@ void IWDG_Init(void)
     {
         while(1);
     }
+    IWDG_Start();
 }
 
 void IWDG_Feed(void)
