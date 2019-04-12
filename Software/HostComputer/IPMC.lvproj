@@ -36,6 +36,17 @@
 			<Item Name="wave.ctl" Type="VI" URL="../ctrl/wave.ctl"/>
 		</Item>
 		<Item Name="doc" Type="Folder">
+			<Item Name="hardware" Type="Folder">
+				<Item Name="project" Type="Folder">
+					<Item Name="IPMC_MACP.PcbDoc" Type="Document" URL="../doc/hardware/project/IPMC_MACP.PcbDoc"/>
+					<Item Name="IPMC_MACP.SchDoc" Type="Document" URL="../doc/hardware/project/IPMC_MACP.SchDoc"/>
+				</Item>
+				<Item Name="bom.xlsx" Type="Document" URL="../doc/hardware/bom.xlsx"/>
+				<Item Name="bottomlayer.pdf" Type="Document" URL="../doc/hardware/bottomlayer.pdf"/>
+				<Item Name="schematic.pdf" Type="Document" URL="../doc/hardware/schematic.pdf"/>
+				<Item Name="toplayer.pdf" Type="Document" URL="../doc/hardware/toplayer.pdf"/>
+			</Item>
+			<Item Name="software" Type="Folder"/>
 			<Item Name="description.rtf" Type="Document" URL="../doc/description.rtf"/>
 			<Item Name="protocol.xlsx" Type="Document" URL="../doc/protocol.xlsx"/>
 			<Item Name="license.rtf" Type="Document" URL="../doc/license.rtf"/>
@@ -265,7 +276,7 @@
 				<Property Name="Bld_supportedLanguage[0]" Type="Str">ChineseS</Property>
 				<Property Name="Bld_supportedLanguage[1]" Type="Str">English</Property>
 				<Property Name="Bld_supportedLanguageCount" Type="Int">2</Property>
-				<Property Name="Bld_version.build" Type="Int">96</Property>
+				<Property Name="Bld_version.build" Type="Int">97</Property>
 				<Property Name="Bld_version.major" Type="Int">1</Property>
 				<Property Name="Destination[0].destName" Type="Str">IPMC.exe</Property>
 				<Property Name="Destination[0].path" Type="Path">../builds/IPMC-Platform/NI_AB_PROJECTNAME/IPMC.exe</Property>
@@ -342,7 +353,19 @@
 				<Property Name="Destination[2].parent" Type="Str">{BAAA530A-532E-4D52-86A1-7A340E9FD0F2}</Property>
 				<Property Name="Destination[2].tag" Type="Str">{78D6F01E-4F38-47EB-9201-2AC065BE959D}</Property>
 				<Property Name="Destination[2].type" Type="Str">userFolder</Property>
-				<Property Name="DestinationCount" Type="Int">3</Property>
+				<Property Name="Destination[3].name" Type="Str">hardware</Property>
+				<Property Name="Destination[3].parent" Type="Str">{CE0576DD-B701-42E7-A50A-A76C026185CB}</Property>
+				<Property Name="Destination[3].tag" Type="Str">{16ACF6BA-D1EB-4941-9708-157584ABA1C3}</Property>
+				<Property Name="Destination[3].type" Type="Str">userFolder</Property>
+				<Property Name="Destination[4].name" Type="Str">project</Property>
+				<Property Name="Destination[4].parent" Type="Str">{16ACF6BA-D1EB-4941-9708-157584ABA1C3}</Property>
+				<Property Name="Destination[4].tag" Type="Str">{AA5FD9CA-1929-4908-9D65-89CF82AE7501}</Property>
+				<Property Name="Destination[4].type" Type="Str">userFolder</Property>
+				<Property Name="Destination[5].name" Type="Str">software</Property>
+				<Property Name="Destination[5].parent" Type="Str">{CE0576DD-B701-42E7-A50A-A76C026185CB}</Property>
+				<Property Name="Destination[5].tag" Type="Str">{229767C4-C097-4665-AB42-F2343BC18550}</Property>
+				<Property Name="Destination[5].type" Type="Str">userFolder</Property>
+				<Property Name="DestinationCount" Type="Int">6</Property>
 				<Property Name="DistPart[0].flavorID" Type="Str">_deployment_</Property>
 				<Property Name="DistPart[0].productID" Type="Str">{74AAFC3E-50DD-40A4-9DD7-155E87481F63}</Property>
 				<Property Name="DistPart[0].productName" Type="Str">NI-VISA运行引擎 17.5</Property>
@@ -446,6 +469,30 @@
 				<Property Name="Source[10].name" Type="Str">ipmc.ico</Property>
 				<Property Name="Source[10].tag" Type="Ref">/我的电脑/ipmc.ico</Property>
 				<Property Name="Source[10].type" Type="Str">File</Property>
+				<Property Name="Source[11].dest" Type="Str">{16ACF6BA-D1EB-4941-9708-157584ABA1C3}</Property>
+				<Property Name="Source[11].name" Type="Str">bom.xlsx</Property>
+				<Property Name="Source[11].tag" Type="Ref">/我的电脑/doc/hardware/bom.xlsx</Property>
+				<Property Name="Source[11].type" Type="Str">File</Property>
+				<Property Name="Source[12].dest" Type="Str">{16ACF6BA-D1EB-4941-9708-157584ABA1C3}</Property>
+				<Property Name="Source[12].name" Type="Str">bottomlayer.pdf</Property>
+				<Property Name="Source[12].tag" Type="Ref">/我的电脑/doc/hardware/bottomlayer.pdf</Property>
+				<Property Name="Source[12].type" Type="Str">File</Property>
+				<Property Name="Source[13].dest" Type="Str">{16ACF6BA-D1EB-4941-9708-157584ABA1C3}</Property>
+				<Property Name="Source[13].name" Type="Str">schematic.pdf</Property>
+				<Property Name="Source[13].tag" Type="Ref">/我的电脑/doc/hardware/schematic.pdf</Property>
+				<Property Name="Source[13].type" Type="Str">File</Property>
+				<Property Name="Source[14].dest" Type="Str">{16ACF6BA-D1EB-4941-9708-157584ABA1C3}</Property>
+				<Property Name="Source[14].name" Type="Str">toplayer.pdf</Property>
+				<Property Name="Source[14].tag" Type="Ref">/我的电脑/doc/hardware/toplayer.pdf</Property>
+				<Property Name="Source[14].type" Type="Str">File</Property>
+				<Property Name="Source[15].dest" Type="Str">{AA5FD9CA-1929-4908-9D65-89CF82AE7501}</Property>
+				<Property Name="Source[15].name" Type="Str">IPMC_MACP.PcbDoc</Property>
+				<Property Name="Source[15].tag" Type="Ref">/我的电脑/doc/hardware/project/IPMC_MACP.PcbDoc</Property>
+				<Property Name="Source[15].type" Type="Str">File</Property>
+				<Property Name="Source[16].dest" Type="Str">{AA5FD9CA-1929-4908-9D65-89CF82AE7501}</Property>
+				<Property Name="Source[16].name" Type="Str">IPMC_MACP.SchDoc</Property>
+				<Property Name="Source[16].tag" Type="Ref">/我的电脑/doc/hardware/project/IPMC_MACP.SchDoc</Property>
+				<Property Name="Source[16].type" Type="Str">File</Property>
 				<Property Name="Source[2].dest" Type="Str">{BAAA530A-532E-4D52-86A1-7A340E9FD0F2}</Property>
 				<Property Name="Source[2].File[0].dest" Type="Str">{BAAA530A-532E-4D52-86A1-7A340E9FD0F2}</Property>
 				<Property Name="Source[2].File[0].name" Type="Str">launch.exe</Property>
@@ -490,7 +537,7 @@
 				<Property Name="Source[9].name" Type="Str">nuaa.ico</Property>
 				<Property Name="Source[9].tag" Type="Ref">/我的电脑/nuaa.ico</Property>
 				<Property Name="Source[9].type" Type="Str">File</Property>
-				<Property Name="SourceCount" Type="Int">11</Property>
+				<Property Name="SourceCount" Type="Int">17</Property>
 			</Item>
 			<Item Name="IPMC-Platform-Install-simple" Type="Installer">
 				<Property Name="Destination[0].name" Type="Str">IPMC-Platform</Property>
@@ -505,7 +552,19 @@
 				<Property Name="Destination[2].parent" Type="Str">{BAAA530A-532E-4D52-86A1-7A340E9FD0F2}</Property>
 				<Property Name="Destination[2].tag" Type="Str">{78D6F01E-4F38-47EB-9201-2AC065BE959D}</Property>
 				<Property Name="Destination[2].type" Type="Str">userFolder</Property>
-				<Property Name="DestinationCount" Type="Int">3</Property>
+				<Property Name="Destination[3].name" Type="Str">hardware</Property>
+				<Property Name="Destination[3].parent" Type="Str">{CE0576DD-B701-42E7-A50A-A76C026185CB}</Property>
+				<Property Name="Destination[3].tag" Type="Str">{8757CE4D-FAF1-45FC-98AC-515F3C8B27CA}</Property>
+				<Property Name="Destination[3].type" Type="Str">userFolder</Property>
+				<Property Name="Destination[4].name" Type="Str">project</Property>
+				<Property Name="Destination[4].parent" Type="Str">{8757CE4D-FAF1-45FC-98AC-515F3C8B27CA}</Property>
+				<Property Name="Destination[4].tag" Type="Str">{BC753057-8C70-412F-8D24-9731FE87E67B}</Property>
+				<Property Name="Destination[4].type" Type="Str">userFolder</Property>
+				<Property Name="Destination[5].name" Type="Str">software</Property>
+				<Property Name="Destination[5].parent" Type="Str">{CE0576DD-B701-42E7-A50A-A76C026185CB}</Property>
+				<Property Name="Destination[5].tag" Type="Str">{D90334F0-A5C8-422A-A153-DB16E9DEAEFB}</Property>
+				<Property Name="Destination[5].type" Type="Str">userFolder</Property>
+				<Property Name="DestinationCount" Type="Int">6</Property>
 				<Property Name="INST_autoIncrement" Type="Bool">true</Property>
 				<Property Name="INST_buildLocation" Type="Path">../builds/IPMC-Platform/IPMC-Platform-Install-simple</Property>
 				<Property Name="INST_buildLocation.type" Type="Str">relativeToCommon</Property>
@@ -514,7 +573,7 @@
 				<Property Name="INST_includeError" Type="Bool">false</Property>
 				<Property Name="INST_language" Type="Int">2052</Property>
 				<Property Name="INST_productName" Type="Str">IPMC-Platform</Property>
-				<Property Name="INST_productVersion" Type="Str">1.0.84</Property>
+				<Property Name="INST_productVersion" Type="Str">1.0.86</Property>
 				<Property Name="INST_readmeID" Type="Ref">/我的电脑/doc/description.rtf</Property>
 				<Property Name="InstSpecBitness" Type="Str">32-bit</Property>
 				<Property Name="InstSpecVersion" Type="Str">17008011</Property>
@@ -558,6 +617,30 @@
 				<Property Name="Source[10].name" Type="Str">CH341SER.EXE</Property>
 				<Property Name="Source[10].tag" Type="Ref">/我的电脑/driver/CH341SER.EXE</Property>
 				<Property Name="Source[10].type" Type="Str">File</Property>
+				<Property Name="Source[11].dest" Type="Str">{8757CE4D-FAF1-45FC-98AC-515F3C8B27CA}</Property>
+				<Property Name="Source[11].name" Type="Str">bom.xlsx</Property>
+				<Property Name="Source[11].tag" Type="Ref">/我的电脑/doc/hardware/bom.xlsx</Property>
+				<Property Name="Source[11].type" Type="Str">File</Property>
+				<Property Name="Source[12].dest" Type="Str">{8757CE4D-FAF1-45FC-98AC-515F3C8B27CA}</Property>
+				<Property Name="Source[12].name" Type="Str">bottomlayer.pdf</Property>
+				<Property Name="Source[12].tag" Type="Ref">/我的电脑/doc/hardware/bottomlayer.pdf</Property>
+				<Property Name="Source[12].type" Type="Str">File</Property>
+				<Property Name="Source[13].dest" Type="Str">{8757CE4D-FAF1-45FC-98AC-515F3C8B27CA}</Property>
+				<Property Name="Source[13].name" Type="Str">schematic.pdf</Property>
+				<Property Name="Source[13].tag" Type="Ref">/我的电脑/doc/hardware/schematic.pdf</Property>
+				<Property Name="Source[13].type" Type="Str">File</Property>
+				<Property Name="Source[14].dest" Type="Str">{8757CE4D-FAF1-45FC-98AC-515F3C8B27CA}</Property>
+				<Property Name="Source[14].name" Type="Str">toplayer.pdf</Property>
+				<Property Name="Source[14].tag" Type="Ref">/我的电脑/doc/hardware/toplayer.pdf</Property>
+				<Property Name="Source[14].type" Type="Str">File</Property>
+				<Property Name="Source[15].dest" Type="Str">{BC753057-8C70-412F-8D24-9731FE87E67B}</Property>
+				<Property Name="Source[15].name" Type="Str">IPMC_MACP.PcbDoc</Property>
+				<Property Name="Source[15].tag" Type="Ref">/我的电脑/doc/hardware/project/IPMC_MACP.PcbDoc</Property>
+				<Property Name="Source[15].type" Type="Str">File</Property>
+				<Property Name="Source[16].dest" Type="Str">{BC753057-8C70-412F-8D24-9731FE87E67B}</Property>
+				<Property Name="Source[16].name" Type="Str">IPMC_MACP.SchDoc</Property>
+				<Property Name="Source[16].tag" Type="Ref">/我的电脑/doc/hardware/project/IPMC_MACP.SchDoc</Property>
+				<Property Name="Source[16].type" Type="Str">File</Property>
 				<Property Name="Source[2].dest" Type="Str">{BAAA530A-532E-4D52-86A1-7A340E9FD0F2}</Property>
 				<Property Name="Source[2].File[0].dest" Type="Str">{BAAA530A-532E-4D52-86A1-7A340E9FD0F2}</Property>
 				<Property Name="Source[2].File[0].name" Type="Str">launch.exe</Property>
@@ -600,7 +683,7 @@
 				<Property Name="Source[9].name" Type="Str">ipmc.ico</Property>
 				<Property Name="Source[9].tag" Type="Ref">/我的电脑/ipmc.ico</Property>
 				<Property Name="Source[9].type" Type="Str">File</Property>
-				<Property Name="SourceCount" Type="Int">11</Property>
+				<Property Name="SourceCount" Type="Int">17</Property>
 			</Item>
 		</Item>
 	</Item>

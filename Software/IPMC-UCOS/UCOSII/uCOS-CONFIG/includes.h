@@ -38,6 +38,7 @@
 #include "laser.h"
 #include "algorithm.h"
 #include "SHT2x.h"
+#include "iwdg.h"
 #include "ipmc.h"
 
 #define  SetBit(x,y)   x|=(1<<y) //将X的第Y位置1
@@ -66,6 +67,7 @@ extern INT16U ErrCode;
 extern float TEMP,HUMI;
 extern double Current_mA,Power_mW,Laser_mm,Force_mN;
 extern bool DBG_Flag,CTR_Flag,CARLIB_OK_Flag;
+
 #endif
 
 

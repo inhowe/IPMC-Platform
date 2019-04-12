@@ -497,6 +497,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\SYSTEM\dma.c</FilePath>
             </File>
+            <File>
+              <FileName>iwdg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\SYSTEM\iwdg.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -596,6 +601,11 @@
               <FileName>stm32f4xx_hal_uart.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\Driver\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_uart.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_iwdg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Driver\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_iwdg.c</FilePath>
             </File>
           </Files>
         </Group>

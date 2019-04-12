@@ -3,6 +3,9 @@
 版本索取API：https://api.github.com/repos/drinow/IPMC-Platform/releases/latest
 
 ## 更新日志
+- 20190412更新
+    - 上位机新增电路原理图、BOM单等资料
+    - 测控板新增独立看门狗程序
 - 20190406更新
     - 新增许多说明资料以及TIPS提示框
     - 修改了更新URL

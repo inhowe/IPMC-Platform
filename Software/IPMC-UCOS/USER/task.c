@@ -18,6 +18,7 @@ void led_task(void *pdata)
     INT8U time=1,i=0;
     while(1)
     {
+        IWDG_Feed();
         for(i=0;i<time;i++)
         {
             if(BoardID==0x00)
@@ -53,7 +54,6 @@ void led_task(void *pdata)
         }
         time=1;
         if(ReadBit(ErrCode,LASERErrBIT))    time=2; 
-//        if(ReadBit(ErrCode,OverCurrentBIT)) time=8;
 
         delay_ms(1000-SHORT_DELAY*2*time);
     }
@@ -370,7 +370,7 @@ void start_task(void *pdata)
 
     delay_ms(150);//让任务都执行一次以获取相关数据
     Carlib();              
-                            
+    IWDG_Start();                        
     OSTaskDel(START_TASK_PRIO); //挂起开始任务
 }
 

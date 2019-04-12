@@ -82,6 +82,7 @@ static void BSP_Init(void)
     LaserCMDToZero();
     Queue_Init(&UART_RXqueue);
     Queue_Init(&CAN_RXqueue);
+    IWDG_Init();
 }
 
 static void MX_NVIC_Init(void)
@@ -99,4 +100,5 @@ static void MX_NVIC_Init(void)
   HAL_NVIC_SetPriority(CAN1_RX0_IRQn, 3, 0);
   HAL_NVIC_EnableIRQ(CAN1_RX0_IRQn);
 }
+
 
