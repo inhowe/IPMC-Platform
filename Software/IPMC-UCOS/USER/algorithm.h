@@ -3,6 +3,7 @@
 
 #include "includes.h"
 
+//位移mm、功率mW、电流mA、力mN
 typedef enum CtrlObj_s{
     LASER=0,
     POWER,

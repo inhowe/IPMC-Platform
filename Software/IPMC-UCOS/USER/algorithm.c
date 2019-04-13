@@ -15,7 +15,7 @@ void Carlib(void)
     CARLIB_OK_Flag=false;
     OS_ENTER_CRITICAL();
     OSTaskSuspend(LED_TASK_PRIO);
-    OSTaskSuspend(DBG_TASK_PRIO);
+    OSTaskSuspend(PRINT_TASK_PRIO);
     OS_EXIT_CRITICAL();
     LED0=0;
     while(i>0)
@@ -32,8 +32,8 @@ void Carlib(void)
     RefV[1]=(double)D1/SAMPLES;
     RefV[2]=(double)D2/SAMPLES;
     LED0=1;
-    
-    OSTaskResume(DBG_TASK_PRIO);
+    Current_mA=Power_mW=Laser_mm=Force_mN=Energy=0;
+    OSTaskResume(PRINT_TASK_PRIO);
     OSTaskResume(LED_TASK_PRIO);
     
     CARLIB_OK_Flag=true;

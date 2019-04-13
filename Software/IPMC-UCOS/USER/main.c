@@ -29,13 +29,13 @@ bool DBG_Flag=false;
 bool CTR_Flag=false;
 bool CARLIB_OK_Flag=false;
 
-double Current_mA,Power_mW,Laser_mm,Force_mN;
+double Current_mA=0,Power_mW=0,Laser_mm=0,Force_mN=0,Energy=0;
 
 //开了看门狗，DEBUG时记得关闭（好像可以调STLINK），否则无法正常DEBUG
 int main(void)
 {
 	HAL_Init();                     //初始化HAL库   
-	Stm32_Clock_Init(336,25,2,8);   //设置时钟,180Mhz
+	Stm32_Clock_Init(336,25,2,8);   //设置时钟,168Mhz
 	delay_init(168);                //初始化延时函数
 	BSP_Init();
 	

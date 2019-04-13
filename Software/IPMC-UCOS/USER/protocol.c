@@ -183,7 +183,7 @@ void Data_anysis(uint8_t* buff,uint8_t* channel)
         {
             if(CTR_Flag==false)//仅第一次执行
             {
-                Carlib();
+//                Carlib();
                 CTR_Flag=true;
             }
         }
