@@ -50,6 +50,7 @@
 				<Item Name="firmware" Type="Folder">
 					<Item Name="IPMC.hex" Type="Document" URL="../doc/software/firmware/IPMC.hex"/>
 				</Item>
+				<Item Name="IPMC-UCOS.zip" Type="Document" URL="../doc/software/IPMC-UCOS.zip"/>
 			</Item>
 			<Item Name="description.rtf" Type="Document" URL="../doc/description.rtf"/>
 			<Item Name="protocol.xlsx" Type="Document" URL="../doc/protocol.xlsx"/>
@@ -67,6 +68,7 @@
 		<Item Name="ipmc.ico" Type="Document" URL="../ipmc.ico"/>
 		<Item Name="nuaa.ico" Type="Document" URL="../nuaa.ico"/>
 		<Item Name="stm32isp.exe" Type="Document" URL="../stm32isp.exe"/>
+		<Item Name="copy.bat" Type="Document" URL="../copy.bat"/>
 		<Item Name="依赖关系" Type="Dependencies">
 			<Item Name="vi.lib" Type="Folder">
 				<Item Name="BuildHelpPath.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/BuildHelpPath.vi"/>
@@ -511,6 +513,10 @@
 				<Property Name="Source[18].name" Type="Str">IPMC.hex</Property>
 				<Property Name="Source[18].tag" Type="Ref">/我的电脑/doc/software/firmware/IPMC.hex</Property>
 				<Property Name="Source[18].type" Type="Str">File</Property>
+				<Property Name="Source[19].dest" Type="Str">{229767C4-C097-4665-AB42-F2343BC18550}</Property>
+				<Property Name="Source[19].name" Type="Str">IPMC-UCOS.zip</Property>
+				<Property Name="Source[19].tag" Type="Ref">/我的电脑/doc/software/IPMC-UCOS.zip</Property>
+				<Property Name="Source[19].type" Type="Str">File</Property>
 				<Property Name="Source[2].dest" Type="Str">{BAAA530A-532E-4D52-86A1-7A340E9FD0F2}</Property>
 				<Property Name="Source[2].File[0].dest" Type="Str">{BAAA530A-532E-4D52-86A1-7A340E9FD0F2}</Property>
 				<Property Name="Source[2].File[0].name" Type="Str">launch.exe</Property>
@@ -555,7 +561,7 @@
 				<Property Name="Source[9].name" Type="Str">nuaa.ico</Property>
 				<Property Name="Source[9].tag" Type="Ref">/我的电脑/nuaa.ico</Property>
 				<Property Name="Source[9].type" Type="Str">File</Property>
-				<Property Name="SourceCount" Type="Int">19</Property>
+				<Property Name="SourceCount" Type="Int">20</Property>
 			</Item>
 			<Item Name="IPMC-Platform-Install-simple" Type="Installer">
 				<Property Name="Destination[0].name" Type="Str">IPMC-Platform</Property>
@@ -672,6 +678,10 @@
 				<Property Name="Source[18].name" Type="Str">IPMC.hex</Property>
 				<Property Name="Source[18].tag" Type="Ref">/我的电脑/doc/software/firmware/IPMC.hex</Property>
 				<Property Name="Source[18].type" Type="Str">File</Property>
+				<Property Name="Source[19].dest" Type="Str">{D90334F0-A5C8-422A-A153-DB16E9DEAEFB}</Property>
+				<Property Name="Source[19].name" Type="Str">IPMC-UCOS.zip</Property>
+				<Property Name="Source[19].tag" Type="Ref">/我的电脑/doc/software/IPMC-UCOS.zip</Property>
+				<Property Name="Source[19].type" Type="Str">File</Property>
 				<Property Name="Source[2].dest" Type="Str">{BAAA530A-532E-4D52-86A1-7A340E9FD0F2}</Property>
 				<Property Name="Source[2].File[0].dest" Type="Str">{BAAA530A-532E-4D52-86A1-7A340E9FD0F2}</Property>
 				<Property Name="Source[2].File[0].name" Type="Str">launch.exe</Property>
@@ -714,7 +724,7 @@
 				<Property Name="Source[9].name" Type="Str">ipmc.ico</Property>
 				<Property Name="Source[9].tag" Type="Ref">/我的电脑/ipmc.ico</Property>
 				<Property Name="Source[9].type" Type="Str">File</Property>
-				<Property Name="SourceCount" Type="Int">19</Property>
+				<Property Name="SourceCount" Type="Int">20</Property>
 			</Item>
 		</Item>
 	</Item>
