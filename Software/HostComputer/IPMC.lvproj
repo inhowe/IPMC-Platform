@@ -68,7 +68,7 @@
 		<Item Name="ipmc.ico" Type="Document" URL="../ipmc.ico"/>
 		<Item Name="nuaa.ico" Type="Document" URL="../nuaa.ico"/>
 		<Item Name="stm32isp.exe" Type="Document" URL="../stm32isp.exe"/>
-		<Item Name="copy.bat" Type="Document" URL="../copy.bat"/>
+		<Item Name="auto.bat" Type="Document" URL="../../../auto.bat"/>
 		<Item Name="依赖关系" Type="Dependencies">
 			<Item Name="vi.lib" Type="Folder">
 				<Item Name="BuildHelpPath.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/BuildHelpPath.vi"/>
@@ -601,7 +601,7 @@
 				<Property Name="INST_includeError" Type="Bool">false</Property>
 				<Property Name="INST_language" Type="Int">2052</Property>
 				<Property Name="INST_productName" Type="Str">IPMC-Platform</Property>
-				<Property Name="INST_productVersion" Type="Str">1.0.88</Property>
+				<Property Name="INST_productVersion" Type="Str">1.0.89</Property>
 				<Property Name="INST_readmeID" Type="Ref">/我的电脑/doc/description.rtf</Property>
 				<Property Name="InstSpecBitness" Type="Str">32-bit</Property>
 				<Property Name="InstSpecVersion" Type="Str">17008011</Property>
