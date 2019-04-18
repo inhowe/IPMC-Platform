@@ -14,6 +14,7 @@
 #include <ctype.h>
 #include <stdlib.h>
 #include <stdarg.h>
+#include "arm_math.h"
 
 #include "ucos_ii.h"
 #include "os_cpu.h"
@@ -45,7 +46,7 @@
 #define  ClrBit(x,y)   x&=~(1<<y) //将X的第Y位清0
 #define  ReadBit(x,y)  (x>>y)&0x01
 
-//ErrCodeBitDefine
+//ErrCode各位定义
 #define LASERErrBIT      0
 #define OverCurrentBIT   15
 #define OverValtageBIT   14
@@ -59,6 +60,8 @@
 extern OS_EVENT *CAN_Q;
 extern OS_EVENT *UART1_Q;
 extern OS_EVENT *COM2Msg;
+
+extern void UpgradeSystem(void);
 
 extern void* CAN_QTbl[64];
 extern void* UART1_QTbl[64];

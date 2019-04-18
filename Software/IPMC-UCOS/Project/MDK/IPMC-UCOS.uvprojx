@@ -336,7 +336,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>USE_HAL_DRIVER,STM32F405xx</Define>
+              <Define>USE_HAL_DRIVER,STM32F405xx,__TARGET_FPU_VFP,__FPU_PRESENT=1,ARM_MATH_CM4,__CC_ARM,ARM_MATH_MATRIX_CHECK,ARM_MATH_ROUNDING</Define>
               <Undefine></Undefine>
               <IncludePath>..\..\USER;..\..\SYSTEM;..\..\HARDWARE;..\..\Driver\STM32F4xx_HAL_Driver\Inc;..\..\Driver\CMSIS;..\..\UCOSII\uC-LIB;..\..\UCOSII\uC-CPU;..\..\UCOSII\UCOS_BSP;..\..\UCOSII\uCOS-CONFIG;..\..\UCOSII\uCOS-II\Source;..\..\UCOSII\uC-CPU\ARM-Cortex-M4\RealView;..\..\UCOSII\uC-LIB\Ports\ARM-Cortex-M4\RealView;..\..\UCOSII\uCOS-II\Ports\ARM-Cortex-M4\Generic\RealView;.\Output</IncludePath>
             </VariousControls>
@@ -502,6 +502,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\SYSTEM\iwdg.c</FilePath>
             </File>
+            <File>
+              <FileName>flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\SYSTEM\flash.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -616,6 +621,11 @@
               <FileName>startup_stm32f429xx.s</FileName>
               <FileType>2</FileType>
               <FilePath>..\..\Driver\CMSIS\startup_stm32f429xx.s</FilePath>
+            </File>
+            <File>
+              <FileName>arm_cortexM4lf_math.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\Driver\DSP_Lib\arm_cortexM4lf_math.lib</FilePath>
             </File>
           </Files>
         </Group>

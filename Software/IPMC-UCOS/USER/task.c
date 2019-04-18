@@ -24,31 +24,31 @@ void led_task(void *pdata)
             if(BoardID==0x00)
             {	LED0=0;
                 if(ReadBit(ErrCode,OverForceBIT)||ReadBit(ErrCode,OverCurrentBIT))
-                    LED1=0;
+                    LED1=LED_ON;
                 else
-                    LED1=1;
+                    LED1=LED_OFF;
             }
             else
             {	LED1=0;
                 if(ReadBit(ErrCode,OverForceBIT)||ReadBit(ErrCode,OverCurrentBIT))
-                    LED0=0;
+                    LED0=LED_ON;
                 else
-                    LED0=1;
+                    LED0=LED_OFF;
             }
             delay_ms(SHORT_DELAY);
             if(BoardID==0x00)
             {	LED0=1;
                 if(ReadBit(ErrCode,OverForceBIT)||ReadBit(ErrCode,OverCurrentBIT))
-                    LED1=0;
+                    LED1=LED_ON;
                 else
-                    LED1=1;
+                    LED1=LED_OFF;
             }
             else
             {	LED1=1;
                 if(ReadBit(ErrCode,OverForceBIT)||ReadBit(ErrCode,OverCurrentBIT))
-                    LED0=0;
+                    LED0=LED_ON;
                 else
-                    LED0=1;
+                    LED0=LED_OFF;
             }
             delay_ms(SHORT_DELAY);
         }
@@ -378,6 +378,6 @@ void start_task(void *pdata)
     delay_ms(150);//让任务都执行一次以获取相关数据
     Carlib();              
                             
-    OSTaskDel(START_TASK_PRIO); //挂起开始任务
+    OSTaskDel(START_TASK_PRIO); //删除开始任务
 }
 

@@ -1,16 +1,15 @@
 #include "sys.h"
 #include "includes.h"
 /************************************************
- ALIENTEK 阿波罗STM32F429开发板实验59
- UCOSII实验1-任务调度-HAL库函数版
- 技术支持：www.openedv.com
- 淘宝店铺：http://eboard.taobao.com  
- 关注微信公众平台微信号："正点原子"，免费获取STM32资料。
- 广州市星翼电子科技有限公司  
- 作者：正点原子 @ALIENTEK
+ *作者：@inhowe 
 ************************************************/
 static void MX_NVIC_Init(void);
 static void BSP_Init(void);
+
+#define VERSION     0x10//固件版本
+
+//用户配置变量的FLASH地址
+#define USR_CONFIG_ADDR     ((uint32_t)0x08080000)
 
 OS_EVENT * CAN_Q;
 OS_EVENT * UART1_Q;
@@ -25,6 +24,7 @@ Reference @ErrCodeBitDefine
 */
 INT16U ErrCode=0;
 INT16U BoardID=0x00;
+
 bool DBG_Flag=false;
 bool CTR_Flag=false;
 bool CARLIB_OK_Flag=false;
@@ -40,9 +40,6 @@ int main(void)
 	BSP_Init();
 	
 	OSInit();                       //UCOS初始化
-	
-    if(HAL_GPIO_ReadPin(KEY_GPIO_Port,KEY_Pin)==GPIO_PIN_RESET )//启用DEBUG模式，输出原始数据。
-        DBG_Flag=true;
     
 	UART1_Q=OSQCreate(&UART1_QTbl[0],64);
 	CAN_Q  =OSQCreate(&CAN_QTbl[0],64);
@@ -62,10 +59,15 @@ int main(void)
 
 static void BSP_Init(void)
 {
+    uint16_t cnt=0;
+    
 	MX_NVIC_Init();
 	
     uart1_init(460800);//USART
     uart2_init(115200);//RS232
+    LED_Init();                     //初始化LED
+    KeyInit();
+
     #ifdef ROBOT_ARM
         IPMC_Init();
     #else
@@ -73,8 +75,7 @@ static void BSP_Init(void)
     #endif
     if(DBG_Flag==false)
         MYDMA_Config(DMA2_Stream7,DMA_CHANNEL_4);//初始化DMA
-    LED_Init();                     //初始化LED
-    KeyInit();
+
     IIC_Init();
     CAN1_Mode_Init(CAN_SJW_1TQ,CAN_BS2_6TQ,CAN_BS1_8TQ,6,CAN_MODE_NORMAL); //CAN初始化,波特率500Kbps      
     AD5722_Init();
@@ -83,7 +84,30 @@ static void BSP_Init(void)
     LaserCMDToZero();
     Queue_Init(&UART_RXqueue);
     Queue_Init(&CAN_RXqueue);
-    IWDG_Init();
+    
+    cnt=0;
+    while(HAL_GPIO_ReadPin(KEY_GPIO_Port,KEY_Pin)==GPIO_PIN_RESET )//按键启动
+    {
+        delay_ms(100);
+        LED0=LED1=LED_ON;
+        delay_ms(100);
+        LED0=LED1=LED_OFF;
+        cnt++;
+        if(cnt>=25)break;
+    }
+    if(cnt>=25)
+    {
+        UpgradeSystem();
+    }
+    else if(cnt>=1)//short press
+    {
+        DBG_Flag=true;
+        IWDG_Init();
+    }
+    else
+    {
+        IWDG_Init();
+    }
 }
 
 static void MX_NVIC_Init(void)
@@ -102,4 +126,40 @@ static void MX_NVIC_Init(void)
   HAL_NVIC_EnableIRQ(CAN1_RX0_IRQn);
 }
 
+void JumpToISP(void)
+{
+    //ISP代码地址
+    #define ISPAddress 0x1FFF0000 
+    
+    //程序跳转不复位外设，建议对一些可能导致问题的外设进行反初始化DeInit，如SysTick。
+    //看门狗一旦初始化不能被关闭，因此如果使用了看门狗，则在调用该函数前，必须先复位系统，并在初始化看门狗之前调用该函数。
+    uint32_t ispJumpAddr;//ISP程序的跳转地址，既程序入口
+    uint32_t ispSpValue;//IAP程序的SP初值，即栈指针
+    void (*Jump_To_ISP)(void);//定义一个函数指针
+    
+    SysTick->CTRL=0x00;       //关闭计数器
+    SysTick->VAL =0X00;       //清空计数器	
+    //__set_PRIMASK(1);
 
+    if (((*(__IO uint32_t*)ISPAddress) & 0x2FFE0000 ) == 0x20000000)
+    { 
+        ispSpValue  = *(__IO uint32_t*)ISPAddress;
+        ispJumpAddr = *(__IO uint32_t*)(ISPAddress+4);
+
+
+        /* 初始化 Stack Pointer */
+        __set_MSP(ispSpValue);
+
+        /* Jump to isp */
+        Jump_To_ISP = (void (*)(void))ispJumpAddr;
+        Jump_To_ISP();
+    }
+}
+
+void UpgradeSystem(void)
+{
+    LED0=LED1=LED_ON;
+    printf("\r\nPlease release your COM port, and call the stm32isp.exe.");
+    printf("\r\nEntering booloader...");
+    JumpToISP();
+}

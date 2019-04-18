@@ -46,7 +46,11 @@
 				<Item Name="schematic.pdf" Type="Document" URL="../doc/hardware/schematic.pdf"/>
 				<Item Name="toplayer.pdf" Type="Document" URL="../doc/hardware/toplayer.pdf"/>
 			</Item>
-			<Item Name="software" Type="Folder"/>
+			<Item Name="software" Type="Folder">
+				<Item Name="firmware" Type="Folder">
+					<Item Name="IPMC.hex" Type="Document" URL="../doc/software/firmware/IPMC.hex"/>
+				</Item>
+			</Item>
 			<Item Name="description.rtf" Type="Document" URL="../doc/description.rtf"/>
 			<Item Name="protocol.xlsx" Type="Document" URL="../doc/protocol.xlsx"/>
 			<Item Name="license.rtf" Type="Document" URL="../doc/license.rtf"/>
@@ -62,6 +66,7 @@
 		<Item Name="download.exe" Type="Document" URL="../download.exe"/>
 		<Item Name="ipmc.ico" Type="Document" URL="../ipmc.ico"/>
 		<Item Name="nuaa.ico" Type="Document" URL="../nuaa.ico"/>
+		<Item Name="stm32isp.exe" Type="Document" URL="../stm32isp.exe"/>
 		<Item Name="依赖关系" Type="Dependencies">
 			<Item Name="vi.lib" Type="Folder">
 				<Item Name="BuildHelpPath.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/BuildHelpPath.vi"/>
@@ -365,7 +370,11 @@
 				<Property Name="Destination[5].parent" Type="Str">{CE0576DD-B701-42E7-A50A-A76C026185CB}</Property>
 				<Property Name="Destination[5].tag" Type="Str">{229767C4-C097-4665-AB42-F2343BC18550}</Property>
 				<Property Name="Destination[5].type" Type="Str">userFolder</Property>
-				<Property Name="DestinationCount" Type="Int">6</Property>
+				<Property Name="Destination[6].name" Type="Str">firmware</Property>
+				<Property Name="Destination[6].parent" Type="Str">{229767C4-C097-4665-AB42-F2343BC18550}</Property>
+				<Property Name="Destination[6].tag" Type="Str">{1ECC0A96-C0D4-4D9B-9E1F-792A4E0775D3}</Property>
+				<Property Name="Destination[6].type" Type="Str">userFolder</Property>
+				<Property Name="DestinationCount" Type="Int">7</Property>
 				<Property Name="DistPart[0].flavorID" Type="Str">_deployment_</Property>
 				<Property Name="DistPart[0].productID" Type="Str">{74AAFC3E-50DD-40A4-9DD7-155E87481F63}</Property>
 				<Property Name="DistPart[0].productName" Type="Str">NI-VISA运行引擎 17.5</Property>
@@ -423,7 +432,7 @@
 				<Property Name="INST_includeError" Type="Bool">false</Property>
 				<Property Name="INST_language" Type="Int">2052</Property>
 				<Property Name="INST_productName" Type="Str">IPMC-Platform</Property>
-				<Property Name="INST_productVersion" Type="Str">1.0.64</Property>
+				<Property Name="INST_productVersion" Type="Str">1.0.65</Property>
 				<Property Name="INST_readmeID" Type="Ref">/我的电脑/doc/description.rtf</Property>
 				<Property Name="InstSpecBitness" Type="Str">32-bit</Property>
 				<Property Name="InstSpecVersion" Type="Str">17008011</Property>
@@ -493,6 +502,15 @@
 				<Property Name="Source[16].name" Type="Str">IPMC_MACP.SchDoc</Property>
 				<Property Name="Source[16].tag" Type="Ref">/我的电脑/doc/hardware/project/IPMC_MACP.SchDoc</Property>
 				<Property Name="Source[16].type" Type="Str">File</Property>
+				<Property Name="Source[17].dest" Type="Str">{BAAA530A-532E-4D52-86A1-7A340E9FD0F2}</Property>
+				<Property Name="Source[17].name" Type="Str">stm32isp.exe</Property>
+				<Property Name="Source[17].tag" Type="Ref">/我的电脑/stm32isp.exe</Property>
+				<Property Name="Source[17].type" Type="Str">File</Property>
+				<Property Name="Source[18].attributes" Type="Int">1</Property>
+				<Property Name="Source[18].dest" Type="Str">{1ECC0A96-C0D4-4D9B-9E1F-792A4E0775D3}</Property>
+				<Property Name="Source[18].name" Type="Str">IPMC.hex</Property>
+				<Property Name="Source[18].tag" Type="Ref">/我的电脑/doc/software/firmware/IPMC.hex</Property>
+				<Property Name="Source[18].type" Type="Str">File</Property>
 				<Property Name="Source[2].dest" Type="Str">{BAAA530A-532E-4D52-86A1-7A340E9FD0F2}</Property>
 				<Property Name="Source[2].File[0].dest" Type="Str">{BAAA530A-532E-4D52-86A1-7A340E9FD0F2}</Property>
 				<Property Name="Source[2].File[0].name" Type="Str">launch.exe</Property>
@@ -537,7 +555,7 @@
 				<Property Name="Source[9].name" Type="Str">nuaa.ico</Property>
 				<Property Name="Source[9].tag" Type="Ref">/我的电脑/nuaa.ico</Property>
 				<Property Name="Source[9].type" Type="Str">File</Property>
-				<Property Name="SourceCount" Type="Int">17</Property>
+				<Property Name="SourceCount" Type="Int">19</Property>
 			</Item>
 			<Item Name="IPMC-Platform-Install-simple" Type="Installer">
 				<Property Name="Destination[0].name" Type="Str">IPMC-Platform</Property>
@@ -564,7 +582,11 @@
 				<Property Name="Destination[5].parent" Type="Str">{CE0576DD-B701-42E7-A50A-A76C026185CB}</Property>
 				<Property Name="Destination[5].tag" Type="Str">{D90334F0-A5C8-422A-A153-DB16E9DEAEFB}</Property>
 				<Property Name="Destination[5].type" Type="Str">userFolder</Property>
-				<Property Name="DestinationCount" Type="Int">6</Property>
+				<Property Name="Destination[6].name" Type="Str">firmware</Property>
+				<Property Name="Destination[6].parent" Type="Str">{D90334F0-A5C8-422A-A153-DB16E9DEAEFB}</Property>
+				<Property Name="Destination[6].tag" Type="Str">{81B071A1-E011-4D00-A814-CC6B48C3B64B}</Property>
+				<Property Name="Destination[6].type" Type="Str">userFolder</Property>
+				<Property Name="DestinationCount" Type="Int">7</Property>
 				<Property Name="INST_autoIncrement" Type="Bool">true</Property>
 				<Property Name="INST_buildLocation" Type="Path">../builds/IPMC-Platform/IPMC-Platform-Install-simple</Property>
 				<Property Name="INST_buildLocation.type" Type="Str">relativeToCommon</Property>
@@ -573,7 +595,7 @@
 				<Property Name="INST_includeError" Type="Bool">false</Property>
 				<Property Name="INST_language" Type="Int">2052</Property>
 				<Property Name="INST_productName" Type="Str">IPMC-Platform</Property>
-				<Property Name="INST_productVersion" Type="Str">1.0.87</Property>
+				<Property Name="INST_productVersion" Type="Str">1.0.88</Property>
 				<Property Name="INST_readmeID" Type="Ref">/我的电脑/doc/description.rtf</Property>
 				<Property Name="InstSpecBitness" Type="Str">32-bit</Property>
 				<Property Name="InstSpecVersion" Type="Str">17008011</Property>
@@ -641,6 +663,15 @@
 				<Property Name="Source[16].name" Type="Str">IPMC_MACP.SchDoc</Property>
 				<Property Name="Source[16].tag" Type="Ref">/我的电脑/doc/hardware/project/IPMC_MACP.SchDoc</Property>
 				<Property Name="Source[16].type" Type="Str">File</Property>
+				<Property Name="Source[17].dest" Type="Str">{BAAA530A-532E-4D52-86A1-7A340E9FD0F2}</Property>
+				<Property Name="Source[17].name" Type="Str">stm32isp.exe</Property>
+				<Property Name="Source[17].tag" Type="Ref">/我的电脑/stm32isp.exe</Property>
+				<Property Name="Source[17].type" Type="Str">File</Property>
+				<Property Name="Source[18].attributes" Type="Int">1</Property>
+				<Property Name="Source[18].dest" Type="Str">{81B071A1-E011-4D00-A814-CC6B48C3B64B}</Property>
+				<Property Name="Source[18].name" Type="Str">IPMC.hex</Property>
+				<Property Name="Source[18].tag" Type="Ref">/我的电脑/doc/software/firmware/IPMC.hex</Property>
+				<Property Name="Source[18].type" Type="Str">File</Property>
 				<Property Name="Source[2].dest" Type="Str">{BAAA530A-532E-4D52-86A1-7A340E9FD0F2}</Property>
 				<Property Name="Source[2].File[0].dest" Type="Str">{BAAA530A-532E-4D52-86A1-7A340E9FD0F2}</Property>
 				<Property Name="Source[2].File[0].name" Type="Str">launch.exe</Property>
@@ -683,7 +714,7 @@
 				<Property Name="Source[9].name" Type="Str">ipmc.ico</Property>
 				<Property Name="Source[9].tag" Type="Ref">/我的电脑/ipmc.ico</Property>
 				<Property Name="Source[9].type" Type="Str">File</Property>
-				<Property Name="SourceCount" Type="Int">17</Property>
+				<Property Name="SourceCount" Type="Int">19</Property>
 			</Item>
 		</Item>
 	</Item>

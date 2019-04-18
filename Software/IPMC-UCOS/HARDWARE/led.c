@@ -16,8 +16,9 @@
 //LED IO初始化
 void LED_Init(void)
 {
+    //GPIOB是开发板上的LED
     GPIO_InitTypeDef GPIO_Initure;
-    __HAL_RCC_GPIOB_CLK_ENABLE();         
+//    __HAL_RCC_GPIOB_CLK_ENABLE();         
 	__HAL_RCC_GPIOC_CLK_ENABLE();
 	
     GPIO_Initure.Pin=GPIO_PIN_0|GPIO_PIN_1; 
@@ -25,9 +26,9 @@ void LED_Init(void)
     GPIO_Initure.Pull=GPIO_PULLUP;          
     GPIO_Initure.Speed=GPIO_SPEED_HIGH;     
 	
-    HAL_GPIO_Init(GPIOB,&GPIO_Initure);
+//    HAL_GPIO_Init(GPIOB,&GPIO_Initure);
 	HAL_GPIO_Init(GPIOC,&GPIO_Initure);
 	
-    HAL_GPIO_WritePin(GPIOB,GPIO_PIN_0|GPIO_PIN_1,GPIO_PIN_SET);	
+//    HAL_GPIO_WritePin(GPIOB,GPIO_PIN_0|GPIO_PIN_1,GPIO_PIN_SET);	
     HAL_GPIO_WritePin(GPIOC,GPIO_PIN_0|GPIO_PIN_1,GPIO_PIN_SET);
 }

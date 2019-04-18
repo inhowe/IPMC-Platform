@@ -14,8 +14,13 @@
 //All rights reserved									  
 ////////////////////////////////////////////////////////////////////////////////// 	
 
-#define LED0 PBout(0)=PCout(0)   //LED0
-#define LED1 PBout(1)=PCout(1)   //LED0
+#define LED_ON  0
+#define LED_OFF 1
+
+//#define LED0 PBout(0)=PCout(0)   //LED0
+//#define LED1 PBout(1)=PCout(1)   //LED0
+#define LED0 PCout(0)   //LED0
+#define LED1 PCout(1)   //LED0
 
 void LED_Init(void);
 #endif
