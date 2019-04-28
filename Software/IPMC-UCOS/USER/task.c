@@ -138,13 +138,13 @@ void print_task(void* pdata)
 	while(1)
 	{
         Current_A = (ADS_Buff[0]-RefV[0])*0.00004097277; // 00006744402706230 0.00004097277=0.0001875/457.62100/0.01
-        f_Current_A = LowPassFilter(Current_A,0);
+        f_Current_A = LowPassFilter100Hz(Current_A,f_Current_A,2);
         Current_mA=f_Current_A*1000;//当前电流值
         if(Current_A>0.3||Current_A<-0.3) SetBit(ErrCode,OverCurrentBIT);//过流检测 安培
         else ClrBit(ErrCode,OverCurrentBIT);
         
         Voltage_V = (ADS_Buff[1]-RefV[1])*0.000375;
-        f_Voltage_V = LowPassFilter(Voltage_V,1);
+        f_Voltage_V = LowPassFilter100Hz(Voltage_V,f_Voltage_V,5);
         if(Current_mA>=0&&f_Voltage_V>=0)//功率不分正负但是功率有方向
             Power_mW=f_Voltage_V * Current_mA;// V*mA=mW!
         else
@@ -154,8 +154,8 @@ void print_task(void* pdata)
         if(ADS_Buff[1]>24000||ADS_Buff[1]<2666) SetBit(ErrCode,OverValtageBIT); //ADC绝对值高于4.5V和低于0.5V警告
         else ClrBit(ErrCode,OverValtageBIT);
     
-        Force_N = (ADS_Buff[2]-RefV[2])*0.000031638863708060510273199367803116;
-        f_Force_N = LowPassFilter(Force_N,2);
+        Force_N = 0.95537745*(-0.00022466+0.0000343215*(ADS_Buff[2]-RefV[2])-0.00000000200793*(ADS_Buff[2]-RefV[2]));//2次曲线*修正系数
+        f_Force_N = LowPassFilter100Hz(Force_N,f_Force_N,1);
         Force_mN = Force_N*1000;
         if(ADS_Buff[2]>24000||ADS_Buff[2]<2666) SetBit(ErrCode,OverForceBIT); //ADC绝对值高于4.5V和低于0.5V警告
         else ClrBit(ErrCode,OverForceBIT);
@@ -212,7 +212,8 @@ void print_task(void* pdata)
         }        
         else
         {
-            printf("ADS[0-2]:%d %d %d ",ADS_Buff[0],ADS_Buff[1],ADS_Buff[2]);
+            printf("AD[0-2]:%d %d %d ",ADS_Buff[0],ADS_Buff[1],ADS_Buff[2]);
+            printf("diffAD[2]_Force:%d ",ADS_Buff[2]-RefV[2]);
             printf("ErrCode:0x%x (15:C 14:V 13:F 0:L) ",ErrCode);
             printf("CPU:%02d%% ",OSCPUUsage);
             printf("ST:%.2f ",algPID.SetPoint);

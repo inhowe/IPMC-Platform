@@ -3,6 +3,10 @@
 
 #include "stm32f4xx.h"
 
+//定义力标定的二次曲线系数的存储地址
+#define FORCE_x2                ADDR_FLASH_SECTOR_8
+#define FORCE_x                 ADDR_FLASH_SECTOR_8+8
+#define FORCE_c                 ADDR_FLASH_SECTOR_8+16
 
 /* Base address of the Flash sectors */ 
 #define ADDR_FLASH_SECTOR_0     ((uint32_t)0x08000000) /* Base address of Sector 0, 16 Kbytes   */
@@ -33,8 +37,6 @@
 
 
 //int InternalFlash_Test(void);
-
-
 
 #endif /* __INTERNAL_FLASH_H */
 

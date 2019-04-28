@@ -8,7 +8,7 @@ double setEnergy=0;//启动控制的能量阈值，在此之前进行累计。
 
 void Carlib(void)
 {
-    #define SAMPLES 20
+    #define SAMPLES 255
     OS_CPU_SR cpu_sr=0;
     INT8U i=SAMPLES;
     int D0=0,D1=0,D2=0;
@@ -22,7 +22,7 @@ void Carlib(void)
     while(i>0)
     {
         IWDG_Feed();
-        delay_ms(SAMPLES*4*2);//let OS scheduling to acquire data;
+        delay_ms(15);//let OS scheduling to acquire data;
         D0+=ADS_Buff[0];
         D1+=ADS_Buff[1];
         D2+=ADS_Buff[2];
@@ -192,33 +192,18 @@ double WeightedFilter(double input)
         return input;
 }
 
-//低通滤波
-//截至频率=滤波系数/2/圆周率/采样时间间隔秒，f=coe/2/pi/t; 
+//采样频率为100Hz的低通滤波
 //滤波系数越小，灵敏度越小，滤波越平稳
-//obj分别表示滤波对象为电流、电压、力
-double LowPassFilter(double input,u8 obj)
+//frq=截至频率=滤波系数/2/圆周率/采样时间间隔秒，f=coe/2/pi/t; 
+double LowPassFilter100Hz(double nowInput,double lastValue, double frq)
 {
-    static double lastValueA=0,lastValueV=0,lastValueF=0;
-    double coe=1;//
-    switch(obj)
-    {
-        //current
-        case 0:
-            coe=0.12566370614359172953850573533118;//2Hz
-            lastValueA=coe*input+(1-coe)*lastValueA;
-            return lastValueA;
-        //voltage
-        case 1:
-            coe=0.31415926535897932384626433832795;//5Hz
-            lastValueV=coe*input+(1-coe)*lastValueV;
-            return lastValueV;
-        //force
-        case 2:
-            coe=0.12566370614359172953850573533118;//2Hz
-            lastValueF=coe*input+(1-coe)*lastValueF;
-            return lastValueF;
-        //no filter
-        default:
-            return input;
-    }
+    double nextValue=0;
+    double coe=frq*2*3.141592653*0.01;//
+    
+    if(frq>0)
+        nextValue=coe*nowInput+(1-coe)*lastValue;
+    else
+        nextValue=nowInput;
+    
+    return nextValue;
 }

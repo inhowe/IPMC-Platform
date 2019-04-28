@@ -55,5 +55,5 @@ void ClearController(void);
 
 //ÂË²¨Æ÷
 double WeightedFilter(double input);
-double LowPassFilter(double input,u8 obj);
+double LowPassFilter100Hz(double nowInput,double lastValue, double frq);
 #endif
