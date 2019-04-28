@@ -43,10 +43,17 @@ extern INT32S   RefV[4];
 extern PID_t    algPID,algOuterPID;
 extern Bang_t   algBang;
 extern CtrlType_t CtrlType;
+extern double setEnergy;
+
 void Carlib(void);
 void myftoa(double data,char str[]);
+
+//¿ØÖÆÆ÷
 bool BangBangController(Bang_t* Ctrl);
 double PIDController(PID_t* Ctrl);
 void ClearController(void);
 
+//ÂË²¨Æ÷
+double WeightedFilter(double input);
+double LowPassFilter(double input,u8 obj);
 #endif

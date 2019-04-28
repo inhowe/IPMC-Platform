@@ -22,14 +22,15 @@ void led_task(void *pdata)
         for(i=0;i<time;i++)
         {
             if(BoardID==0x00)
-            {	LED0=0;
+            {	
+                LED0=LED_ON;
                 if(ReadBit(ErrCode,OverForceBIT)||ReadBit(ErrCode,OverCurrentBIT))
                     LED1=LED_ON;
                 else
                     LED1=LED_OFF;
             }
             else
-            {	LED1=0;
+            {	LED1=LED_ON;
                 if(ReadBit(ErrCode,OverForceBIT)||ReadBit(ErrCode,OverCurrentBIT))
                     LED0=LED_ON;
                 else
@@ -37,14 +38,16 @@ void led_task(void *pdata)
             }
             delay_ms(SHORT_DELAY);
             if(BoardID==0x00)
-            {	LED0=1;
+            {	
+                LED0=LED_OFF;
                 if(ReadBit(ErrCode,OverForceBIT)||ReadBit(ErrCode,OverCurrentBIT))
                     LED1=LED_ON;
                 else
                     LED1=LED_OFF;
             }
             else
-            {	LED1=1;
+            {	
+                LED1=LED_OFF;
                 if(ReadBit(ErrCode,OverForceBIT)||ReadBit(ErrCode,OverCurrentBIT))
                     LED0=LED_ON;
                 else
@@ -131,23 +134,28 @@ void print_task(void* pdata)
     char SendBuff[128]={0};
 //    OS_STK_DATA UsedSTK;
     double Current_A=0,Voltage_V=0,Force_N=0;
+    double f_Current_A=0,f_Voltage_V=0,f_Force_N=0;
 	while(1)
 	{
         Current_A = (ADS_Buff[0]-RefV[0])*0.00004097277; // 00006744402706230 0.00004097277=0.0001875/457.62100/0.01
-        Current_mA=Current_A*1000;//当前电流值
+        f_Current_A = LowPassFilter(Current_A,0);
+        Current_mA=f_Current_A*1000;//当前电流值
         if(Current_A>0.3||Current_A<-0.3) SetBit(ErrCode,OverCurrentBIT);//过流检测 安培
         else ClrBit(ErrCode,OverCurrentBIT);
         
         Voltage_V = (ADS_Buff[1]-RefV[1])*0.000375;
-        if(Current_mA>=0&&Voltage_V>=0)//功率不分正负但是功率有方向
-            Power_mW=Voltage_V * Current_mA;// V*mA=mW!
+        f_Voltage_V = LowPassFilter(Voltage_V,1);
+        if(Current_mA>=0&&f_Voltage_V>=0)//功率不分正负但是功率有方向
+            Power_mW=f_Voltage_V * Current_mA;// V*mA=mW!
         else
-            Power_mW=-1*Voltage_V * Current_mA;
-        Energy+=Power_mW;//能量积分，单位未知
+            Power_mW=-1*f_Voltage_V * Current_mA;
+        
+        Energy_mJ+=Power_mW*0.01;//能量积分，mJ
         if(ADS_Buff[1]>24000||ADS_Buff[1]<2666) SetBit(ErrCode,OverValtageBIT); //ADC绝对值高于4.5V和低于0.5V警告
         else ClrBit(ErrCode,OverValtageBIT);
     
-        Force_N = (ADS_Buff[2]-RefV[2])*0.00004110667;
+        Force_N = (ADS_Buff[2]-RefV[2])*0.000031638863708060510273199367803116;
+        f_Force_N = LowPassFilter(Force_N,2);
         Force_mN = Force_N*1000;
         if(ADS_Buff[2]>24000||ADS_Buff[2]<2666) SetBit(ErrCode,OverForceBIT); //ADC绝对值高于4.5V和低于0.5V警告
         else ClrBit(ErrCode,OverForceBIT);
@@ -163,19 +171,19 @@ void print_task(void* pdata)
         {
             memset(SendBuff,0,sizeof(SendBuff));
     //        printf("C:%sA ",array);
-            myftoa(Current_A,array);//0.0001875 = 1/32768.0*6.144
+            myftoa(f_Current_A,array);//0.0001875 = 1/32768.0*6.144   //Current_A
             strcat(SendBuff,"C:");strcat(SendBuff,array);strcat(SendBuff,"A ");
             
     //        printf("V:%sV ",array);
-            myftoa(Voltage_V,array);//0.000375 = 1/32768.0*6.144*2
+            myftoa(f_Voltage_V,array);//0.000375 = 1/32768.0*6.144*2 //Voltage_V
             strcat(SendBuff,"V:");strcat(SendBuff,array);strcat(SendBuff,"V ");     
             
     //        printf("F:%sN ",array);
-            myftoa(Force_N,array);//0.00004001667=0.000375/2*0.3*0.725925925926*0.98
+            myftoa(f_Force_N,array);//0.00004001667=0.000375/2*0.3*0.725925925926*0.98 //Force_N
             strcat(SendBuff,"F:");strcat(SendBuff,array);strcat(SendBuff,"N ");
             
     //        printf("L:%smm ",array);        
-            myftoa(LaserOffset,array);
+            myftoa(LaserOffset,array);//LaserOffset
             strcat(SendBuff,"L:");strcat(SendBuff,array);strcat(SendBuff,"mm ");
             
     //        printf("T0:%sS ",array);            
@@ -215,6 +223,8 @@ void print_task(void* pdata)
             printf("SumErr:%.2f ",algPID.SumErr);
             printf("dErr:%.2f ",algPID.dErr);
             printf("out:%.2f ",algPID.output);
+            printf("energy:%.1f ",setEnergy);
+            printf("predlaser:%.1fmm ",0.38632*Energy_mJ+0.00392);
 //            OSTaskStkChk(DAC_TASK_PRIO,&UsedSTK);printf("DAC:%.1f%% ",(float)UsedSTK.OSUsed/DAC_STK_SIZE*100);
 //            OSTaskStkChk(ADC_TASK_PRIO,&UsedSTK);printf("ADC:%.1f%% ",(float)UsedSTK.OSUsed/ADC_STK_SIZE*100);
 //            OSTaskStkChk(COM_TASK_PRIO,&UsedSTK);printf("COM:%.1f%% ",(float)UsedSTK.OSUsed/COM_STK_SIZE*100);
@@ -227,6 +237,7 @@ void print_task(void* pdata)
 	}
 }
 
+//能量和位移关系图。laser=0.16526+0.00502*energy-1.28083E-6*energy^2+4.68189E-10*energy^3
 void dac_task(void* pdata)
 {
 	while(1)
@@ -235,15 +246,21 @@ void dac_task(void* pdata)
             WaveFunc();
         else if(CARLIB_OK_Flag==true)
         {    
-            switch(CtrlType)
+            if(Energy_mJ>setEnergy)
             {
-                case TYPE_PID:PIDController(&algPID);break;
-                case TYPE_BANG:BangBangController(&algBang);break;
-                case TYPE_SERIAL_PID:break;
-                case TYPE_UNKNOWN:break;
-                default:break;
+                switch(CtrlType)
+                {
+                    case TYPE_PID:PIDController(&algPID);break;
+                    case TYPE_BANG:BangBangController(&algBang);break;
+                    case TYPE_SERIAL_PID:break;
+                    case TYPE_UNKNOWN:break;
+                    default:break;
+                }
             }
-            
+            else
+            {
+                AD5722_Output(3.5,CH0);
+            }
         }
         
         if(CTR_Flag==false)

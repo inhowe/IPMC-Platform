@@ -4,6 +4,7 @@ INT32S RefV[4];
 PID_t   algPID ={0},algOuterPID={0};
 Bang_t  algBang={0};
 CtrlType_t CtrlType=TYPE_UNKNOWN;
+double setEnergy=0;//启动控制的能量阈值，在此之前进行累计。
 
 void Carlib(void)
 {
@@ -32,7 +33,7 @@ void Carlib(void)
     RefV[1]=(double)D1/SAMPLES;
     RefV[2]=(double)D2/SAMPLES;
     LED0=1;
-    Current_mA=Power_mW=Laser_mm=Force_mN=Energy=0;
+    Current_mA=Power_mW=Laser_mm=Force_mN=Energy_mJ=0;
     OSTaskResume(PRINT_TASK_PRIO);
     OSTaskResume(LED_TASK_PRIO);
     
@@ -137,6 +138,7 @@ double PIDController(PID_t* Ctrl)
     return Ctrl->output;
 }
 
+//清除控制器参数
 void ClearController(void)
 {
     algPID.dErr=0;
@@ -146,4 +148,77 @@ void ClearController(void)
     algPID.LastErr2=0;
 //    memset(&algPID,0,sizeof(algPID));
 //    memset(&algBang,0,sizeof(algBang));
+}
+
+
+//滑动加权滤波
+double WeightedFilter(double input)
+{
+    #define LENGTH 4
+    double weight[4]={0.4,0.3,0.2,0.1};
+//    double weight[6]={0.6,0.24,0.096,0.0384,0.01536,0.010285};
+//    double weight[8]={0.6,0.24,0.096,0.0384,0.01536,0.006144,0.0024576,0.0016834};
+    static bool filled=false;
+    static uint8_t cnt=0;
+    static double cache[LENGTH]={0};//数据缓存
+    //填充cache，倒序
+    if(cnt++<=LENGTH)
+    {
+        cache[LENGTH-cnt]=input;
+        return input;
+    }
+    else
+    {
+        filled=true;
+    }
+    
+    double result=0;
+    if(filled)
+    {
+        //重新排列
+        for(u8 i=LENGTH-1;i>0;i--)
+        {
+            cache[i]=cache[i-1];
+        }
+        cache[0]=input;
+        //加权
+        for(u8 i=0;i<LENGTH;i++)
+        {
+            result += cache[i]*weight[i];
+        }
+        return result;
+    }
+    else
+        return input;
+}
+
+//低通滤波
+//截至频率=滤波系数/2/圆周率/采样时间间隔秒，f=coe/2/pi/t; 
+//滤波系数越小，灵敏度越小，滤波越平稳
+//obj分别表示滤波对象为电流、电压、力
+double LowPassFilter(double input,u8 obj)
+{
+    static double lastValueA=0,lastValueV=0,lastValueF=0;
+    double coe=1;//
+    switch(obj)
+    {
+        //current
+        case 0:
+            coe=0.12566370614359172953850573533118;//2Hz
+            lastValueA=coe*input+(1-coe)*lastValueA;
+            return lastValueA;
+        //voltage
+        case 1:
+            coe=0.31415926535897932384626433832795;//5Hz
+            lastValueV=coe*input+(1-coe)*lastValueV;
+            return lastValueV;
+        //force
+        case 2:
+            coe=0.12566370614359172953850573533118;//2Hz
+            lastValueF=coe*input+(1-coe)*lastValueF;
+            return lastValueF;
+        //no filter
+        default:
+            return input;
+    }
 }

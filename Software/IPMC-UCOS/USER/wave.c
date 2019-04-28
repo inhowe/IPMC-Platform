@@ -9,7 +9,7 @@ void Channel_Group_Init(void)
     CGroup.DA0.type=DC;
     CGroup.DA1.type=DC;
     CGroup.DA0.DC = 0;
-    CGroup.DA0.DC = 0;
+    CGroup.DA1.DC = 0;
 }
 
 void WaveFunc(void)

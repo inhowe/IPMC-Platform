@@ -54,6 +54,7 @@ uint8_t LengthCal(uint8_t* data)
     case 0x55  :    len=6;break; //carlib cmd
     case 0x56  :    len=1;break; //switch cmd
     case 0x57  :    len=22;break; //control cmd
+    case 0x58  :    len=20;break; //control cmd
     default    :    len=0 ;break;
   }
   return len;
@@ -256,6 +257,10 @@ void Data_anysis(uint8_t* buff,uint8_t* channel)
             algBang.ObjType=(CtrlObj_t)buff[21];//±»¿Ø¶ÔÏó
         }
     break;
+    case 0x58:
+        Energy_mJ=0;
+        setEnergy=*(float *)(&buff[0]);
+        break;
   }
 }
 

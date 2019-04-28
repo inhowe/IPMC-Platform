@@ -69,6 +69,7 @@
 		<Item Name="nuaa.ico" Type="Document" URL="../nuaa.ico"/>
 		<Item Name="stm32isp.exe" Type="Document" URL="../stm32isp.exe"/>
 		<Item Name="auto.bat" Type="Document" URL="../../../auto.bat"/>
+		<Item Name="开关变量转字符串.vi" Type="VI" URL="../sub VI/开关变量转字符串.vi"/>
 		<Item Name="依赖关系" Type="Dependencies">
 			<Item Name="vi.lib" Type="Folder">
 				<Item Name="BuildHelpPath.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/BuildHelpPath.vi"/>
