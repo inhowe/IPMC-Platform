@@ -154,7 +154,7 @@ void print_task(void* pdata)
         if(ADS_Buff[1]>24000||ADS_Buff[1]<2666) SetBit(ErrCode,OverValtageBIT); //ADC绝对值高于4.5V和低于0.5V警告
         else ClrBit(ErrCode,OverValtageBIT);
     
-        Force_N = 0.95537745*(-0.00022466+0.0000343215*(ADS_Buff[2]-RefV[2])-0.00000000200793*(ADS_Buff[2]-RefV[2]));//2次曲线*修正系数
+        Force_N = 0.94019608*(-0.00022466+0.0000343215*(ADS_Buff[2]-RefV[2])-0.00000000200793*(ADS_Buff[2]-RefV[2])*(ADS_Buff[2]-RefV[2]));//2次曲线*修正系数
         f_Force_N = LowPassFilter100Hz(Force_N,f_Force_N,1);
         Force_mN = Force_N*1000;
         if(ADS_Buff[2]>24000||ADS_Buff[2]<2666) SetBit(ErrCode,OverForceBIT); //ADC绝对值高于4.5V和低于0.5V警告
