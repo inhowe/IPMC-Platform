@@ -285,7 +285,7 @@
 				<Property Name="Bld_supportedLanguage[0]" Type="Str">ChineseS</Property>
 				<Property Name="Bld_supportedLanguage[1]" Type="Str">English</Property>
 				<Property Name="Bld_supportedLanguageCount" Type="Int">2</Property>
-				<Property Name="Bld_version.build" Type="Int">101</Property>
+				<Property Name="Bld_version.build" Type="Int">102</Property>
 				<Property Name="Bld_version.major" Type="Int">1</Property>
 				<Property Name="Destination[0].destName" Type="Str">IPMC.exe</Property>
 				<Property Name="Destination[0].path" Type="Path">../builds/IPMC-Platform/NI_AB_PROJECTNAME/IPMC.exe</Property>
