@@ -29,7 +29,7 @@ bool DBG_Flag=false;
 bool CTR_Flag=false;
 bool CARLIB_OK_Flag=false;
 
-double Current_mA=0,Power_mW=0,Laser_mm=0,Force_mN=0,Energy_mJ=0;
+double Current_mA=0,Power_mW=0,Laser_mm=0,Force_mN=0,Energy_mJ=0,dLaser_mm=0;
 
 //开了看门狗，DEBUG时记得关闭（好像可以调STLINK），否则无法正常DEBUG
 int main(void)

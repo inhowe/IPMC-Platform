@@ -29,6 +29,7 @@
 			<Item Name="调用main.vi" Type="VI" URL="../sub VI/调用main.vi"/>
 			<Item Name="清除波形.vi" Type="VI" URL="../sub VI/清除波形.vi"/>
 			<Item Name="XY图数据提取.vi" Type="VI" URL="../sub VI/XY图数据提取.vi"/>
+			<Item Name="开关变量转字符串.vi" Type="VI" URL="../sub VI/开关变量转字符串.vi"/>
 		</Item>
 		<Item Name="ctrl" Type="Folder">
 			<Item Name="XYGraph.ctl" Type="VI" URL="../ctrl/XYGraph.ctl"/>
@@ -56,6 +57,7 @@
 			<Item Name="protocol.xlsx" Type="Document" URL="../doc/protocol.xlsx"/>
 			<Item Name="license.rtf" Type="Document" URL="../doc/license.rtf"/>
 			<Item Name="manual.html" Type="Document" URL="../doc/manual.html"/>
+			<Item Name="sourcecode.html" Type="Document" URL="../doc/sourcecode.html"/>
 		</Item>
 		<Item Name="driver" Type="Folder">
 			<Item Name="CH341SER.EXE" Type="Document" URL="../driver/CH341SER.EXE"/>
@@ -69,7 +71,6 @@
 		<Item Name="nuaa.ico" Type="Document" URL="../nuaa.ico"/>
 		<Item Name="stm32isp.exe" Type="Document" URL="../stm32isp.exe"/>
 		<Item Name="auto.bat" Type="Document" URL="../../../auto.bat"/>
-		<Item Name="开关变量转字符串.vi" Type="VI" URL="../sub VI/开关变量转字符串.vi"/>
 		<Item Name="依赖关系" Type="Dependencies">
 			<Item Name="vi.lib" Type="Folder">
 				<Item Name="BuildHelpPath.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/BuildHelpPath.vi"/>
@@ -284,7 +285,7 @@
 				<Property Name="Bld_supportedLanguage[0]" Type="Str">ChineseS</Property>
 				<Property Name="Bld_supportedLanguage[1]" Type="Str">English</Property>
 				<Property Name="Bld_supportedLanguageCount" Type="Int">2</Property>
-				<Property Name="Bld_version.build" Type="Int">100</Property>
+				<Property Name="Bld_version.build" Type="Int">101</Property>
 				<Property Name="Bld_version.major" Type="Int">1</Property>
 				<Property Name="Destination[0].destName" Type="Str">IPMC.exe</Property>
 				<Property Name="Destination[0].path" Type="Path">../builds/IPMC-Platform/NI_AB_PROJECTNAME/IPMC.exe</Property>
@@ -383,31 +384,31 @@
 				<Property Name="DistPart[0].productName" Type="Str">NI-VISA运行引擎 17.5</Property>
 				<Property Name="DistPart[0].upgradeCode" Type="Str">{8627993A-3F66-483C-A562-0D3BA3F267B1}</Property>
 				<Property Name="DistPart[1].flavorID" Type="Str">DefaultFull</Property>
-				<Property Name="DistPart[1].productID" Type="Str">{DA546982-6C74-4630-BC46-B7B8CB4D6A6F}</Property>
-				<Property Name="DistPart[1].productName" Type="Str">NI LabVIEW运行引擎 2017 SP1 f1</Property>
+				<Property Name="DistPart[1].productID" Type="Str">{F8C28DE1-1E13-4D22-AC1B-A09B86F991EC}</Property>
+				<Property Name="DistPart[1].productName" Type="Str">NI LabVIEW运行引擎 2017 f2</Property>
 				<Property Name="DistPart[1].SoftDep[0].exclude" Type="Bool">false</Property>
-				<Property Name="DistPart[1].SoftDep[0].productName" Type="Str">NI LabVIEW运行引擎 2017 SP1非英语语言支持</Property>
+				<Property Name="DistPart[1].SoftDep[0].productName" Type="Str">NI LabVIEW运行引擎 2017非英语语言支持</Property>
 				<Property Name="DistPart[1].SoftDep[0].upgradeCode" Type="Str">{182AE811-85B6-4238-B67E-F19497CC186B}</Property>
 				<Property Name="DistPart[1].SoftDep[1].exclude" Type="Bool">false</Property>
 				<Property Name="DistPart[1].SoftDep[1].productName" Type="Str">NI ActiveX容器</Property>
 				<Property Name="DistPart[1].SoftDep[1].upgradeCode" Type="Str">{1038A887-23E1-4289-B0BD-0C4B83C6BA21}</Property>
 				<Property Name="DistPart[1].SoftDep[10].exclude" Type="Bool">false</Property>
-				<Property Name="DistPart[1].SoftDep[10].productName" Type="Str">NI mDNS Responder 17.0</Property>
+				<Property Name="DistPart[1].SoftDep[10].productName" Type="Str">NI mDNS Responder 14.0</Property>
 				<Property Name="DistPart[1].SoftDep[10].upgradeCode" Type="Str">{9607874B-4BB3-42CB-B450-A2F5EF60BA3B}</Property>
 				<Property Name="DistPart[1].SoftDep[11].exclude" Type="Bool">false</Property>
-				<Property Name="DistPart[1].SoftDep[11].productName" Type="Str">NI Deployment Framework 2018</Property>
+				<Property Name="DistPart[1].SoftDep[11].productName" Type="Str">NI Deployment Framework 2017</Property>
 				<Property Name="DistPart[1].SoftDep[11].upgradeCode" Type="Str">{838942E4-B73C-492E-81A3-AA1E291FD0DC}</Property>
 				<Property Name="DistPart[1].SoftDep[12].exclude" Type="Bool">false</Property>
-				<Property Name="DistPart[1].SoftDep[12].productName" Type="Str">NI错误报告 2018</Property>
+				<Property Name="DistPart[1].SoftDep[12].productName" Type="Str">NI错误报告 2017</Property>
 				<Property Name="DistPart[1].SoftDep[12].upgradeCode" Type="Str">{42E818C6-2B08-4DE7-BD91-B0FD704C119A}</Property>
 				<Property Name="DistPart[1].SoftDep[2].exclude" Type="Bool">false</Property>
 				<Property Name="DistPart[1].SoftDep[2].productName" Type="Str">数学核心库</Property>
 				<Property Name="DistPart[1].SoftDep[2].upgradeCode" Type="Str">{699C1AC5-2CF2-4745-9674-B19536EBA8A3}</Property>
 				<Property Name="DistPart[1].SoftDep[3].exclude" Type="Bool">false</Property>
-				<Property Name="DistPart[1].SoftDep[3].productName" Type="Str">NI Logos 18.0</Property>
+				<Property Name="DistPart[1].SoftDep[3].productName" Type="Str">NI Logos 5.9</Property>
 				<Property Name="DistPart[1].SoftDep[3].upgradeCode" Type="Str">{5E4A4CE3-4D06-11D4-8B22-006008C16337}</Property>
 				<Property Name="DistPart[1].SoftDep[4].exclude" Type="Bool">false</Property>
-				<Property Name="DistPart[1].SoftDep[4].productName" Type="Str">NI TDM Streaming 18.0</Property>
+				<Property Name="DistPart[1].SoftDep[4].productName" Type="Str">NI TDM Streaming 17.0</Property>
 				<Property Name="DistPart[1].SoftDep[4].upgradeCode" Type="Str">{4CD11BE6-6BB7-4082-8A27-C13771BC309B}</Property>
 				<Property Name="DistPart[1].SoftDep[5].exclude" Type="Bool">false</Property>
 				<Property Name="DistPart[1].SoftDep[5].productName" Type="Str">NI LabVIEW Web服务器 2017</Property>
@@ -435,7 +436,7 @@
 				<Property Name="INST_includeError" Type="Bool">false</Property>
 				<Property Name="INST_language" Type="Int">2052</Property>
 				<Property Name="INST_productName" Type="Str">IPMC-Platform</Property>
-				<Property Name="INST_productVersion" Type="Str">1.0.65</Property>
+				<Property Name="INST_productVersion" Type="Str">1.0.66</Property>
 				<Property Name="INST_readmeID" Type="Ref">/我的电脑/doc/description.rtf</Property>
 				<Property Name="InstSpecBitness" Type="Str">32-bit</Property>
 				<Property Name="InstSpecVersion" Type="Str">17008011</Property>
@@ -526,6 +527,10 @@
 				<Property Name="Source[2].tag" Type="Ref">/我的电脑/version.ini</Property>
 				<Property Name="Source[2].type" Type="Str">File</Property>
 				<Property Name="Source[2].unlock" Type="Bool">true</Property>
+				<Property Name="Source[20].dest" Type="Str">{CE0576DD-B701-42E7-A50A-A76C026185CB}</Property>
+				<Property Name="Source[20].name" Type="Str">sourcecode.html</Property>
+				<Property Name="Source[20].tag" Type="Ref">/我的电脑/doc/sourcecode.html</Property>
+				<Property Name="Source[20].type" Type="Str">File</Property>
 				<Property Name="Source[3].dest" Type="Str">{BAAA530A-532E-4D52-86A1-7A340E9FD0F2}</Property>
 				<Property Name="Source[3].name" Type="Str">download.exe</Property>
 				<Property Name="Source[3].tag" Type="Ref">/我的电脑/download.exe</Property>
@@ -562,7 +567,7 @@
 				<Property Name="Source[9].name" Type="Str">nuaa.ico</Property>
 				<Property Name="Source[9].tag" Type="Ref">/我的电脑/nuaa.ico</Property>
 				<Property Name="Source[9].type" Type="Str">File</Property>
-				<Property Name="SourceCount" Type="Int">20</Property>
+				<Property Name="SourceCount" Type="Int">21</Property>
 			</Item>
 			<Item Name="IPMC-Platform-Install-simple" Type="Installer">
 				<Property Name="Destination[0].name" Type="Str">IPMC-Platform</Property>
@@ -602,7 +607,7 @@
 				<Property Name="INST_includeError" Type="Bool">false</Property>
 				<Property Name="INST_language" Type="Int">2052</Property>
 				<Property Name="INST_productName" Type="Str">IPMC-Platform</Property>
-				<Property Name="INST_productVersion" Type="Str">1.0.90</Property>
+				<Property Name="INST_productVersion" Type="Str">1.0.91</Property>
 				<Property Name="INST_readmeID" Type="Ref">/我的电脑/doc/description.rtf</Property>
 				<Property Name="InstSpecBitness" Type="Str">32-bit</Property>
 				<Property Name="InstSpecVersion" Type="Str">17008011</Property>
@@ -691,6 +696,10 @@
 				<Property Name="Source[2].tag" Type="Ref">/我的电脑/version.ini</Property>
 				<Property Name="Source[2].type" Type="Str">File</Property>
 				<Property Name="Source[2].unlock" Type="Bool">true</Property>
+				<Property Name="Source[20].dest" Type="Str">{CE0576DD-B701-42E7-A50A-A76C026185CB}</Property>
+				<Property Name="Source[20].name" Type="Str">sourcecode.html</Property>
+				<Property Name="Source[20].tag" Type="Ref">/我的电脑/doc/sourcecode.html</Property>
+				<Property Name="Source[20].type" Type="Str">File</Property>
 				<Property Name="Source[3].dest" Type="Str">{BAAA530A-532E-4D52-86A1-7A340E9FD0F2}</Property>
 				<Property Name="Source[3].name" Type="Str">download.exe</Property>
 				<Property Name="Source[3].tag" Type="Ref">/我的电脑/download.exe</Property>
@@ -725,7 +734,7 @@
 				<Property Name="Source[9].name" Type="Str">ipmc.ico</Property>
 				<Property Name="Source[9].tag" Type="Ref">/我的电脑/ipmc.ico</Property>
 				<Property Name="Source[9].type" Type="Str">File</Property>
-				<Property Name="SourceCount" Type="Int">20</Property>
+				<Property Name="SourceCount" Type="Int">21</Property>
 			</Item>
 		</Item>
 	</Item>

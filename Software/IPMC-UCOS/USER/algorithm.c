@@ -6,6 +6,7 @@ Bang_t  algBang={0};
 CtrlType_t CtrlType=TYPE_UNKNOWN;
 double setEnergy=0;//启动控制的能量阈值，在此之前进行累计。
 
+
 void Carlib(void)
 {
     #define SAMPLES 255
@@ -95,6 +96,7 @@ double PIDController(PID_t* Ctrl)
     
     double UpperLim,LowerLim;//位移的控制上下限
     
+    //根据控制对象进行赋值
     if(Ctrl->ObjType==LASER)
     {
         Ctrl->CurrntPoint = Laser_mm;
@@ -115,10 +117,16 @@ double PIDController(PID_t* Ctrl)
     {
         Ctrl->CurrntPoint = Force_mN ;
     }
+    else if(Ctrl->ObjType==dLaser)
+    {
+        Ctrl->CurrntPoint = dLaser_mm ;
+    }
     else return 0;
     
     LowerLim=Ctrl->SetPoint - Ctrl->Bind /2.0;
     UpperLim=Ctrl->SetPoint + Ctrl->Bind /2.0;
+    LowerLim=LowerLim;
+    UpperLim=UpperLim;
     
     Ctrl->Err=Ctrl->SetPoint-Ctrl->CurrntPoint;
     if(Ctrl->output>OUT_LOWERLIM&&Ctrl->output<OUT_UPPERLIM)//抗饱和
@@ -194,16 +202,56 @@ double WeightedFilter(double input)
 
 //采样频率为100Hz的低通滤波
 //滤波系数越小，灵敏度越小，滤波越平稳
-//frq=截至频率=滤波系数/2/圆周率/采样时间间隔秒，f=coe/2/pi/t; 
-double LowPassFilter100Hz(double nowInput,double lastValue, double frq)
+//frqc=截至频率=滤波系数/2/圆周率/采样时间间隔秒，f=coe/2/pi/t; 
+double RC_LowPassFilter(double nowInput,double lastValue, double frqc)
 {
     double nextValue=0;
-    double coe=frq*2*3.141592653*0.01;//
+    double coe=frqc*2*3.141592653*0.01;//
     
-    if(frq>0)
+    if(frqc>0)
         nextValue=coe*nowInput+(1-coe)*lastValue;
     else
         nextValue=nowInput;
     
     return nextValue;
+}
+
+//采样率100hz，截至频率2.5Hz左右的IIR滤波器,专门给电流用的
+//xk：输入值
+//tap：存储的是被滤波信号的历史数据（会被自动更新）
+//返回值：滤波结果
+double IIR_LowPassFilter2P5Hz_Current(double xk)
+{
+    //各抽头系数值。
+    double num[3]={0.00713,0.01427,0.00713};
+    double den[3]={1,-1.74727,0.77581};
+    double output=0;
+    
+    static double xk1=0,xk2=0,yk1=0,yk2=0;
+    
+    output = num[0]*xk + num[1]*xk1 + num[2]*xk2 - den[1]*yk1 - den[2]*yk2;
+    xk2=xk1;
+    xk1=xk;
+    yk2=yk1;
+    yk1=output;
+    
+    return output;
+}
+
+double IIR_LowPassFilter2P5Hz_Power(double xk)
+{
+    //各抽头系数值。
+    double num[3]={0.00713,0.01427,0.00713};
+    double den[3]={1,-1.74727,0.77581};
+    double output=0;
+    
+    static double xk1=0,xk2=0,yk1=0,yk2=0;
+    
+    output = num[0]*xk + num[1]*xk1 + num[2]*xk2 - den[1]*yk1 - den[2]*yk2;
+    xk2=xk1;
+    xk1=xk;
+    yk2=yk1;
+    yk1=output;
+    
+    return output;
 }

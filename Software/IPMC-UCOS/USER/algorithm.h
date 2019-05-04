@@ -54,7 +54,9 @@ bool BangBangController(Bang_t* Ctrl);
 double PIDController(PID_t* Ctrl);
 void ClearController(void);
 
-//滤波器
+//采样率100Hz的滤波器
 double WeightedFilter(double input);
-double LowPassFilter100Hz(double nowInput,double lastValue, double frq);
+double RC_LowPassFilter(double nowInput,double lastValue, double frqc);
+double IIR_LowPassFilter2P5Hz_Current(double xk);
+double IIR_LowPassFilter2P5Hz_Power(double xk);
 #endif
