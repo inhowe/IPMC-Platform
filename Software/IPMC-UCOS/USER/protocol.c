@@ -220,7 +220,7 @@ void Data_anysis(uint8_t* buff,uint8_t* channel)
             HAL_NVIC_SystemReset();
         }
     break;
-    case 0x57://控制功能
+    case 0x57://control1控制功能
         if(buff[0]==TYPE_PID)//PID
         {
             CtrlType = TYPE_PID;
@@ -257,7 +257,7 @@ void Data_anysis(uint8_t* buff,uint8_t* channel)
             algBang.ObjType=(CtrlObj_t)buff[21];//被控对象
         }
     break;
-    case 0x58:
+    case 0x58://control2
         Energy_mJ=0;
         setEnergy=*(float *)(&buff[0]);
         break;
