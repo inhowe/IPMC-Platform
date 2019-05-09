@@ -3,6 +3,8 @@
 版本索取API：https://api.github.com/repos/drinow/IPMC-Platform/releases/latest
 
 ## 更新日志
+- 20190509更新
+	- 新增更新控制参数按钮
 - 20190506更新
 	- 上位机降低XY图的数据量，新增"清空XY图"按键，现在因XY图数据量过大出现卡顿现象的概率更低了
 	- 上位机修改了"使能控制"按钮逻辑，你的每一次操作都能被正确反映
