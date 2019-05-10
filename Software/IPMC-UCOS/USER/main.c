@@ -102,7 +102,7 @@ static void BSP_Init(void)
     else if(cnt>=1)//short press
     {
         DBG_Flag=true;
-        IWDG_Init();
+//        IWDG_Init();
     }
     else
     {

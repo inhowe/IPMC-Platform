@@ -251,8 +251,9 @@ void dac_task(void* pdata)
         if(CTR_Flag==false)
             WaveFunc();
         else if(CARLIB_OK_Flag==true)
-        {    
-            if(Energy_mJ>setEnergy)
+        {   
+
+            if(Energy_mJ>=setEnergy)
             {
                 switch(CtrlType)
                 {
@@ -265,8 +266,25 @@ void dac_task(void* pdata)
             }
             else
             {
-                AD5722_Output(3.5,CH0);
-            }
+//                algPID_1.ObjType=POWER;
+//                algPID_1.SetPoint=50;
+//                algPID_1.KP=algPID.KP;
+//                algPID_1.KI=algPID.KI;
+//                algPID_1.KD=algPID.KD;
+                if(algPID.ObjType==POWER)
+                {
+                    algPID_1=algPID;
+                    algPID_1.SetPoint=50;
+                    PIDController(&algPID_1);
+                    algPID.dErr=algPID_1.dErr;
+                    algPID.SumErr=algPID_1.SumErr;
+                    algPID.LastErr1=algPID_1.LastErr1;
+                    algPID.LastErr2=algPID_1.LastErr2;
+                    algPID.Err=algPID_1.Err;
+                }
+                else
+                    AD5722_Output(3.5,CH0);
+            }            
         }
         
         if(CTR_Flag==false)

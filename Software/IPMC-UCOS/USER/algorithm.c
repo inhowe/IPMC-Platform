@@ -1,7 +1,7 @@
 #include "algorithm.h"
 
 INT32S RefV[4];
-PID_t   algPID ={0},algOuterPID={0};
+PID_t   algPID ={0},algOuterPID={0},algPID_1={0};
 Bang_t  algBang={0};
 CtrlType_t CtrlType=TYPE_UNKNOWN;
 double setEnergy=0;//启动控制的能量阈值，在此之前进行累计。
@@ -41,6 +41,7 @@ void Carlib(void)
     CARLIB_OK_Flag=true;
 }
 
+
 //4位精度浮点数转ASCII
 void myftoa(double data,char str[])
 {
@@ -63,6 +64,44 @@ void myftoa(double data,char str[])
         strHead[0] = '-'; //-0.8取整为0，丢失符号！
     
     strcat(str, strHead);
+}
+
+
+//阶跃信号平滑过渡
+//输入：设定值，当前值
+//输出：平滑处理后的新设定值
+void smoothGradient(double setPoint_IN,double nowPoint_IN,double* newSetPoint_OUT)
+{
+    #define DIVISION 200 //拆分数，渐变时间=DIVISION*0.01秒
+    static int runStage=0;
+    static double nowSet=0,nowPoint=0;
+    static double divide=0;
+    
+    if(Energy_mJ>setEnergy)//超过能量阈值后开始运行
+        runStage++;
+    else                    //关闭状态
+    {
+        runStage=0;
+        return;
+    }
+    
+    if(runStage==1)//初始化
+    {
+        nowSet   = setPoint_IN;
+        nowPoint = nowPoint_IN;
+        divide = (nowPoint_IN-setPoint_IN)/DIVISION;
+    }
+    if(runStage>=1)//运行中
+    {
+        if( (nowPoint-divide*runStage<=nowSet && nowPoint>nowSet) || 
+            (nowPoint-divide*runStage>=nowSet && nowPoint<nowSet) )//停止运行
+        {
+            *newSetPoint_OUT=nowSet;
+            return;
+        }
+        
+        *newSetPoint_OUT = nowPoint-divide*runStage;
+    }
 }
 
 //BangBang控制
@@ -93,7 +132,6 @@ double PIDController(PID_t* Ctrl)
     #define OUT_UPPERLIM  3.5 //输出信号的上下限
     #define OUT_LOWERLIM -3.5
     
-    
     double UpperLim,LowerLim;//位移的控制上下限
     
     //根据控制对象进行赋值
@@ -123,6 +161,8 @@ double PIDController(PID_t* Ctrl)
     }
     else return 0;
     
+    smoothGradient(Ctrl->SetPoint,Ctrl->CurrntPoint,&Ctrl->SetPoint);
+    
     LowerLim=Ctrl->SetPoint - Ctrl->Bind /2.0;
     UpperLim=Ctrl->SetPoint + Ctrl->Bind /2.0;
     LowerLim=LowerLim;
@@ -142,6 +182,7 @@ double PIDController(PID_t* Ctrl)
     if(Ctrl->output<OUT_LOWERLIM)Ctrl->output=OUT_LOWERLIM;
     
     AD5722_Output(Ctrl->output,CH0);
+    
 //    printf("Err:%.1f SumErr:%.1f dErr:%.1f LastErr1:%.1f LastErr2:%.1f out:%.1f\r\n",Err,SumErr,dErr,LastErr1,LastErr2,output);
     return Ctrl->output;
 }
