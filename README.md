@@ -3,6 +3,9 @@
 版本索取API：https://api.github.com/repos/drinow/IPMC-Platform/releases/latest
 
 ## 更新日志
+- 20190513更新
+	- 增大曲线能够存储的点数（400W点）
+	- 给XY图增加一个使能开关，默认关闭
 - 20190509更新
 	- 新增更新控制参数按钮
 - 20190506更新
