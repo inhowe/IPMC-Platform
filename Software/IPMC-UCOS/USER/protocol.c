@@ -226,7 +226,7 @@ void Data_anysis(uint8_t* buff,uint8_t* channel)
             CtrlType = TYPE_PID;
             //不知道为啥直接赋值就硬件错误
             SmallEnd[0]=buff[1];SmallEnd[1]=buff[2];SmallEnd[2]=buff[3];SmallEnd[3]=buff[4];
-            algPID.SetPoint=(double)(*((float*)SmallEnd));
+            algPID.getPoint=(double)(*((float*)SmallEnd));
             
             SmallEnd[0]=buff[9];SmallEnd[1]=buff[10];SmallEnd[2]=buff[11];SmallEnd[3]=buff[12];
             algPID.KP= (double)(*((float*)SmallEnd));

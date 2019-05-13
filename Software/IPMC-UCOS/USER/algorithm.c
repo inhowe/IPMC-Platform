@@ -67,36 +67,41 @@ void myftoa(double data,char str[])
 }
 
 
-//阶跃信号平滑过渡
-//输入：设定值，当前值
-//输出：平滑处理后的新设定值
-void smoothGradient(double setPoint_IN,double nowPoint_IN,double* newSetPoint_OUT)
+//上升阶段和过渡阶段处理
+//输入：获取值，当前值
+//输出：设定值
+void step1_step2(double getPoint_IN,double nowPoint_IN,double* newSetPoint_OUT)
 {
     #define DIVISION 200 //拆分数，渐变时间=DIVISION*0.01秒
+    static double needEnergy=0;//平滑过程中估计消耗的能量
     static int runStage=0;
     static double nowSet=0,nowPoint=0;
     static double divide=0;
     
-    if(Energy_mJ>setEnergy)//超过能量阈值后开始运行
+    needEnergy=(nowPoint_IN-getPoint_IN);//功率差*时间*0.5  三角形的形状
+    needEnergy=needEnergy;
+    
+    if(Energy_mJ>setEnergy&&setEnergy!=0)//超过能量阈值后开始运行
         runStage++;
-    else                    //关闭状态
+    else//关闭状态
     {
+        *newSetPoint_OUT=150;//恒功率
         runStage=0;
         return;
     }
     
     if(runStage==1)//初始化
     {
-        nowSet   = setPoint_IN;
+        nowSet   = getPoint_IN ;
         nowPoint = nowPoint_IN;
-        divide = (nowPoint_IN-setPoint_IN)/DIVISION;
+        divide = (nowPoint_IN-getPoint_IN)/DIVISION;
     }
     if(runStage>=1)//运行中
     {
         if( (nowPoint-divide*runStage<=nowSet && nowPoint>nowSet) || 
             (nowPoint-divide*runStage>=nowSet && nowPoint<nowSet) )//停止运行
         {
-            *newSetPoint_OUT=nowSet;
+            *newSetPoint_OUT=getPoint_IN;
             return;
         }
         
@@ -127,6 +132,45 @@ bool BangBangController(Bang_t* Ctrl)
     return true;
 }
 
+//更新控制器的nowPoint
+//return 1 更新失败，某些地方出错
+//return 0 无错误，数据更新
+u8 UpdateController(PID_t* Ctrl)
+{
+        //根据控制对象进行赋值
+    if(Ctrl->ObjType==LASER)
+    {
+        Ctrl->nowPoint = Laser_mm;
+        if(ReadBit(ErrCode,LASERErrBIT))//激光传感器失效时停止控制
+            return 1;
+        if(LaserOffset>30||LaserOffset<-30)//错误数据时不予处理，这个很重要，因为程序逻辑没有处理好导致数据可能会变化
+            return 1;
+    }
+    else if(Ctrl->ObjType==POWER)
+    {
+         Ctrl->nowPoint = Power_mW;
+    }
+    else if(Ctrl->ObjType==CURRENT)
+    {
+        Ctrl->nowPoint = Current_mA ;
+    }
+    else if(Ctrl->ObjType==FORCE)
+    {
+        Ctrl->nowPoint = Force_mN ;
+    }
+    else if(Ctrl->ObjType==dLaser)
+    {
+        Ctrl->nowPoint = dLaser_mm ;
+    }
+    else return 1;
+    
+    Ctrl->SetPoint=Ctrl->getPoint;
+    
+    return 0;
+}
+
+
+//应先调用updatecontroller函数。
 double PIDController(PID_t* Ctrl)
 {
     #define OUT_UPPERLIM  3.5 //输出信号的上下限
@@ -134,41 +178,12 @@ double PIDController(PID_t* Ctrl)
     
     double UpperLim,LowerLim;//位移的控制上下限
     
-    //根据控制对象进行赋值
-    if(Ctrl->ObjType==LASER)
-    {
-        Ctrl->CurrntPoint = Laser_mm;
-        if(ReadBit(ErrCode,LASERErrBIT))//激光传感器失效时停止控制
-            return 0;
-        if(LaserOffset>30||LaserOffset<-30)//错误数据时不予处理，这个很重要，因为程序逻辑没有处理好导致数据可能会变化
-            return 0;
-    }
-    else if(Ctrl->ObjType==POWER)
-    {
-         Ctrl->CurrntPoint = Power_mW;
-    }
-    else if(Ctrl->ObjType==CURRENT)
-    {
-        Ctrl->CurrntPoint = Current_mA ;
-    }
-    else if(Ctrl->ObjType==FORCE)
-    {
-        Ctrl->CurrntPoint = Force_mN ;
-    }
-    else if(Ctrl->ObjType==dLaser)
-    {
-        Ctrl->CurrntPoint = dLaser_mm ;
-    }
-    else return 0;
-    
-    smoothGradient(Ctrl->SetPoint,Ctrl->CurrntPoint,&Ctrl->SetPoint);
-    
     LowerLim=Ctrl->SetPoint - Ctrl->Bind /2.0;
     UpperLim=Ctrl->SetPoint + Ctrl->Bind /2.0;
     LowerLim=LowerLim;
     UpperLim=UpperLim;
     
-    Ctrl->Err=Ctrl->SetPoint-Ctrl->CurrntPoint;
+    Ctrl->Err=Ctrl->SetPoint-Ctrl->nowPoint;
     if(Ctrl->output>OUT_LOWERLIM&&Ctrl->output<OUT_UPPERLIM)//抗饱和
         Ctrl->SumErr+=Ctrl->Err;
 //    if(LaserOffset>LowerLim&&LaserOffset<UpperLim)SumErr=0;//积分死区，接近目标时关闭积分
@@ -190,6 +205,7 @@ double PIDController(PID_t* Ctrl)
 //清除控制器参数
 void ClearController(void)
 {
+    algPID.output=0;
     algPID.dErr=0;
     algPID.Err=0;
     algPID.SumErr=0;

@@ -228,7 +228,7 @@ void print_task(void* pdata)
             printf("ErrCode:0x%x (15:C 14:V 13:F 0:L) ",ErrCode);
             printf("CPU:%02d%% ",OSCPUUsage);
             printf("ST:%.2f ",algPID.SetPoint);
-            printf("CRT:%.2f ",algPID.CurrntPoint );
+            printf("CRT:%.2f ",algPID.nowPoint );
             printf("OBJ:%d ",algPID.ObjType );
             printf("WAY:%d ",CtrlType );
             printf("Err:%.2f ",algPID.Err);
@@ -258,39 +258,41 @@ void dac_task(void* pdata)
             WaveFunc();
         else if(CARLIB_OK_Flag==true)
         {   
-
-            if(Energy_mJ>=setEnergy)
+            UpdateController(&algPID);
+            step1_step2(algPID.getPoint,algPID.nowPoint,&algPID.SetPoint);
+            switch(CtrlType)
             {
-                switch(CtrlType)
-                {
-                    case TYPE_PID:PIDController(&algPID);break;
-                    case TYPE_BANG:BangBangController(&algBang);break;
-                    case TYPE_SERIAL_PID:break;
-                    case TYPE_UNKNOWN:break;
-                    default:break;
-                }
+                case TYPE_PID:PIDController(&algPID);break;
+                case TYPE_BANG:BangBangController(&algBang);break;
+                case TYPE_SERIAL_PID:break;
+                case TYPE_UNKNOWN:break;
+                default:break;
             }
-            else
-            {
-//                algPID_1.ObjType=POWER;
-//                algPID_1.SetPoint=50;
-//                algPID_1.KP=algPID.KP;
-//                algPID_1.KI=algPID.KI;
-//                algPID_1.KD=algPID.KD;
-                if(algPID.ObjType==POWER)
-                {
-                    algPID_1=algPID;
-                    algPID_1.SetPoint=200;
-                    PIDController(&algPID_1);
-                    algPID.dErr=algPID_1.dErr;
-                    algPID.SumErr=algPID_1.SumErr;
-                    algPID.LastErr1=algPID_1.LastErr1;
-                    algPID.LastErr2=algPID_1.LastErr2;
-                    algPID.Err=algPID_1.Err;
-                }
-                else
-                    AD5722_Output(3.5,CH0);
-            }            
+//            if(Energy_mJ>=setEnergy)
+//            {
+//                
+//            }
+//            else
+//            {
+////                algPID_1.ObjType=POWER;
+////                algPID_1.SetPoint=50;
+////                algPID_1.KP=algPID.KP;
+////                algPID_1.KI=algPID.KI;
+////                algPID_1.KD=algPID.KD;
+//                if(algPID.ObjType==POWER)
+//                {
+//                    algPID_1=algPID;
+//                    algPID_1.SetPoint=200;
+//                    PIDController(&algPID_1);
+//                    algPID.dErr=algPID_1.dErr;
+//                    algPID.SumErr=algPID_1.SumErr;
+//                    algPID.LastErr1=algPID_1.LastErr1;
+//                    algPID.LastErr2=algPID_1.LastErr2;
+//                    algPID.Err=algPID_1.Err;
+//                }
+//                else
+//                    AD5722_Output(3.5,CH0);
+//            }            
         }
         
         if(CTR_Flag==false)

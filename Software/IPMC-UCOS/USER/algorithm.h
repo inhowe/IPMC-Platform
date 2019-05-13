@@ -21,13 +21,14 @@ typedef enum CtrlType_s{
 
 typedef struct PID_s{
     CtrlObj_t ObjType;//被控对象
-    double CurrntPoint;
+    double nowPoint;
     double SetPoint;
     double KP;//P系数
     double KI;//I系数
     double KD;//D系数
     double LastErr1,LastErr2,SumErr,dErr,Err;//err[k-1],err[k-2],积分，微分，偏差
     double Bind;//死区
+    double getPoint;//存储电脑发下来的设定值（因为setPoint可能会根据算法需要改变）
     double output;
 }PID_t;
 
@@ -50,6 +51,8 @@ void Carlib(void);
 void myftoa(double data,char str[]);
 
 //控制器
+void step1_step2(double setPoint_IN,double nowPoint_IN,double* newSetPoint_OUT);
+u8 UpdateController(PID_t* Ctrl);
 bool BangBangController(Bang_t* Ctrl);
 double PIDController(PID_t* Ctrl);
 void ClearController(void);
