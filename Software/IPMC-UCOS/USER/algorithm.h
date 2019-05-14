@@ -51,7 +51,7 @@ void Carlib(void);
 void myftoa(double data,char str[]);
 
 //¿ØÖÆÆ÷
-void step1_step2(double setPoint_IN,double nowPoint_IN,double* newSetPoint_OUT);
+void step1_step2(double getPoint_IN,double nowPoint_IN,double* newSetPoint_OUT,CtrlObj_t ObjType);
 u8 UpdateController(PID_t* Ctrl);
 bool BangBangController(Bang_t* Ctrl);
 double PIDController(PID_t* Ctrl);

@@ -70,7 +70,7 @@ void myftoa(double data,char str[])
 //上升阶段和过渡阶段处理
 //输入：获取值，当前值
 //输出：设定值
-void step1_step2(double getPoint_IN,double nowPoint_IN,double* newSetPoint_OUT)
+void step1_step2(double getPoint_IN,double nowPoint_IN,double* newSetPoint_OUT,CtrlObj_t ObjType)
 {
     #define DIVISION 200 //拆分数，渐变时间=DIVISION*0.01秒
     static double needEnergy=0;//平滑过程中估计消耗的能量
@@ -81,7 +81,13 @@ void step1_step2(double getPoint_IN,double nowPoint_IN,double* newSetPoint_OUT)
     needEnergy=(nowPoint_IN-getPoint_IN);//功率差*时间*0.5  三角形的形状
     needEnergy=needEnergy;
     
-    if(Energy_mJ>setEnergy&&setEnergy!=0)//超过能量阈值后开始运行
+    if(ObjType!=POWER)
+    {
+        *newSetPoint_OUT=getPoint_IN;
+        return;
+    }
+    
+    if(Energy_mJ>setEnergy&&setEnergy!=0)//超过能量阈值后开始运行过渡过程
         runStage++;
     else//关闭状态
     {
@@ -104,7 +110,6 @@ void step1_step2(double getPoint_IN,double nowPoint_IN,double* newSetPoint_OUT)
             *newSetPoint_OUT=getPoint_IN;
             return;
         }
-        
         *newSetPoint_OUT = nowPoint-divide*runStage;
     }
 }

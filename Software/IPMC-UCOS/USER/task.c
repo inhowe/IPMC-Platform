@@ -259,7 +259,7 @@ void dac_task(void* pdata)
         else if(CARLIB_OK_Flag==true)
         {   
             UpdateController(&algPID);
-            step1_step2(algPID.getPoint,algPID.nowPoint,&algPID.SetPoint);
+            step1_step2(algPID.getPoint,algPID.nowPoint,&algPID.SetPoint,algPID.ObjType);
             switch(CtrlType)
             {
                 case TYPE_PID:PIDController(&algPID);break;
