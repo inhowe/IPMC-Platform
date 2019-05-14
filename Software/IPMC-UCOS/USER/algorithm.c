@@ -1,7 +1,7 @@
 #include "algorithm.h"
 
 INT32S RefV[4];
-PID_t   algPID ={0},algOuterPID={0},algPID_1={0};
+PID_t   algPID ={0},algOuterPID={0};
 Bang_t  algBang={0};
 CtrlType_t CtrlType=TYPE_UNKNOWN;
 double setEnergy=0;//启动控制的能量阈值，在此之前进行累计。
@@ -79,7 +79,7 @@ void step1_step2(double getPoint_IN,double nowPoint_IN,double* newSetPoint_OUT,C
     static double divide=0;
     
     needEnergy=(nowPoint_IN-getPoint_IN);//功率差*时间*0.5  三角形的形状
-    needEnergy=needEnergy;
+//    needEnergy=needEnergy;
     
     if(ObjType!=POWER)
     {
@@ -87,7 +87,7 @@ void step1_step2(double getPoint_IN,double nowPoint_IN,double* newSetPoint_OUT,C
         return;
     }
     
-    if(Energy_mJ>setEnergy&&setEnergy!=0)//超过能量阈值后开始运行过渡过程
+    if((Energy_mJ>setEnergy||Energy_mJ>setEnergy-needEnergy)&&setEnergy!=0)//超过能量阈值后开始运行过渡过程
         runStage++;
     else//关闭状态
     {

@@ -42,7 +42,7 @@ typedef struct Bang_s{
 }Bang_t;
 
 extern INT32S   RefV[4];
-extern PID_t    algPID,algOuterPID,algPID_1;
+extern PID_t    algPID,algOuterPID;
 extern Bang_t   algBang;
 extern CtrlType_t CtrlType;
 extern double setEnergy;

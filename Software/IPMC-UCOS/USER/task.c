@@ -223,10 +223,11 @@ void print_task(void* pdata)
         }        
         else
         {
+//            printf("d:%f,%f,%f,%f,%f,%f,%f\n",f_Current_A,f_Voltage_V,f_Force_N,LaserOffset,TEMP,HUMI,OSCPUUsage/1.0);
             printf("AD[0-2]:%d %d %d ",ADS_Buff[0],ADS_Buff[1],ADS_Buff[2]);
             printf("diffAD[2]_Force:%d ",ADS_Buff[2]-RefV[2]);
             printf("ErrCode:0x%x (15:C 14:V 13:F 0:L) ",ErrCode);
-            printf("CPU:%02d%% ",OSCPUUsage);
+//            printf("CPU:%02d%% ",OSCPUUsage);
             printf("ST:%.2f ",algPID.SetPoint);
             printf("CRT:%.2f ",algPID.nowPoint );
             printf("OBJ:%d ",algPID.ObjType );
