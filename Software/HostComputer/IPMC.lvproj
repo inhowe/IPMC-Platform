@@ -607,7 +607,7 @@
 				<Property Name="INST_includeError" Type="Bool">false</Property>
 				<Property Name="INST_language" Type="Int">2052</Property>
 				<Property Name="INST_productName" Type="Str">IPMC-Platform</Property>
-				<Property Name="INST_productVersion" Type="Str">1.0.96</Property>
+				<Property Name="INST_productVersion" Type="Str">1.0.97</Property>
 				<Property Name="INST_readmeID" Type="Ref">/我的电脑/doc/description.rtf</Property>
 				<Property Name="InstSpecBitness" Type="Str">32-bit</Property>
 				<Property Name="InstSpecVersion" Type="Str">17008011</Property>
