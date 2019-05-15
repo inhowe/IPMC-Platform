@@ -30,6 +30,7 @@
 			<Item Name="清除波形.vi" Type="VI" URL="../sub VI/清除波形.vi"/>
 			<Item Name="XY图数据提取.vi" Type="VI" URL="../sub VI/XY图数据提取.vi"/>
 			<Item Name="开关变量转字符串.vi" Type="VI" URL="../sub VI/开关变量转字符串.vi"/>
+			<Item Name="UTF-8toGBK.vi" Type="VI" URL="../sub VI/UTF-8toGBK.vi"/>
 		</Item>
 		<Item Name="ctrl" Type="Folder">
 			<Item Name="XYGraph.ctl" Type="VI" URL="../ctrl/XYGraph.ctl"/>
@@ -178,7 +179,6 @@
 			<Item Name="CDK_sTypeDef_Languages.ctl" Type="VI" URL="/&lt;resource&gt;/Framework/Providers/Builds/Installer/CDK_sTypeDef_Languages.ctl"/>
 			<Item Name="mxLvGetItem.vi" Type="VI" URL="/&lt;resource&gt;/Framework/Providers/API/mxLvGetItem.vi"/>
 			<Item Name="mxLvProvider.mxx" Type="Document" URL="/&lt;resource&gt;/Framework/Providers/mxLvProvider.mxx"/>
-			<Item Name="UTF-8toGBK.vi" Type="VI" URL="/F/Desktop/UTF-8toGBK.vi"/>
 			<Item Name="kernel32.dll" Type="Document" URL="kernel32.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
@@ -204,7 +204,7 @@
 				<Property Name="Bld_supportedLanguage[0]" Type="Str">ChineseS</Property>
 				<Property Name="Bld_supportedLanguage[1]" Type="Str">English</Property>
 				<Property Name="Bld_supportedLanguageCount" Type="Int">2</Property>
-				<Property Name="Bld_version.build" Type="Int">57</Property>
+				<Property Name="Bld_version.build" Type="Int">58</Property>
 				<Property Name="Bld_version.major" Type="Int">1</Property>
 				<Property Name="Destination[0].destName" Type="Str">launch.exe</Property>
 				<Property Name="Destination[0].path" Type="Path">../builds/IPMC-Platform/launch/launch.exe</Property>
@@ -289,7 +289,7 @@
 				<Property Name="Bld_supportedLanguage[0]" Type="Str">ChineseS</Property>
 				<Property Name="Bld_supportedLanguage[1]" Type="Str">English</Property>
 				<Property Name="Bld_supportedLanguageCount" Type="Int">2</Property>
-				<Property Name="Bld_version.build" Type="Int">110</Property>
+				<Property Name="Bld_version.build" Type="Int">111</Property>
 				<Property Name="Bld_version.major" Type="Int">1</Property>
 				<Property Name="Destination[0].destName" Type="Str">IPMC.exe</Property>
 				<Property Name="Destination[0].path" Type="Path">../builds/IPMC-Platform/NI_AB_PROJECTNAME/IPMC.exe</Property>
@@ -440,7 +440,7 @@
 				<Property Name="INST_includeError" Type="Bool">false</Property>
 				<Property Name="INST_language" Type="Int">2052</Property>
 				<Property Name="INST_productName" Type="Str">IPMC-Platform</Property>
-				<Property Name="INST_productVersion" Type="Str">1.0.73</Property>
+				<Property Name="INST_productVersion" Type="Str">1.0.74</Property>
 				<Property Name="INST_readmeID" Type="Ref">/我的电脑/doc/description.rtf</Property>
 				<Property Name="InstSpecBitness" Type="Str">32-bit</Property>
 				<Property Name="InstSpecVersion" Type="Str">17008011</Property>
@@ -611,7 +611,7 @@
 				<Property Name="INST_includeError" Type="Bool">false</Property>
 				<Property Name="INST_language" Type="Int">2052</Property>
 				<Property Name="INST_productName" Type="Str">IPMC-Platform</Property>
-				<Property Name="INST_productVersion" Type="Str">1.0.100</Property>
+				<Property Name="INST_productVersion" Type="Str">1.0.101</Property>
 				<Property Name="INST_readmeID" Type="Ref">/我的电脑/doc/description.rtf</Property>
 				<Property Name="InstSpecBitness" Type="Str">32-bit</Property>
 				<Property Name="InstSpecVersion" Type="Str">17008011</Property>
