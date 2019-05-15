@@ -46,6 +46,7 @@ extern PID_t    algPID,algOuterPID;
 extern Bang_t   algBang;
 extern CtrlType_t CtrlType;
 extern double setEnergy;
+extern double initPower,transientTime,compensatePower;
 
 void Carlib(void);
 void myftoa(double data,char str[]);

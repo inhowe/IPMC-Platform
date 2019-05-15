@@ -260,6 +260,9 @@ void Data_anysis(uint8_t* buff,uint8_t* channel)
     case 0x58://control2
         Energy_mJ=0;
         setEnergy=*(float *)(&buff[0]);
+        initPower=*(float *)(&buff[4]);
+        transientTime=*(float *)(&buff[8]);
+        compensatePower=*(float *)(&buff[12]);
         break;
   }
 }

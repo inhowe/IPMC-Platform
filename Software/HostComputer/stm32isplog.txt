@@ -1,37 +1,19 @@
-Debug: "Loading File. hexFileSize:99 KB"
+Debug: "Loading File. hexFileSize:104 KB"
 Debug: Parasing File.
 Debug: baseAddr:0x8000000 mainAddr:0x80001ad
 Debug: Connecting ISP...0x0
-Debug: Connecting ISP...0x1
-Debug: Connecting ISP...0x2
-Debug: Connecting ISP...0x3
-Debug: Connecting ISP...0x4
-Debug: Connecting ISP...0x5
-Debug: Connecting ISP...0x6
-Debug: Connecting ISP...0x7
-Debug: Connecting ISP...0x8
-Debug: Connecting ISP...0x9
-Debug: Connecting ISP...0xa
-Debug: Connecting ISP...0xb
-Debug: Connecting ISP...0xc
-Debug: Connecting ISP...0xd
-Debug: Connecting ISP...0xe
-Debug: Connecting ISP...0xf
-Debug: Connecting ISP...0x10
-Debug: Connecting ISP...0x11
-Debug: Connecting ISP...0x12
-Debug: Connecting ISP...0x13
-Debug: Connecting ISP...0x14
-Debug: Connecting ISP...0x15
-Debug: Connecting ISP...0x16
-Debug: Connecting ISP...0x17
-Debug: Connecting ISP...0x18
-Debug: Connecting ISP...0x19
-Debug: Connecting ISP...0x1a
-Debug: Connecting ISP...0x1b
-Debug: Connecting ISP...0x1c
-Debug: Connecting ISP...0x1d
-Debug: Connecting ISP...0x1e
-Debug: Connecting ISP...0x1f
-Debug: Connecting ISP...0x20
-Debug: Connecting ISP...0x21
+Debug: ISP connected.
+Debug: ISP Version:0x31
+Debug: PID:0x413
+Debug: Description: "STM32F4 Series MCU"
+Debug: ReadMemory cmd NACK in step3.
+Debug: UID read error.
+Debug: ReadMemory cmd NACK in step3.
+Debug: Option Byte: ("\xFF\xAA\x00U\xFF\xAA\x00U\xFF\xFF\x00\x00\xFF\xFF\x00\x00", "")
+Debug: Downloading... 
+
+Debug: Left 2 page data...
+Debug: Left 1 page data...
+Debug: Left 0 page data...
+Debug: "Elapsed time:7469 msc"
+Debug: The program will jump to user app...

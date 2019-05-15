@@ -70,15 +70,16 @@ void myftoa(double data,char str[])
 //上升阶段和过渡阶段处理
 //输入：获取值，当前值
 //输出：设定值
+double initPower=150,transientTime=2,compensatePower=0;//前期功率（mW），过渡时间（S），补偿功率（mW/min）
 void step1_step2(double getPoint_IN,double nowPoint_IN,double* newSetPoint_OUT,CtrlObj_t ObjType)
 {
     #define DIVISION 200 //拆分数，渐变时间=DIVISION*0.01秒
     static double needEnergy=0;//平滑过程中估计消耗的能量
-    static int runStage=0;
+    static unsigned int runStage=0;
     static double nowSet=0,nowPoint=0;
     static double divide=0;
+    static unsigned int cntForCompensate=0;//补偿功率计数
     
-    needEnergy=(nowPoint_IN-getPoint_IN);//功率差*时间*0.5  三角形的形状
 //    needEnergy=needEnergy;
     
     if(ObjType!=POWER)
@@ -87,12 +88,18 @@ void step1_step2(double getPoint_IN,double nowPoint_IN,double* newSetPoint_OUT,C
         return;
     }
     
-    if((Energy_mJ>setEnergy||Energy_mJ>setEnergy-needEnergy)&&setEnergy!=0)//超过能量阈值后开始运行过渡过程
+    if(Energy_mJ>setEnergy||Energy_mJ>setEnergy-needEnergy)//超过能量阈值后开始运行过渡过程（过渡过程也会消耗能量所以要减去它）
         runStage++;
-    else//关闭状态
+    else//step1状态
     {
-        *newSetPoint_OUT=150;//恒功率
-        runStage=0;
+        if(setEnergy!=0)
+            *newSetPoint_OUT=initPower;//恒功率时默认使用150
+        else
+            *newSetPoint_OUT=getPoint_IN;//未设置能量时则不使用前期功率
+        needEnergy=fabs(nowPoint_IN-getPoint_IN);//功率差*时间*0.5  三角形的形状
+        
+        runStage=0;//当能量变量重置时，该函数才重置运行状态
+        cntForCompensate=0;
         return;
     }
     
@@ -100,14 +107,16 @@ void step1_step2(double getPoint_IN,double nowPoint_IN,double* newSetPoint_OUT,C
     {
         nowSet   = getPoint_IN ;
         nowPoint = nowPoint_IN;
-        divide = (nowPoint_IN-getPoint_IN)/DIVISION;
+        
+        divide = (nowPoint_IN-getPoint_IN)/transientTime*0.01;//默认过渡时间2秒
     }
     if(runStage>=1)//运行中
     {
         if( (nowPoint-divide*runStage<=nowSet && nowPoint>nowSet) || 
             (nowPoint-divide*runStage>=nowSet && nowPoint<nowSet) )//停止运行
         {
-            *newSetPoint_OUT=getPoint_IN;
+            *newSetPoint_OUT=getPoint_IN+cntForCompensate*compensatePower/6000;//6000把min单位转为10ms单位
+            cntForCompensate++;
             return;
         }
         *newSetPoint_OUT = nowPoint-divide*runStage;
@@ -189,7 +198,9 @@ double PIDController(PID_t* Ctrl)
     UpperLim=UpperLim;
     
     Ctrl->Err=Ctrl->SetPoint-Ctrl->nowPoint;
-    if(Ctrl->output>OUT_LOWERLIM&&Ctrl->output<OUT_UPPERLIM)//抗饱和
+    if((Ctrl->output>OUT_LOWERLIM&&Ctrl->output<OUT_UPPERLIM)||
+      (Ctrl->output>=OUT_UPPERLIM&&Ctrl->Err<0)||
+      (Ctrl->output<=OUT_LOWERLIM&&Ctrl->Err>0))//抗饱和,3种情况允许积分：1.输出值在限定值内。2.输出值超过上限定值但是负误差。3.输出值低于下限定值但是正误差
         Ctrl->SumErr+=Ctrl->Err;
 //    if(LaserOffset>LowerLim&&LaserOffset<UpperLim)SumErr=0;//积分死区，接近目标时关闭积分
     Ctrl->dErr=Ctrl->LastErr1-Ctrl->LastErr2;

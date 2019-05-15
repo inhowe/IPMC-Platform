@@ -138,7 +138,7 @@ void print_task(void* pdata)
     double lastLaserOffset=0;
 	while(1)
 	{
-        Current_A = (ADS_Buff[0]-RefV[0])*0.00004097277; // 00006744402706230 0.00004097277=0.0001875/457.62100/0.01
+        Current_A = (ADS_Buff[0]-RefV[0])*0.000039934061560271849741418838615385; // 00006744402706230 0.00004097277=0.0001875/457.62100/0.01
         if(fabs(Current_A)<0.0005)
             f_Current_A = RC_LowPassFilter(Current_A,f_Current_A,1);
         else
@@ -148,7 +148,7 @@ void print_task(void* pdata)
         if(Current_A>0.3||Current_A<-0.3) SetBit(ErrCode,OverCurrentBIT);//过流检测 安培
         else ClrBit(ErrCode,OverCurrentBIT);
         
-        Voltage_V = (ADS_Buff[1]-RefV[1])*0.000375;
+        Voltage_V = (ADS_Buff[1]-RefV[1])*0.000374849265;//0.000375*99.959804%
         f_Voltage_V = RC_LowPassFilter(Voltage_V,f_Voltage_V,5);
         if(Current_mA>=0&&f_Voltage_V>=0)//功率不分正负但是功率有方向
             Power_mW=f_Voltage_V * Current_mA;// V*mA=mW!
@@ -237,7 +237,7 @@ void print_task(void* pdata)
             printf("dErr:%.2f ",algPID.dErr);
             printf("out:%.2f ",algPID.output);
             printf("energy:%.1f ",setEnergy);
-            printf("predlaser:%.1fmm ",0.38632*Energy_mJ+0.00392);
+//            printf("predlaser:%.1fmm ",0.38632*Energy_mJ+0.00392);
 //            OSTaskStkChk(DAC_TASK_PRIO,&UsedSTK);printf("DAC:%.1f%% ",(float)UsedSTK.OSUsed/DAC_STK_SIZE*100);
 //            OSTaskStkChk(ADC_TASK_PRIO,&UsedSTK);printf("ADC:%.1f%% ",(float)UsedSTK.OSUsed/ADC_STK_SIZE*100);
 //            OSTaskStkChk(COM_TASK_PRIO,&UsedSTK);printf("COM:%.1f%% ",(float)UsedSTK.OSUsed/COM_STK_SIZE*100);
