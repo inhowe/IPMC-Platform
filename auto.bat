@@ -13,7 +13,7 @@ copy ..\IPMC-UCOS.zip .\Software\HostComputer\doc\software\
 del .\Software\IPMC-UCOS.zip
 
 echo STEP_2
-::::重新压缩IPMC.zip用于发布
+::::重新压缩IPMC.zip、IPMC-Platform-Install-simple.zip用于发布
 del .\Software\builds\IPMC-Platform\IPMC\IPMC.zip
 %zip% a -k -r -s -m3 -ep1 .\Software\builds\IPMC-Platform\IPMC\IPMC.zip .\Software\builds\IPMC-Platform\IPMC\IPMC.exe
 del .\Software\builds\IPMC-Platform\IPMC-Platform-Install-simple.zip
