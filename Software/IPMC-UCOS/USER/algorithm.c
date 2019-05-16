@@ -96,7 +96,7 @@ void step1_step2(double getPoint_IN,double nowPoint_IN,double* newSetPoint_OUT,C
             *newSetPoint_OUT=initPower;//恒功率时默认使用150
         else
             *newSetPoint_OUT=getPoint_IN;//未设置能量时则不使用前期功率
-        needEnergy=fabs(nowPoint_IN-getPoint_IN);//功率差*时间*0.5  三角形的形状
+        needEnergy=fabs(nowPoint_IN-getPoint_IN)*transientTime/2.0;//功率差*时间*0.5  三角形的形状
         
         runStage=0;//当能量变量重置时，该函数才重置运行状态
         cntForCompensate=0;
