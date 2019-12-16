@@ -104,7 +104,6 @@ void laser_task(void* pdata)
             LaserBAKMessure(COM2Buff);
             OS_EXIT_CRITICAL();
             ClrBit(ErrCode,LASERErrBIT);
-            Laser_mm = LaserOffset;
             time = 3;
         }
         else
@@ -128,14 +127,16 @@ void com_task(void* pdata)
 	}
 }
 
+
 void print_task(void* pdata)
 {
     char array[9]={'0','0','.','0','0','0','0'};
     char SendBuff[128]={0};
 //    OS_STK_DATA UsedSTK;
     double Current_A=0,Voltage_V=0,Force_N=0;
-    double f_Current_A=0,f_Voltage_V=0,f_Force_N=0;
+		double f_Current_A=0,f_Voltage_V=0,f_Force_N=0,f_Laser_mm=0;
     double lastLaserOffset=0;
+		char overCurrentCnt = 0;
 	while(1)
 	{
         Current_A = (ADS_Buff[0]-RefV[0])*0.000039934061560271849741418838615385; // 00006744402706230 0.00004097277=0.0001875/457.62100/0.01
@@ -145,8 +146,18 @@ void print_task(void* pdata)
             f_Current_A = RC_LowPassFilter(Current_A,f_Current_A,2);
 //        f_Current_A = IIR_LowPassFilter2P5Hz_Current(Current_A);//
         Current_mA=f_Current_A*1000;//当前电流值
-        if(Current_A>0.3||Current_A<-0.3) SetBit(ErrCode,OverCurrentBIT);//过流检测 安培
-        else ClrBit(ErrCode,OverCurrentBIT);
+        if(Current_A>0.3||Current_A<-0.3){
+					SetBit(ErrCode,OverCurrentBIT);//过流检测 安培
+					overCurrentCnt++;
+					if(overCurrentCnt >= 100) //1000ms过流复位
+						HAL_NVIC_SystemReset();
+					if(overCurrentCnt >= 20 && (Current_A>1.0||Current_A<-1.0) )
+						HAL_NVIC_SystemReset();
+				}
+        else{
+					ClrBit(ErrCode,OverCurrentBIT);
+					overCurrentCnt = 0;
+				}
         
         Voltage_V = (ADS_Buff[1]-RefV[1])*0.000374849265;//0.000375*99.959804%
         f_Voltage_V = RC_LowPassFilter(Voltage_V,f_Voltage_V,5);
@@ -168,9 +179,14 @@ void print_task(void* pdata)
         if(ADS_Buff[2]>24000||ADS_Buff[2]<2666) SetBit(ErrCode,OverForceBIT); //ADC绝对值高于4.5V和低于0.5V警告
         else ClrBit(ErrCode,OverForceBIT);
         
-        dLaser_mm=RC_LowPassFilter(LaserOffset-lastLaserOffset,dLaser_mm,1);
-        lastLaserOffset=LaserOffset;
-        
+				if(Laser_mm!=Laser_OutOfRange)
+				{
+					Laser_mm = RC_LowPassFilter(LaserOffset,Laser_mm,5);
+					dLaser_mm=RC_LowPassFilter(Laser_mm-lastLaserOffset,dLaser_mm,5);
+					lastLaserOffset=LaserOffset;
+					f_Laser_mm=Laser_mm;
+				}
+				
         if(__HAL_DMA_GET_FLAG(&UART1TxDMA_Handler,DMA_FLAG_TCIF3_7))//判断上次DMA2_Steam7传输完成
         {
             //清除DMA2_Steam7传输完成标志
@@ -194,7 +210,7 @@ void print_task(void* pdata)
             strcat(SendBuff,"F:");strcat(SendBuff,array);strcat(SendBuff,"N ");
             
     //        printf("L:%smm ",array);        
-            myftoa(LaserOffset,array);//LaserOffset
+            myftoa(f_Laser_mm,array);//LaserOffset
             strcat(SendBuff,"L:");strcat(SendBuff,array);strcat(SendBuff,"mm ");
             
     //        printf("T0:%sS ",array);            

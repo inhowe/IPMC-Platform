@@ -112,7 +112,7 @@ void IIC_NAck(void)
 //0，无应答			  
 void IIC_Send_Byte(u8 txd)
 {                        
-  uint8_t t;   
+  	uint8_t t;   
 	SDA_OUT(); 	    
 	IIC_SCL=0;//拉低时钟开始数据传输
 	for(t=0;t<8;t++)
@@ -133,8 +133,8 @@ u8 IIC_Read_Byte(unsigned char ack)
 	SDA_IN();//SDA设置为输入
   for(i=0;i<8;i++ )
 	{
-    IIC_SCL=0; 
-    IIC_DelayUS(5);
+    	IIC_SCL=0; 
+    	IIC_DelayUS(5);
 		IIC_SCL=1;
         receive<<=1;
 		IIC_DelayUS(5);

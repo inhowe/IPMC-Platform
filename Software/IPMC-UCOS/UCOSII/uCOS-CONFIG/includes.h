@@ -68,7 +68,7 @@ extern void* UART1_QTbl[64];
 extern INT16U BoardID;
 extern INT16U ErrCode;
 extern float TEMP,HUMI;
-extern double Current_mA,Power_mW,Laser_mm,Force_mN,Energy_mJ,dLaser_mm;
+extern double Current_mA,Power_mW,Force_mN,Energy_mJ,Laser_mm,dLaser_mm;
 extern bool DBG_Flag,CTR_Flag,CARLIB_OK_Flag;
 
 #endif

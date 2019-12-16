@@ -42,4 +42,5 @@ void com_task(void* pdata);
 void idle_task(void* pdata);
 void laser_task(void* pdata);
 void sht20_task(void* pdata);
+
 #endif

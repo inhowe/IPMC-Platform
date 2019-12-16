@@ -3,7 +3,7 @@
 
 #include "includes.h"
 
-//#define ROBOT_ARM
+#define ROBOT_ARM
 
 #ifdef ROBOT_ARM
         #define GETARMSTATUS()  ( (HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_10)<<1)|HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_11) )

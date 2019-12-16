@@ -29,7 +29,7 @@ bool DBG_Flag=false;
 bool CTR_Flag=false;
 bool CARLIB_OK_Flag=false;
 
-double Current_mA=0,Power_mW=0,Laser_mm=0,Force_mN=0,Energy_mJ=0,dLaser_mm=0;
+double Current_mA=0,Power_mW=0,Force_mN=0,Energy_mJ=0,Laser_mm=0,dLaser_mm=0;
 
 //DEBUG时应关闭IWDG，可在Peripheral-DBG寄存器里勾选DBG_IWDEG_STOP
 int main(void)
@@ -39,11 +39,11 @@ int main(void)
 	delay_init(168);                //初始化延时函数
 	BSP_Init();
 	
-	OSInit();                       //UCOS初始化
+	OSInit();                       //UCOS初始化，重置用到的变量、建立空闲任务、建立统计任务等
     
-	UART1_Q=OSQCreate(&UART1_QTbl[0],64);
-	CAN_Q  =OSQCreate(&CAN_QTbl[0],64);
-	COM2Msg =OSMboxCreate((void *)0);
+	UART1_Q = OSQCreate(&UART1_QTbl[0],64);
+	CAN_Q   = OSQCreate(&CAN_QTbl[0],64);
+	COM2Msg = OSMboxCreate((void *)0);
 
 	OSTaskCreateExt((void(*)(void*) )start_task,                //任务函数
 									(void*          )0,                         //传递给任务函数的参数
@@ -139,7 +139,6 @@ void JumpToISP(void)
     
     SysTick->CTRL=0x00;       //关闭计数器
     SysTick->VAL =0X00;       //清空计数器	
-    //__set_PRIMASK(1);
 
     if (((*(__IO uint32_t*)ISPAddress) & 0x2FFE0000 ) == 0x20000000)
     { 

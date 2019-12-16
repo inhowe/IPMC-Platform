@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"includes.h": "c",
+			"stm32f4xx.h": "c"
+		}
+	}
+}

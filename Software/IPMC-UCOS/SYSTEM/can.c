@@ -134,7 +134,7 @@ u8 CAN1_Send_Msg(u8* msg,u8 len)
     CAN1_Handler.pTxMsg->RTR=CAN_RTR_DATA;  //数据帧
     CAN1_Handler.pTxMsg->DLC=len;                
     for(i=0;i<len;i++)
-    CAN1_Handler.pTxMsg->Data[i]=msg[i];
+        CAN1_Handler.pTxMsg->Data[i]=msg[i];
     if(HAL_CAN_Transmit(&CAN1_Handler,10)!=HAL_OK) return 1;     //发送
     return 0;		
 }
@@ -148,6 +148,6 @@ u8 CAN1_Receive_Msg(u8 *buf)
  	u32 i;
     if(HAL_CAN_Receive(&CAN1_Handler,CAN_FIFO0,0)!=HAL_OK) return 0;//接收数据，超时时间设置为0	
     for(i=0;i<CAN1_Handler.pRxMsg->DLC;i++)
-    buf[i]=CAN1_Handler.pRxMsg->Data[i];
+        buf[i]=CAN1_Handler.pRxMsg->Data[i];
 	return CAN1_Handler.pRxMsg->DLC;	
 }

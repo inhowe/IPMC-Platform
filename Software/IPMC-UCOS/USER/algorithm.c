@@ -198,9 +198,9 @@ double PIDController(PID_t* Ctrl)
     UpperLim=UpperLim;
     
     Ctrl->Err=Ctrl->SetPoint-Ctrl->nowPoint;
-    if((Ctrl->output>OUT_LOWERLIM&&Ctrl->output<OUT_UPPERLIM)||
-      (Ctrl->output>=OUT_UPPERLIM&&Ctrl->Err<0)||
-      (Ctrl->output<=OUT_LOWERLIM&&Ctrl->Err>0))//抗饱和,3种情况允许积分：1.输出值在限定值内。2.输出值超过上限定值但是负误差。3.输出值低于下限定值但是正误差
+    if((Ctrl->output >OUT_LOWERLIM&&Ctrl->output<OUT_UPPERLIM)||
+       (Ctrl->output>=OUT_UPPERLIM&&Ctrl->Err<0)||
+       (Ctrl->output<=OUT_LOWERLIM&&Ctrl->Err>0))//抗饱和,3种情况允许积分：1.输出值在限定值内。2.输出值超过上限定值但是负误差。3.输出值低于下限定值但是正误差
         Ctrl->SumErr+=Ctrl->Err;
 //    if(LaserOffset>LowerLim&&LaserOffset<UpperLim)SumErr=0;//积分死区，接近目标时关闭积分
     Ctrl->dErr=Ctrl->LastErr1-Ctrl->LastErr2;

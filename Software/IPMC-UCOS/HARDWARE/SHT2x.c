@@ -51,7 +51,7 @@ float SHT2x_GetTempPoll(void)
     } while(ack!=0);
     tmp1 = IIC_Read_Byte(1);
     tmp2 = IIC_Read_Byte(1);
-		 IIC_Read_Byte(0);
+		IIC_Read_Byte(0);
     IIC_Stop();
     
     ST = (tmp1 << 8) | (tmp2 << 0);
@@ -86,7 +86,7 @@ float SHT2x_GetHumiPoll(void)
     tmp1 = IIC_Read_Byte(1);
    
     tmp2 = IIC_Read_Byte(1);
-     IIC_Read_Byte(0);
+    IIC_Read_Byte(0);
     IIC_Stop();
     
     SRH = (tmp1 << 8) | (tmp2 << 0);
