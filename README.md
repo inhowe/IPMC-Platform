@@ -3,6 +3,9 @@
 版本索取API：https://api.github.com/repos/drinow/IPMC-Platform/releases/latest
 
 ## 更新日志
+- 20191216更新
+  - 发现BUG，关闭了采样率调整功能
+  - 输出电流过大时，系统执行自动复位
 - 20190515更新
 	- 现在可以在升级前知道新版本具体更新了哪些东西
 	- 新增分隔显示的曲线图
